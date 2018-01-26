@@ -149,3 +149,62 @@ class MunicipalForm(PerfilForm):
             raise forms.ValidationError(_("Ya existe un usuario asignado a este municipio"))
 
         return municipio
+
+class ParroquialForm(PerfilForm):
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(ParroquialForm, self).__init__(*args, **kwargs)
+        municipal = Municipal.objects.get(perfil=user.perfil)
+        lista_parroquia = [('','Selecione...')]
+        for pa in Parroquia.objects.filter(municipio=municipal.municipio):
+            lista_parroquia.append( (pa.id,pa.nombre) )
+        self.fields['parroquia'].choices = lista_parroquia
+
+    Parroquia = forms.ChoiceField(
+        label=_("Parroquia"),
+        widget=forms.Select(attrs={
+            'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
+            'title': _("Seleccione la parroquia"),
+        })
+    )
+
+    def clean_parroquia(self):
+        parroquia = self.cleaned_data['parroquia']
+
+        if Parroquial.objects.filter(parroquia=parroquia):
+            raise forms.ValidationError(_("Ya existe un usuario asignado a esta parroquia"))
+
+        return parroquia
+
+class MunicipalUpdateForm(PerfilForm):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(MunicipalUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['password'].required = False
+        self.fields['verificar_contrasenha'].required = False
+        self.fields['password'].widget.attrs['disabled'] = True
+        self.fields['verificar_contrasenha'].widget.attrs['disabled'] = True
+        municipal = Municipal.objects.get(perfil=user.perfil)
+        lista_municipio = [('','Selecione...')]
+        for mu in Municipio.objects.filter(estado=municipal.municipio.estado):
+            lista_municipio.append( (mu.id,mu.nombre) )
+        self.fields['municipio'].choices = lista_municipio
+
+    municipio = forms.ChoiceField(
+        label=_("Municipio"),
+        widget=forms.Select(attrs={
+            'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
+            'title': _("Seleccione el municipio"),
+        })
+    )
+
+    def clean_verificar_contrasenha(self):
+        pass
+
+    class Meta:
+        model = User
+        exclude = [
+            'perfil','nivel','password','verificar_contrasenha','date_joined','last_login','is_active',
+            'is_superuser','is_staff'
+        ]

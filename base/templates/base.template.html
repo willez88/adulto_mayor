@@ -11,13 +11,15 @@
                 </div>
                 {% if request.user.is_authenticated %}
                 <ul class="nav navbar-nav">
-                    {% if request.user.perfil.nivel == 1 %}
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menú<span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            {% if request.user.perfil.nivel == 1 %}
                             <li><a href="{% url 'municipal_listar' %}">Municipal</a></li>
+                            {% elif request.user.perfil.nivel == 2 %}
+                            <li><a href="{% url 'parroquial_listar' %}">Parroquial</a></li>
+                            {% endif %}
                         </ul>
                     </li>
-                    {% endif %}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -25,6 +27,8 @@
                     <ul class="dropdown-menu">
                         {% if request.user.perfil.nivel == 1 %}
                         <li><a href="{% url 'estadal_actualizar' request.user.id %}"> Perfil</a></li>
+                        {% elif request.user.perfil.nivel == 2 %}
+                        <li><a href="{% url 'municipal_actualizar' request.user.id %}"> Perfil</a></li>
                         {% endif %}
                         <li><a href="{% url 'password_change' %}"> Cambiar Clave</a></li>
                         <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> Salir</a></li>
@@ -48,15 +52,7 @@
                         </div>
                         <div class="panel-body">
                             <h4 class="text-center">{{ texto2 }}</h4>
-                        </div>
-                    </div>
-                {% else %}
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="text-center">Bienvenido al Sistema de Registro</h4>
-                        </div>
-                        <div class="panel-body">
-                            <h4 class="text-center">Inicie sesión para poder empezar a registrar los datos.</h4>
+                            <a class="btn btn-primary btn-sm pull-right"href="/admin/">Panel Administrativo</a>
                         </div>
                     </div>
                 {% endif %}

@@ -10,7 +10,11 @@ class InicioView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(InicioView, self).get_context_data(**kwargs)
         perfil = self.request.user.perfil
-        if perfil.nivel == 1:
+        if perfil.nivel == 0:
+            context['texto1'] = 'Bienvenido ' + str(perfil)
+            context['texto2'] = 'Usuario nivel administrador. Este usuario permite registrar y eliminar \
+            a cualquier usuario desde el panel administrativo'
+        elif perfil.nivel == 1:
             estadal = Estadal.objects.get(perfil=perfil)
             context['texto1'] = 'Bienvenido ' + str(perfil)
             context['texto2'] = 'Usuario nivel estado ' + str(estadal.estado) + '. Este usuario permite registrar y monitoriar a los representantes de \

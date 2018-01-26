@@ -21,14 +21,12 @@ class Perfil(models.Model):
         on_delete=models.CASCADE
     )
 
-    class Meta:
+    def __str__(self):
+        return "%s %s" % (self.user.first_name, self.user.last_name)
 
+    class Meta:
         verbose_name = _("Perfil")
         verbose_name_plural = _("Perfiles")
-
-    def __str__(self):
-
-        return "%s %s" % (self.user.first_name, self.user.last_name)
 
 class Estadal(models.Model):
 
@@ -40,8 +38,10 @@ class Estadal(models.Model):
         Perfil, on_delete=models.CASCADE
     )
 
-    class Meta:
+    def __str__(self):
+        return "%s %s" % (self.perfil.user.first_name, self.perfil.user.last_name)
 
+    class Meta:
         verbose_name = _("Estadal")
         verbose_name_plural = _("Estadales")
 
@@ -55,8 +55,10 @@ class Municipal(models.Model):
         Perfil, on_delete=models.CASCADE
     )
 
-    class Meta:
+    def __str__(self):
+        return "%s %s" % (self.perfil.user.first_name, self.perfil.user.last_name)
 
+    class Meta:
         verbose_name = _("Municipal")
         verbose_name_plural = _("Municipales")
 
@@ -70,7 +72,9 @@ class Parroquial(models.Model):
         Perfil, on_delete=models.CASCADE
     )
 
-    class Meta:
+    def __str__(self):
+        return "%s %s" % (self.perfil.user.first_name, self.perfil.user.last_name)
 
+    class Meta:
         verbose_name = _("Parroquial")
         verbose_name_plural = _("Parroquiales")

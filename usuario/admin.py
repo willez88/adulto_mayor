@@ -9,8 +9,6 @@ class PerfilAdmin(admin.ModelAdmin):
     list_per_page = 25
     ordering = ('user',)
     search_fields = ('telefono','nivel','user',)
-
-## Registra el modelo ConsejoComunal en el panel administrativo
 admin.site.register(Perfil, PerfilAdmin)
 
 class EstadalAdmin(admin.ModelAdmin):
@@ -19,8 +17,6 @@ class EstadalAdmin(admin.ModelAdmin):
     list_per_page = 25
     ordering = ('estado',)
     search_fields = ('estado','perfil',)
-
-## Registra el modelo ConsejoComunal en el panel administrativo
 admin.site.register(Estadal, EstadalAdmin)
 
 class MunicipalAdmin(admin.ModelAdmin):
@@ -29,6 +25,12 @@ class MunicipalAdmin(admin.ModelAdmin):
     list_per_page = 25
     ordering = ('municipio',)
     search_fields = ('municipio','perfil',)
-
-## Registra el modelo ConsejoComunal en el panel administrativo
 admin.site.register(Municipal, MunicipalAdmin)
+
+class ParroquialAdmin(admin.ModelAdmin):
+    list_display = ('parroquia','perfil',)
+    list_filter = ('parroquia','perfil',)
+    list_per_page = 25
+    ordering = ('parroquia',)
+    search_fields = ('municipio','perfil',)
+admin.site.register(Parroquial, ParroquialAdmin)

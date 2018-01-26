@@ -6,6 +6,7 @@ NACIONALIDAD = (
 )
 
 NIVEL = (
+    (0, 'administrador'),
     (1, 'Nivel Estadal'),
     (2, 'Nivel Municipal'),
     (3, 'Nivel Parroquial'),
