@@ -7,6 +7,16 @@ from base.fields import CedulaField
 from .models import Estadal, Municipal
 
 class PerfilForm(forms.ModelForm):
+    """!
+    Clase que contiene los campos del formulario de perfil del usuario
+
+    @author William Páez (wpaez at cenditel.gob.ve)
+    @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+    @date 14-01-2018
+    @version 1.0.0
+    """
+
+    ## Username para identificar al usuario, en este caso se usa la cédula
     username = CedulaField(
         validators=[
             validators.RegexValidator(
@@ -16,6 +26,7 @@ class PerfilForm(forms.ModelForm):
         ], help_text=_("V00000000 ó E00000000")
     )
 
+    ## Nombres del usuario
     first_name = forms.CharField(
         label=_("Nombres:"), max_length=100,
         widget=forms.TextInput(
@@ -26,6 +37,7 @@ class PerfilForm(forms.ModelForm):
         )
     )
 
+    ## Apellidos del usuario
     last_name = forms.CharField(
         label=_("Apellidos:"), max_length=100,
         widget=forms.TextInput(
@@ -36,6 +48,7 @@ class PerfilForm(forms.ModelForm):
         )
     )
 
+    ## Correo del usuario
     email = forms.EmailField(
         label=_("Correo Electrónico:"), max_length=100,
         widget=forms.EmailInput(
@@ -46,6 +59,7 @@ class PerfilForm(forms.ModelForm):
         )
     )
 
+    ## Teléfono del usuario
     telefono = forms.CharField(
         label=_("Teléfono:"),
         max_length=15,
@@ -64,6 +78,7 @@ class PerfilForm(forms.ModelForm):
         help_text=_("+58-416-0000000")
     )
 
+    ## Clave de acceso del usuario
     password = forms.CharField(
         label=_("Contraseña:"), max_length=128,
         widget=forms.PasswordInput(
@@ -74,7 +89,7 @@ class PerfilForm(forms.ModelForm):
         )
     )
 
-    ## Confirmación de contraseña de acceso
+    ## Confirmación de clave de acceso del usuario
     verificar_contrasenha = forms.CharField(
         label=_("Verificar Contraseña:"), max_length=128,
         widget=forms.PasswordInput(
@@ -94,17 +109,45 @@ class PerfilForm(forms.ModelForm):
         return verificar_contrasenha
 
     class Meta:
+        """!
+        Meta clase del formulario que establece algunas propiedades
+
+        @author William Páez (wpaez at cenditel.gob.ve)
+        @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+        @date 14-01-2018
+        @version 1.0.0
+        """
+
         model = User
         exclude = ['perfil','nivel','date_joined']
 
 class EstadalUpdateForm(PerfilForm):
+    """!
+    Clase que contiene el formulario para poder actualizar los datos de un usuario que tiene nivel estadal
+
+    @author William Páez (wpaez at cenditel.gob.ve)
+    @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+    @date 14-01-2018
+    @version 1.0.0
+    """
+
     def __init__(self, *args, **kwargs):
+        """!
+        Función que inicializa el formulario
+
+        @author William Páez (wpaez at cenditel.gob.ve)
+        @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+        @date 14-01-2018
+        @version 1.0.0
+        """
+
         super(EstadalUpdateForm, self).__init__(*args, **kwargs)
         self.fields['password'].required = False
         self.fields['verificar_contrasenha'].required = False
         self.fields['password'].widget.attrs['disabled'] = True
         self.fields['verificar_contrasenha'].widget.attrs['disabled'] = True
 
+    ## Estado donde se encuentra el usuario
     estado = forms.ModelChoiceField(
         label=_("Estado"), queryset=Estado.objects.all(), empty_label=_("Seleccione..."),
         widget=forms.Select(attrs={
@@ -117,6 +160,15 @@ class EstadalUpdateForm(PerfilForm):
         pass
 
     class Meta:
+        """!
+        Meta clase del formulario que establece algunas propiedades
+
+        @author William Páez (wpaez at cenditel.gob.ve)
+        @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+        @date 14-01-2018
+        @version 1.0.0
+        """
+        
         model = User
         exclude = [
             'perfil','nivel','password','verificar_contrasenha','date_joined','last_login','is_active',

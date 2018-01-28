@@ -1,9 +1,17 @@
-from django.forms import MultiValueField, ChoiceField, CharField, TextInput
+from django import forms
 from .constant import NACIONALIDAD
 from .widgets import CedulaWidget
 from django.utils.translation import ugettext_lazy as _
 
-class CedulaField(MultiValueField):
+class CedulaField(forms.MultiValueField):
+    """!
+    Clase que agrupa los campos de una cédula correspondientes a la nacionalidad y los números
+
+    @author Ing. Roldan Vargas (rvargas at cenditel.gob.ve) / William Páez (wpaez at cenditel.gob.ve)
+    @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+    @date 14-01-2018
+    @version 1.0.0
+    """
 
     widget = CedulaWidget
     default_error_messages = {
@@ -19,8 +27,8 @@ class CedulaField(MultiValueField):
         }
 
         fields = (
-            ChoiceField(choices=NACIONALIDAD),
-            CharField(max_length=8)
+            forms.ChoiceField(choices=NACIONALIDAD),
+            forms.CharField(max_length=8)
         )
 
         label = _("Cedula de Identidad:")

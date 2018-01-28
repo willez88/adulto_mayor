@@ -5,6 +5,7 @@ NACIONALIDAD = (
     ('V', 'V'), ('E', 'E')
 )
 
+## Establece los diferentes niveles de un usuario
 NIVEL = (
     (0, 'administrador'),
     (1, 'Nivel Estadal'),

@@ -5,6 +5,15 @@ from usuario.models import Estadal, Municipal, Parroquial
 # Create your views here.
 
 class InicioView(TemplateView):
+    """!
+    Clase para mostrar la página de inicio según el nivel de usuario
+
+    @author William Páez (wpaez at cenditel.gob.ve)
+    @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+    @date 26-01-2018
+    @version 1.0.0
+    """
+
     template_name = "base.template.html"
 
     def get_context_data(self, **kwargs):
@@ -30,4 +39,13 @@ class InicioView(TemplateView):
         return context
 
 class Error403View(TemplateView):
+    """!
+    Clase para mostrar error de permiso
+
+    @author William Páez (wpaez at cenditel.gob.ve)
+    @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+    @date 14-01-2018
+    @version 1.0.0
+    """
+    
     template_name = "base.error.403.html"
