@@ -1,10 +1,10 @@
 from django import forms
 from django.contrib.auth.models import User
-from base.models import Estado, Municipio
+from base.models import Estado, Municipio, Parroquia
 from django.utils.translation import ugettext_lazy as _
 from django.core import validators
 from base.fields import CedulaField
-from .models import Estadal, Municipal
+from .models import Estadal, Municipal, Parroquial
 
 class PerfilForm(forms.ModelForm):
     """!
@@ -168,7 +168,7 @@ class EstadalUpdateForm(PerfilForm):
         @date 14-01-2018
         @version 1.0.0
         """
-        
+
         model = User
         exclude = [
             'perfil','nivel','password','verificar_contrasenha','date_joined','last_login','is_active',
@@ -202,33 +202,6 @@ class MunicipalForm(PerfilForm):
 
         return municipio
 
-class ParroquialForm(PerfilForm):
-
-    def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user')
-        super(ParroquialForm, self).__init__(*args, **kwargs)
-        municipal = Municipal.objects.get(perfil=user.perfil)
-        lista_parroquia = [('','Selecione...')]
-        for pa in Parroquia.objects.filter(municipio=municipal.municipio):
-            lista_parroquia.append( (pa.id,pa.nombre) )
-        self.fields['parroquia'].choices = lista_parroquia
-
-    Parroquia = forms.ChoiceField(
-        label=_("Parroquia"),
-        widget=forms.Select(attrs={
-            'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
-            'title': _("Seleccione la parroquia"),
-        })
-    )
-
-    def clean_parroquia(self):
-        parroquia = self.cleaned_data['parroquia']
-
-        if Parroquial.objects.filter(parroquia=parroquia):
-            raise forms.ValidationError(_("Ya existe un usuario asignado a esta parroquia"))
-
-        return parroquia
-
 class MunicipalUpdateForm(PerfilForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
@@ -248,6 +221,65 @@ class MunicipalUpdateForm(PerfilForm):
         widget=forms.Select(attrs={
             'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
             'title': _("Seleccione el municipio"),
+        })
+    )
+
+    def clean_verificar_contrasenha(self):
+        pass
+
+    class Meta:
+        model = User
+        exclude = [
+            'perfil','nivel','password','verificar_contrasenha','date_joined','last_login','is_active',
+            'is_superuser','is_staff'
+        ]
+
+class ParroquialForm(PerfilForm):
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(ParroquialForm, self).__init__(*args, **kwargs)
+        municipal = Municipal.objects.get(perfil=user.perfil)
+        lista_parroquia = [('','Selecione...')]
+        for pa in Parroquia.objects.filter(municipio=municipal.municipio):
+            lista_parroquia.append( (pa.id,pa.nombre) )
+        self.fields['parroquia'].choices = lista_parroquia
+
+    parroquia = forms.ChoiceField(
+        label=_("Parroquia"),
+        widget=forms.Select(attrs={
+            'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
+            'title': _("Seleccione la parroquia"),
+        })
+    )
+
+    def clean_parroquia(self):
+        parroquia = self.cleaned_data['parroquia']
+
+        if Parroquial.objects.filter(parroquia=parroquia):
+            raise forms.ValidationError(_("Ya existe un usuario asignado a esta parroquia"))
+
+        return parroquia
+
+class ParroquialUpdateForm(PerfilForm):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(ParroquialUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['password'].required = False
+        self.fields['verificar_contrasenha'].required = False
+        self.fields['password'].widget.attrs['disabled'] = True
+        self.fields['verificar_contrasenha'].widget.attrs['disabled'] = True
+        parroquial = Parroquial.objects.get(perfil=user.perfil)
+        lista_parroquia = [('','Selecione...')]
+        for pa in Parroquia.objects.filter(municipio=parroquial.parroquia.municipio):
+            lista_parroquia.append( (pa.id,pa.nombre) )
+        self.fields['parroquia'].choices = lista_parroquia
+
+    parroquia = forms.ChoiceField(
+        label=_("Parroquia"),
+        widget=forms.Select(attrs={
+            'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
+            'title': _("Seleccione la parroquia"),
         })
     )
 

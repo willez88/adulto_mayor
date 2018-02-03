@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
-from .views import MunicipalList, MunicipalCreate, EstadalUpdate, ParroquialList, ParroquialCreate, MunicipalUpdate
+from .views import MunicipalList, MunicipalCreate, EstadalUpdate, ParroquialList, ParroquialCreate, MunicipalUpdate, ParroquialUpdate
 
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
@@ -16,4 +16,6 @@ urlpatterns = [
     path('municipal/actualizar/<int:pk>/', login_required(MunicipalUpdate.as_view()), name='municipal_actualizar'),
     path('parroquial/', login_required(ParroquialList.as_view()), name='parroquial_listar'),
     path('parroquial/registrar/', login_required(ParroquialCreate.as_view()), name='parroquial_registrar'),
+
+    path('parroquial/actualizar/<int:pk>/', login_required(ParroquialUpdate.as_view()), name='parroquial_actualizar'),
 ]

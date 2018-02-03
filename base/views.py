@@ -35,7 +35,9 @@ class InicioView(TemplateView):
             de cada parroquia que pertenecen a dicho municipio'
         elif perfil.nivel == 3:
             parroquial = Parroquial.objects.get(perfil=perfil)
-            context['dato'] = parroquial.parroquia
+            context['texto1'] = 'Bienvenido ' + str(perfil)
+            context['texto2'] = 'Usuario nivel parroquia ' + str(parroquial.parroquia) + '. Este usuario permite registrar y monitoriar a los representantes \
+            de cada consejo comunal que pertenecen a dicha parroquia'
         return context
 
 class Error403View(TemplateView):
@@ -47,5 +49,5 @@ class Error403View(TemplateView):
     @date 14-01-2018
     @version 1.0.0
     """
-    
+
     template_name = "base.error.403.html"

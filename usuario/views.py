@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .forms import EstadalUpdateForm, MunicipalForm, ParroquialForm, MunicipalUpdateForm
+from .forms import EstadalUpdateForm, MunicipalForm, ParroquialForm, MunicipalUpdateForm, ParroquialUpdateForm
 from .models import Perfil, Estadal, Municipal, Parroquial
 from django.contrib.auth.models import User
-from base.models import Estado, Municipio
+from base.models import Estado, Municipio, Parroquia
 
 # Create your views here.
 
@@ -135,7 +135,7 @@ class MunicipalUpdate(UpdateView):
         perfil = Perfil.objects.get(user=self.object)
         datos_iniciales['telefono'] = perfil.telefono
         municipal = Municipal.objects.get(perfil=perfil)
-        datos_iniciales['municipio'] = municipal.municipio
+        datos_iniciales['municipio'] = municipal.municipio.id
         return datos_iniciales
 
     def form_valid(self, form):
@@ -152,7 +152,8 @@ class MunicipalUpdate(UpdateView):
             perfil.save()
             if Municipal.objects.filter(perfil=perfil):
                 municipal = Municipal.objects.get(perfil=perfil)
-                municipal.municipio = form.cleaned_data['municipio']
+                municipio = Municipio.objects.get(pk=form.cleaned_data['municipio'])
+                municipal.municipio = municipio
                 municipal.save()
         return super(MunicipalUpdate, self).form_valid(form)
 
@@ -166,12 +167,19 @@ class ParroquialList(ListView):
 
     def dispatch(self, request, *args, **kwargs):
         user = User.objects.get(username=self.request.user.username)
-        if user.perfil.nivel == 2:
+        if user.perfil.nivel == 1 or user.perfil.nivel == 2:
             return super(ParroquialList, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('error_403')
 
     def get_queryset(self):
+        ## usuario estadal puede ver al nivel parroquial
+        if Estadal.objects.filter(perfil=self.request.user.perfil):
+            estadal = Estadal.objects.get(perfil=self.request.user.perfil)
+            queryset = Parroquial.objects.filter(parroquia__municipio__estado=estadal.estado)
+            return queryset
+
+        ## usuario municipal puede ver al parroquial
         if Municipal.objects.filter(perfil=self.request.user.perfil):
             municipal = Municipal.objects.get(perfil=self.request.user.perfil)
             queryset = Parroquial.objects.filter(parroquia__municipio=municipal.municipio)
@@ -222,3 +230,51 @@ class ParroquialCreate(CreateView):
     def form_invalid(self, form):
         print(form.errors)
         return super(ParroquialCreate, self).form_invalid(form)
+
+class ParroquialUpdate(UpdateView):
+    model = User
+    form_class = ParroquialUpdateForm
+    template_name = "usuario.parroquial.actualizar.html"
+    success_url = reverse_lazy('inicio')
+
+    def dispatch(self, request, *args, **kwargs):
+        if User.objects.filter(pk=self.kwargs['pk']) and self.request.user.perfil.nivel == 3:
+            return super(ParroquialUpdate, self).dispatch(request, *args, **kwargs)
+        else:
+            return redirect('error_403')
+
+    def get_form_kwargs(self):
+        kwargs = super(ParroquialUpdate, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+    def get_initial(self):
+        datos_iniciales = super(ParroquialUpdate, self).get_initial()
+        perfil = Perfil.objects.get(user=self.object)
+        datos_iniciales['telefono'] = perfil.telefono
+        parroquial = Parroquial.objects.get(perfil=perfil)
+        datos_iniciales['parroquia'] = parroquial.parroquia.id
+        return datos_iniciales
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.username = form.cleaned_data['username']
+        self.object.first_name = form.cleaned_data['first_name']
+        self.object.last_name = form.cleaned_data['last_name']
+        self.object.email = form.cleaned_data['email']
+        self.object.save()
+
+        if Perfil.objects.filter(user=self.object):
+            perfil = Perfil.objects.get(user=self.object)
+            perfil.telefono = form.cleaned_data['telefono']
+            perfil.save()
+            if Parroquial.objects.filter(perfil=perfil):
+                parroquial = Parroquial.objects.get(perfil=perfil)
+                parroquia = Parroquia.objects.get(pk=form.cleaned_data['parroquia'])
+                parroquial.parroquia = parroquia
+                parroquial.save()
+        return super(ParroquialUpdate, self).form_valid(form)
+
+    def form_invalid(self, form):
+        print(form.errors)
+        return super(ParroquialUpdate, self).form_invalid(form)
