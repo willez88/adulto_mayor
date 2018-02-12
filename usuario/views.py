@@ -15,7 +15,7 @@ class EstadalUpdate(UpdateView):
     success_url = reverse_lazy('inicio')
 
     def dispatch(self, request, *args, **kwargs):
-        if User.objects.filter(pk=self.kwargs['pk']) and self.request.user.perfil.nivel == 1:
+        if self.request.user == self.kwargs['pk'] and self.request.user.perfil.nivel == 1:
             return super(EstadalUpdate, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('error_403')
@@ -55,8 +55,7 @@ class MunicipalList(ListView):
     template_name = "usuario.municipal.listar.html"
 
     def dispatch(self, request, *args, **kwargs):
-        user = User.objects.get(username=self.request.user.username)
-        if user.perfil.nivel == 1:
+        if self.request.user.perfil.nivel == 1:
             return super(MunicipalList, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('error_403')
@@ -74,8 +73,7 @@ class MunicipalCreate(CreateView):
     success_url = reverse_lazy('municipal_listar')
 
     def dispatch(self, request, *args, **kwargs):
-        user = User.objects.get(username=self.request.user.username)
-        if user.perfil.nivel == 1:
+        if self.request.user.perfil.nivel == 1:
             return super(MunicipalCreate, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('error_403')
@@ -120,7 +118,7 @@ class MunicipalUpdate(UpdateView):
     success_url = reverse_lazy('inicio')
 
     def dispatch(self, request, *args, **kwargs):
-        if User.objects.filter(pk=self.kwargs['pk']) and self.request.user.perfil.nivel == 2:
+        if self.request.user.id == self.kwargs['pk'] and self.request.user.perfil.nivel == 2:
             return super(MunicipalUpdate, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('error_403')
@@ -166,8 +164,7 @@ class ParroquialList(ListView):
     template_name = "usuario.parroquial.listar.html"
 
     def dispatch(self, request, *args, **kwargs):
-        user = User.objects.get(username=self.request.user.username)
-        if user.perfil.nivel == 1 or user.perfil.nivel == 2:
+        if self.request.user.perfil.nivel == 1 or self.request.user.perfil.nivel == 2:
             return super(ParroquialList, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('error_403')
@@ -192,8 +189,7 @@ class ParroquialCreate(CreateView):
     success_url = reverse_lazy('parroquial_listar')
 
     def dispatch(self, request, *args, **kwargs):
-        user = User.objects.get(username=self.request.user.username)
-        if user.perfil.nivel == 2:
+        if self.request.user.perfil.nivel == 2:
             return super(ParroquialCreate, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('error_403')
@@ -238,7 +234,7 @@ class ParroquialUpdate(UpdateView):
     success_url = reverse_lazy('inicio')
 
     def dispatch(self, request, *args, **kwargs):
-        if User.objects.filter(pk=self.kwargs['pk']) and self.request.user.perfil.nivel == 3:
+        if self.request.user.id == self.kwargs['pk'] and self.request.user.perfil.nivel == 3:
             return super(ParroquialUpdate, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('error_403')
