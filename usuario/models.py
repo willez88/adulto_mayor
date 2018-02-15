@@ -64,7 +64,7 @@ class Municipal(models.Model):
 
 class Parroquial(models.Model):
 
-    parroquia = models.OneToOneField(
+    parroquia = models.ForeignKey(
         Parroquia, on_delete=models.CASCADE
     )
 

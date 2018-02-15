@@ -255,9 +255,10 @@ class ParroquialForm(PerfilForm):
 
     def clean_parroquia(self):
         parroquia = self.cleaned_data['parroquia']
-
-        if Parroquial.objects.filter(parroquia=parroquia):
-            raise forms.ValidationError(_("Ya existe un usuario asignado a esta parroquia"))
+        parroquial = Parroquial.objects.filter(parroquia=parroquia)
+        print(parroquial.count())
+        if parroquial.count() >= 5:
+            raise forms.ValidationError(_("Solo se pueden asignar 5 usuarios para esta parroquia"))
 
         return parroquia
 
