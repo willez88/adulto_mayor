@@ -4,7 +4,7 @@
 {% block contenido %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4 class="text-left">Listar - Municipal <a href="{% url 'municipal_registrar' %}" class="btn btn-success btn-sm pull-right">Registrar</a></h4>
+            <h4 class="text-left">Listar - Comunal <a href="{% url 'comunal_registrar' %}" class="btn btn-success btn-sm pull-right">Registrar</a></h4>
         </div>
 
         <div class="panel-body">
@@ -18,19 +18,19 @@
                                 <th>Apellidos</th>
                                 <th>Correo</th>
                                 <th>Teléfono</th>
-                                <th>Municipio</th>
+                                <th>Consejo Comunal</th>
                                 <th>Operación</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for mun in object_list %}
+                            {% for cc in object_list %}
                                 <tr>
-                                <td> {{ mun.perfil.user.username }} </td>
-                                <td> {{ mun.perfil.user.first_name }} </td>
-                                <td> {{ mun.perfil.user.last_name }} </td>
-                                <td> {{ mun.perfil.user.email }} </td>
-                                <td> {{ mun.perfil.telefono }} </td>
-                                <td> {{ mun.municipio }}, {{ mun.municipio.estado }} </td>
+                                <td> {{ cc.perfil.user.username }} </td>
+                                <td> {{ cc.perfil.user.first_name }} </td>
+                                <td> {{ cc.perfil.user.last_name }} </td>
+                                <td> {{ cc.perfil.user.email }} </td>
+                                <td> {{ cc.perfil.telefono }} </td>
+                                <td> {{ cc.consejo_comunal }}, {{ cc.consejo_comunal.parroquia }}, {{ cc.consejo_comunal.parroquia.municipio }}, {{ cc.consejo_comunal.parroquia.municipio.estado }} </td>
                                 <td> <a href="#" data-toggle="tooltip" title="Actualizar"><i class="fa fa-pencil"></i></a> <a href="#" data-toggle="tooltip" title="Eliminar"><i class="fa fa-remove"></i></a> </td>
                                 </tr>
                             {% endfor %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 
@@ -138,3 +139,23 @@ class Parroquia(models.Model):
         """
 
         return self.nombre
+
+class ConsejoComunal(models.Model):
+
+    ## Número de rif del Consejo Comunal
+    rif = models.CharField(
+        max_length=10, primary_key=True
+    )
+
+    ## Nombre del Consejo Comunal
+    nombre = models.CharField(max_length=500)
+
+    ## Parroquia en el que se encuetra ubicado el Consejo Comunal
+    parroquia = models.ForeignKey(Parroquia,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        verbose_name = _("Consejo Comunal")
+        verbose_name_plural = _("Consejos Comunales")

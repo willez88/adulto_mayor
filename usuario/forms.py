@@ -1,10 +1,10 @@
 from django import forms
 from django.contrib.auth.models import User
-from base.models import Estado, Municipio, Parroquia
+from base.models import Estado, Municipio, Parroquia, ConsejoComunal
 from django.utils.translation import ugettext_lazy as _
 from django.core import validators
 from base.fields import CedulaField
-from .models import Estadal, Municipal, Parroquial
+from .models import Estadal, Municipal, Parroquial, Comunal
 
 class PerfilForm(forms.ModelForm):
     """!
@@ -281,6 +281,57 @@ class ParroquialUpdateForm(PerfilForm):
         widget=forms.Select(attrs={
             'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
             'title': _("Seleccione la parroquia"),
+        })
+    )
+
+    def clean_verificar_contrasenha(self):
+        pass
+
+    class Meta:
+        model = User
+        exclude = [
+            'perfil','nivel','password','verificar_contrasenha','date_joined','last_login','is_active',
+            'is_superuser','is_staff'
+        ]
+
+class ComunalForm(PerfilForm):
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(ComunalForm, self).__init__(*args, **kwargs)
+        parroquial = Parroquial.objects.get(perfil=user.perfil)
+        lista_consejo_comunal = [('','Selecione...')]
+        for cc in ConsejoComunal.objects.filter(parroquia=parroquial.parroquia):
+            lista_consejo_comunal.append( (cc.rif,cc.rif + ' ' + cc.nombre) )
+        self.fields['consejo_comunal'].choices = lista_consejo_comunal
+
+    consejo_comunal = forms.ChoiceField(
+        label=_("Consejo Comunal"),
+        widget=forms.Select(attrs={
+            'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
+            'title': _("Seleccione el consejo comunal"),
+        })
+    )
+
+class ComunalUpdateForm(PerfilForm):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(ComunalUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['password'].required = False
+        self.fields['verificar_contrasenha'].required = False
+        self.fields['password'].widget.attrs['disabled'] = True
+        self.fields['verificar_contrasenha'].widget.attrs['disabled'] = True
+        comunal= Comunal.objects.get(perfil=user.perfil)
+        lista_consejo_comunal = [('','Selecione...')]
+        for cc in ConsejoComunal.objects.filter(parroquia=comunal.consejo_comunal.parroquia):
+            lista_consejo_comunal.append( (cc.rif,cc.rif + ' ' + cc.nombre) )
+        self.fields['consejo_comunal'].choices = lista_consejo_comunal
+
+    consejo_comunal = forms.ChoiceField(
+        label=_("Consejo Comunal"),
+        widget=forms.Select(attrs={
+            'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
+            'title': _("Seleccione el consejo comunal"),
         })
     )
 

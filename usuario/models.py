@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from base.models import Estado, Municipio, Parroquia
+from base.models import Estado, Municipio, Parroquia, ConsejoComunal
 from django.utils.translation import ugettext_lazy as _
 from base.constant import NIVEL, NACIONALIDAD
 from base.fields import CedulaField
@@ -78,3 +78,20 @@ class Parroquial(models.Model):
     class Meta:
         verbose_name = _("Parroquial")
         verbose_name_plural = _("Parroquiales")
+
+class Comunal(models.Model):
+
+    consejo_comunal = models.OneToOneField(
+        ConsejoComunal, on_delete=models.CASCADE
+    )
+
+    perfil = models.OneToOneField(
+        Perfil, on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return "%s %s" % (self.perfil.user.first_name, self.perfil.user.last_name)
+
+    class Meta:
+        verbose_name = _("Comunal")
+        verbose_name_plural = _("Comunales")

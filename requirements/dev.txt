@@ -2,3 +2,6 @@ django
 django-extensions
 psycopg2
 pygraphviz
+ndg-httpsclient
+pyopenssl
+pyasn1

@@ -30,7 +30,7 @@
                                 <td> {{ par.perfil.user.last_name }} </td>
                                 <td> {{ par.perfil.user.email }} </td>
                                 <td> {{ par.perfil.telefono }} </td>
-                                <td> {{ par.parroquia }} </td>
+                                <td> {{ par.parroquia }}, {{ par.parroquia.municipio }}, {{ par.parroquia.municipio.estado }} </td>
                                 <td> <a href="#" data-toggle="tooltip" title="Actualizar"><i class="fa fa-pencil"></i></a> <a href="#" data-toggle="tooltip" title="Eliminar"><i class="fa fa-remove"></i></a> </td>
                                 </tr>
                             {% endfor %}

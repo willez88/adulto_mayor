@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .forms import EstadalUpdateForm, MunicipalForm, ParroquialForm, MunicipalUpdateForm, ParroquialUpdateForm
-from .models import Perfil, Estadal, Municipal, Parroquial
+from .forms import EstadalUpdateForm, MunicipalForm, ParroquialForm, MunicipalUpdateForm, ParroquialUpdateForm, ComunalForm, ComunalUpdateForm
+from .models import Perfil, Estadal, Municipal, Parroquial, Comunal
 from django.contrib.auth.models import User
-from base.models import Estado, Municipio, Parroquia
+from base.models import Estado, Municipio, Parroquia, ConsejoComunal
+from django.conf import settings
+from base.constant import EMAIL_SUBJECT_REGISTRO
+from base.functions import enviar_correo
 
 # Create your views here.
 
@@ -15,7 +18,7 @@ class EstadalUpdate(UpdateView):
     success_url = reverse_lazy('inicio')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user == self.kwargs['pk'] and self.request.user.perfil.nivel == 1:
+        if self.request.user.id == self.kwargs['pk'] and self.request.user.perfil.nivel == 1:
             return super(EstadalUpdate, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('error_403')
@@ -105,6 +108,17 @@ class MunicipalCreate(CreateView):
             municipio = municipio,
             perfil = perfil
         )
+
+        admin, admin_email = '', ''
+        if settings.ADMINS:
+            admin = settings.ADMINS[0][0]
+            admin_email = settings.ADMINS[0][1]
+
+        enviado = enviar_correo(self.object.email, 'usuario.bienvenida.mail', EMAIL_SUBJECT_REGISTRO, {'nivel':'Estadal','nombre':self.request.user.first_name,
+            'apellido':self.request.user.last_name, 'correo':self.request.user.email, 'username':self.object.username, 'clave':form.cleaned_data['password'],
+            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM
+        })
+
         return super(MunicipalCreate, self).form_valid(form)
 
     def form_invalid(self, form):
@@ -274,3 +288,119 @@ class ParroquialUpdate(UpdateView):
     def form_invalid(self, form):
         print(form.errors)
         return super(ParroquialUpdate, self).form_invalid(form)
+
+class ComunalList(ListView):
+    model = Comunal
+    template_name = "usuario.comunal.listar.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.perfil.nivel == 1 or self.request.user.perfil.nivel == 3:
+            return super(ComunalList, self).dispatch(request, *args, **kwargs)
+        else:
+            return redirect('error_403')
+
+    def get_queryset(self):
+        ## usuario estadal puede ver al nivel parroquial
+        if Estadal.objects.filter(perfil=self.request.user.perfil):
+            estadal = Estadal.objects.get(perfil=self.request.user.perfil)
+            queryset = Comunal.objects.filter(consejo_comunal__parroquia__municipio__estado=estadal.estado)
+            return queryset
+
+        ## usuario parroquial puede ver al comunal
+        if Parroquial.objects.filter(perfil=self.request.user.perfil):
+            parroquial = Parroquial.objects.get(perfil=self.request.user.perfil)
+            queryset = Comunal.objects.filter(consejo_comunal__parroquia=parroquial.parroquia)
+            return queryset
+
+class ComunalCreate(CreateView):
+    model = User
+    form_class = ComunalForm
+    template_name = "usuario.comunal.registrar.html"
+    success_url = reverse_lazy('comunal_listar')
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.perfil.nivel == 3:
+            return super(ComunalCreate, self).dispatch(request, *args, **kwargs)
+        else:
+            return redirect('error_403')
+
+    def get_form_kwargs(self):
+        kwargs = super(ComunalCreate, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.username = form.cleaned_data['username']
+        self.object.first_name = form.cleaned_data['first_name']
+        self.object.last_name = form.cleaned_data['last_name']
+        self.object.email = form.cleaned_data['email']
+        self.object.set_password(form.cleaned_data['password'])
+        self.object.is_active = True
+        self.object.save()
+
+        user = User.objects.get(username=self.object.username)
+        perfil = Perfil.objects.create(
+            telefono=form.cleaned_data['telefono'],
+            nivel = 4,
+            user= user
+        )
+
+        consejo_comunal = ConsejoComunal.objects.get(pk=form.cleaned_data['consejo_comunal'])
+        Comunal.objects.create(
+            consejo_comunal = consejo_comunal,
+            perfil = perfil
+        )
+        return super(ComunalCreate, self).form_valid(form)
+
+    def form_invalid(self, form):
+        print(form.errors)
+        return super(ComunalCreate, self).form_invalid(form)
+
+class ComunalUpdate(UpdateView):
+    model = User
+    form_class = ComunalUpdateForm
+    template_name = "usuario.comunal.actualizar.html"
+    success_url = reverse_lazy('inicio')
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.id == self.kwargs['pk'] and self.request.user.perfil.nivel == 4:
+            return super(ComunalUpdate, self).dispatch(request, *args, **kwargs)
+        else:
+            return redirect('error_403')
+
+    def get_form_kwargs(self):
+        kwargs = super(ComunalUpdate, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+    def get_initial(self):
+        datos_iniciales = super(ComunalUpdate, self).get_initial()
+        perfil = Perfil.objects.get(user=self.object)
+        datos_iniciales['telefono'] = perfil.telefono
+        comunal = Comunal.objects.get(perfil=perfil)
+        datos_iniciales['consejo_comunal'] = comunal.consejo_comunal.rif
+        return datos_iniciales
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.username = form.cleaned_data['username']
+        self.object.first_name = form.cleaned_data['first_name']
+        self.object.last_name = form.cleaned_data['last_name']
+        self.object.email = form.cleaned_data['email']
+        self.object.save()
+
+        if Perfil.objects.filter(user=self.object):
+            perfil = Perfil.objects.get(user=self.object)
+            perfil.telefono = form.cleaned_data['telefono']
+            perfil.save()
+            if Comunal.objects.filter(perfil=perfil):
+                comunal = Comunal.objects.get(perfil=perfil)
+                consejo_comunal = ConsejoComunal.objects.get(pk=form.cleaned_data['consejo_comunal'])
+                comunal.consejo_comunal = consejo_comunal
+                comunal.save()
+        return super(ComunalUpdate, self).form_valid(form)
+
+    def form_invalid(self, form):
+        print(form.errors)
+        return super(ComunalUpdate, self).form_invalid(form)
