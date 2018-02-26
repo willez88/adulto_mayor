@@ -100,6 +100,12 @@ class PerfilForm(forms.ModelForm):
         )
     )
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email):
+            raise forms.ValidationError(_("El correo ya esta registrado"))
+        return email
+
     def clean_verificar_contrasenha(self):
         verificar_contrasenha = self.cleaned_data['verificar_contrasenha']
         contrasenha = self.data['password']
