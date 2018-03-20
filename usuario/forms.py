@@ -163,6 +163,13 @@ class NacionalUpdateForm(PerfilForm):
         })
     )
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        username = self.cleaned_data['username']
+        if User.objects.filter(email=email).exclude(username=username):
+            raise forms.ValidationError(_("El correo ya esta registrado"))
+        return email
+
     def clean_verificar_contrasenha(self):
         pass
 
