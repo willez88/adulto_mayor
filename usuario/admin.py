@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Perfil, Estadal, Municipal, Parroquial, Comunal
+from .models import Perfil, Nacional, Estadal, Municipal, Parroquial, Comunal
 
 # Register your models here.
 
@@ -10,6 +10,14 @@ class PerfilAdmin(admin.ModelAdmin):
     ordering = ('user',)
     search_fields = ('telefono','nivel','user',)
 admin.site.register(Perfil, PerfilAdmin)
+
+class NacionalAdmin(admin.ModelAdmin):
+    list_display = ('perfil','pais',)
+    list_filter = ('perfil','pais',)
+    list_per_page = 25
+    ordering = ('pais',)
+    search_fields = ('pais','perfil',)
+admin.site.register(Nacional, NacionalAdmin)
 
 class EstadalAdmin(admin.ModelAdmin):
     list_display = ('perfil','estado',)

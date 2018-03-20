@@ -154,7 +154,7 @@ class ConsejoComunal(models.Model):
     parroquia = models.ForeignKey(Parroquia,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.nombre
+        return self.rif + ' ' + self.nombre
 
     class Meta:
         verbose_name = _("Consejo Comunal")

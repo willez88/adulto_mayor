@@ -14,13 +14,18 @@
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menú<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             {% if request.user.perfil.nivel == 1 %}
+                            <li><a href="{% url 'estadal_listar' %}">Estadal</a></li>
                             <li><a href="{% url 'municipal_listar' %}">Municipal</a></li>
                             <li><a href="{% url 'parroquial_listar' %}">Parroquial</a></li>
                             <li><a href="{% url 'comunal_listar' %}">Consejo Comunal</a></li>
                             {% elif request.user.perfil.nivel == 2 %}
+                            <li><a href="{% url 'municipal_listar' %}">Municipal</a></li>
                             <li><a href="{% url 'parroquial_listar' %}">Parroquial</a></li>
                             <li><a href="{% url 'comunal_listar' %}">Consejo Comunal</a></li>
                             {% elif request.user.perfil.nivel == 3 %}
+                            <li><a href="{% url 'parroquial_listar' %}">Parroquial</a></li>
+                            <li><a href="{% url 'comunal_listar' %}">Consejo Comunal</a></li>
+                            {% elif request.user.perfil.nivel == 4 %}
                             <li><a href="{% url 'comunal_listar' %}">Consejo Comunal</a></li>
                             {% endif %}
                         </ul>
@@ -31,12 +36,14 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user fa-lg" aria-hidden="true"></i> {{ request.user.username }}</a>
                     <ul class="dropdown-menu">
                         {% if request.user.perfil.nivel == 1 %}
-                        <li><a href="{% url 'estadal_actualizar' request.user.id %}"> Perfil</a></li>
+                        <li><a href="{% url 'nacional_actualizar' request.user.id %}"> Perfil</a></li>
                         {% elif request.user.perfil.nivel == 2 %}
-                        <li><a href="{% url 'municipal_actualizar' request.user.id %}"> Perfil</a></li>
+                        <li><a href="{% url 'estadal_actualizar' request.user.id %}"> Perfil</a></li>
                         {% elif request.user.perfil.nivel == 3 %}
-                        <li><a href="{% url 'parroquial_actualizar' request.user.id %}"> Perfil</a></li>
+                        <li><a href="{% url 'municipal_actualizar' request.user.id %}"> Perfil</a></li>
                         {% elif request.user.perfil.nivel == 4 %}
+                        <li><a href="{% url 'parroquial_actualizar' request.user.id %}"> Perfil</a></li>
+                        {% elif request.user.perfil.nivel == 5 %}
                         <li><a href="{% url 'comunal_actualizar' request.user.id %}"> Perfil</a></li>
                         {% endif %}
                         <li><a href="{% url 'password_change' %}"> Cambiar Clave</a></li>
@@ -61,7 +68,6 @@
                         </div>
                         <div class="panel-body">
                             <h4 class="text-center">{{ texto2 }}</h4>
-                            <a class="btn btn-primary btn-sm pull-right"href="/admin/">Panel Administrativo</a>
                         </div>
                     </div>
                 {% endif %}

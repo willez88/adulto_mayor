@@ -1,7 +1,10 @@
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
-from .views import MunicipalList, MunicipalCreate, EstadalUpdate, ParroquialList, ParroquialCreate, MunicipalUpdate, ParroquialUpdate, ComunalList, ComunalCreate, ComunalUpdate
+from .views import (
+    NacionalUpdate, EstadalList, EstadalCreate, MunicipalList, MunicipalCreate, EstadalUpdate, ParroquialList, ParroquialCreate, MunicipalUpdate, ParroquialUpdate,
+    ComunalList, ComunalCreate, ComunalUpdate
+)
 
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
@@ -20,6 +23,10 @@ urlpatterns = [
 
     path('cambiar-clave/', login_required(auth_views.PasswordChangeView.as_view(template_name='password_change_form.html')), name='password_change'),
     path('cambiar-clave-hecho/', login_required(auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html')), name='password_change_done'),
+
+    path('nacional/actualizar/<int:pk>/', login_required(NacionalUpdate.as_view()), name='nacional_actualizar'),
+    path('estadal/', login_required(EstadalList.as_view()), name='estadal_listar'),
+    path('estadal/registrar/', login_required(EstadalCreate.as_view()), name='estadal_registrar'),
 
     path('estadal/actualizar/<int:pk>/', login_required(EstadalUpdate.as_view()), name='estadal_actualizar'),
     path('municipal/', login_required(MunicipalList.as_view()), name='municipal_listar'),

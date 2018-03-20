@@ -19,7 +19,6 @@
                                 <th>Correo</th>
                                 <th>Teléfono</th>
                                 <th>Municipio</th>
-                                <th>Operación</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,7 +30,6 @@
                                 <td> {{ mun.perfil.user.email }} </td>
                                 <td> {{ mun.perfil.telefono }} </td>
                                 <td> {{ mun.municipio }}, {{ mun.municipio.estado }} </td>
-                                <td> <a href="#" data-toggle="tooltip" title="Actualizar"><i class="fa fa-pencil"></i></a> <a href="#" data-toggle="tooltip" title="Eliminar"><i class="fa fa-remove"></i></a> </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

@@ -1,10 +1,10 @@
 from django import forms
 from django.contrib.auth.models import User
-from base.models import Estado, Municipio, Parroquia, ConsejoComunal
+from base.models import Pais, Estado, Municipio, Parroquia, ConsejoComunal
 from django.utils.translation import ugettext_lazy as _
 from django.core import validators
 from base.fields import CedulaField
-from .models import Estadal, Municipal, Parroquial, Comunal
+from .models import Nacional, Estadal, Municipal, Parroquial, Comunal
 
 class PerfilForm(forms.ModelForm):
     """!
@@ -127,6 +127,88 @@ class PerfilForm(forms.ModelForm):
         model = User
         exclude = ['perfil','nivel','date_joined']
 
+class NacionalUpdateForm(PerfilForm):
+    """!
+    Clase que contiene el formulario para poder actualizar los datos de un usuario que tiene nivel Nacional
+
+    @author William Páez (wpaez at cenditel.gob.ve)
+    @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+    @date 04-03-2018
+    @version 1.0.0
+    """
+
+    def __init__(self, *args, **kwargs):
+        """!
+        Función que inicializa el formulario
+
+        @author William Páez (wpaez at cenditel.gob.ve)
+        @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+        @date 04-03-2018
+        @version 1.0.0
+        """
+
+        super(NacionalUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['pais'].required = False
+        self.fields['password'].required = False
+        self.fields['verificar_contrasenha'].required = False
+        self.fields['password'].widget.attrs['disabled'] = True
+        self.fields['verificar_contrasenha'].widget.attrs['disabled'] = True
+
+    ## Estado donde se encuentra el usuario
+    pais = forms.CharField(
+        label=_("País"),
+        widget=forms.TextInput(attrs={
+            'class': 'form-control input-sm', 'data-toggle': 'tooltip', 'style':'width:250px;', 'readonly':'true',
+            'title': _("Indica el nombre del pais"),
+        })
+    )
+
+    def clean_verificar_contrasenha(self):
+        pass
+
+    class Meta:
+        """!
+        Meta clase del formulario que establece algunas propiedades
+
+        @author William Páez (wpaez at cenditel.gob.ve)
+        @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+        @date 14-01-2018
+        @version 1.0.0
+        """
+
+        model = User
+        exclude = [
+            'perfil','nivel','password','verificar_contrasenha','date_joined','last_login','is_active',
+            'is_superuser','is_staff', 'pais'
+        ]
+
+class EstadalForm(PerfilForm):
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(EstadalForm, self).__init__(*args, **kwargs)
+        nacional = Nacional.objects.get(perfil=user.perfil)
+        lista_estado = [('','Selecione...')]
+        for es in Estado.objects.filter(pais=nacional.pais):
+            lista_estado.append( (es.id,es.nombre) )
+        self.fields['estado'].choices = lista_estado
+
+    estado = forms.ChoiceField(
+        label=_("Estado"),
+        widget=forms.Select(attrs={
+            'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
+            'title': _("Seleccione el estado"),
+        })
+    )
+
+    def clean_estado(self):
+        estado = self.cleaned_data['estado']
+
+        if Estadal.objects.filter(estado=estado):
+            raise forms.ValidationError(_("Ya existe un usuario asignado a este estado"))
+
+        return estado
+
 class EstadalUpdateForm(PerfilForm):
     """!
     Clase que contiene el formulario para poder actualizar los datos de un usuario que tiene nivel estadal
@@ -148,17 +230,18 @@ class EstadalUpdateForm(PerfilForm):
         """
 
         super(EstadalUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['estado'].required = False
         self.fields['password'].required = False
         self.fields['verificar_contrasenha'].required = False
         self.fields['password'].widget.attrs['disabled'] = True
         self.fields['verificar_contrasenha'].widget.attrs['disabled'] = True
 
     ## Estado donde se encuentra el usuario
-    estado = forms.ModelChoiceField(
-        label=_("Estado"), queryset=Estado.objects.all(), empty_label=_("Seleccione..."),
-        widget=forms.Select(attrs={
-            'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
-            'title': _("Seleccione el estado"),
+    estado = forms.CharField(
+        label=_("Estado"),
+        widget=forms.TextInput(attrs={
+            'class': 'form-control input-sm', 'data-toggle': 'tooltip', 'style':'width:250px;', 'readonly': 'true',
+            'title': _("Indica el nombre del estado"),
         })
     )
 
@@ -178,7 +261,7 @@ class EstadalUpdateForm(PerfilForm):
         model = User
         exclude = [
             'perfil','nivel','password','verificar_contrasenha','date_joined','last_login','is_active',
-            'is_superuser','is_staff'
+            'is_superuser','is_staff','estado'
         ]
 
 class MunicipalForm(PerfilForm):
@@ -212,21 +295,17 @@ class MunicipalUpdateForm(PerfilForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
         super(MunicipalUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['municipio'].required = False
         self.fields['password'].required = False
         self.fields['verificar_contrasenha'].required = False
         self.fields['password'].widget.attrs['disabled'] = True
         self.fields['verificar_contrasenha'].widget.attrs['disabled'] = True
-        municipal = Municipal.objects.get(perfil=user.perfil)
-        lista_municipio = [('','Selecione...')]
-        for mu in Municipio.objects.filter(estado=municipal.municipio.estado):
-            lista_municipio.append( (mu.id,mu.nombre) )
-        self.fields['municipio'].choices = lista_municipio
 
-    municipio = forms.ChoiceField(
+    municipio = forms.CharField(
         label=_("Municipio"),
-        widget=forms.Select(attrs={
-            'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
-            'title': _("Seleccione el municipio"),
+        widget=forms.TextInput(attrs={
+            'class': 'form-control input-sm', 'data-toggle': 'tooltip', 'style':'width:250px;', 'readonly': 'true',
+            'title': _("Indica el nombre del municipio"),
         })
     )
 
@@ -237,7 +316,7 @@ class MunicipalUpdateForm(PerfilForm):
         model = User
         exclude = [
             'perfil','nivel','password','verificar_contrasenha','date_joined','last_login','is_active',
-            'is_superuser','is_staff'
+            'is_superuser','is_staff','municipio'
         ]
 
 class ParroquialForm(PerfilForm):
@@ -272,21 +351,17 @@ class ParroquialUpdateForm(PerfilForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
         super(ParroquialUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['parroquia'].required = False
         self.fields['password'].required = False
         self.fields['verificar_contrasenha'].required = False
         self.fields['password'].widget.attrs['disabled'] = True
         self.fields['verificar_contrasenha'].widget.attrs['disabled'] = True
-        parroquial = Parroquial.objects.get(perfil=user.perfil)
-        lista_parroquia = [('','Selecione...')]
-        for pa in Parroquia.objects.filter(municipio=parroquial.parroquia.municipio):
-            lista_parroquia.append( (pa.id,pa.nombre) )
-        self.fields['parroquia'].choices = lista_parroquia
 
-    parroquia = forms.ChoiceField(
+    parroquia = forms.CharField(
         label=_("Parroquia"),
-        widget=forms.Select(attrs={
-            'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
-            'title': _("Seleccione la parroquia"),
+        widget=forms.TextInput(attrs={
+            'class': 'form-control input-sm', 'data-toggle': 'tooltip', 'style':'width:250px;', 'readonly': 'true',
+            'title': _("Indica el nombre de la parroquia"),
         })
     )
 
@@ -297,7 +372,7 @@ class ParroquialUpdateForm(PerfilForm):
         model = User
         exclude = [
             'perfil','nivel','password','verificar_contrasenha','date_joined','last_login','is_active',
-            'is_superuser','is_staff'
+            'is_superuser','is_staff','parroquia'
         ]
 
 class ComunalForm(PerfilForm):
@@ -323,21 +398,17 @@ class ComunalUpdateForm(PerfilForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
         super(ComunalUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['consejo_comunal'].required = False
         self.fields['password'].required = False
         self.fields['verificar_contrasenha'].required = False
         self.fields['password'].widget.attrs['disabled'] = True
         self.fields['verificar_contrasenha'].widget.attrs['disabled'] = True
-        comunal= Comunal.objects.get(perfil=user.perfil)
-        lista_consejo_comunal = [('','Selecione...')]
-        for cc in ConsejoComunal.objects.filter(parroquia=comunal.consejo_comunal.parroquia):
-            lista_consejo_comunal.append( (cc.rif,cc.rif + ' ' + cc.nombre) )
-        self.fields['consejo_comunal'].choices = lista_consejo_comunal
 
-    consejo_comunal = forms.ChoiceField(
+    consejo_comunal = forms.CharField(
         label=_("Consejo Comunal"),
-        widget=forms.Select(attrs={
-            'class': 'form-control select2', 'data-toggle': 'tooltip', 'style':'width:250px;',
-            'title': _("Seleccione el consejo comunal"),
+        widget=forms.TextInput(attrs={
+            'class': 'form-control input-sm', 'data-toggle': 'tooltip', 'style':'width:250px;', 'readonly': 'true',
+            'title': _("Indica el nombre del consejo comunal"),
         })
     )
 
@@ -348,5 +419,5 @@ class ComunalUpdateForm(PerfilForm):
         model = User
         exclude = [
             'perfil','nivel','password','verificar_contrasenha','date_joined','last_login','is_active',
-            'is_superuser','is_staff'
+            'is_superuser','is_staff','consejo_comunal'
         ]

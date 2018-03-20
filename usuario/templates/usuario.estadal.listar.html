@@ -4,7 +4,7 @@
 {% block contenido %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4 class="text-left">Listar - Parroquial <a href="{% url 'parroquial_registrar' %}" class="btn btn-success btn-sm pull-right">Registrar</a></h4>
+            <h4 class="text-left">Listar - Estadal <a href="{% url 'estadal_registrar' %}" class="btn btn-success btn-sm pull-right">Registrar</a></h4>
         </div>
 
         <div class="panel-body">
@@ -18,18 +18,18 @@
                                 <th>Apellidos</th>
                                 <th>Correo</th>
                                 <th>Teléfono</th>
-                                <th>Parroquia</th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for par in object_list %}
+                            {% for est in object_list %}
                                 <tr>
-                                <td> {{ par.perfil.user.username }} </td>
-                                <td> {{ par.perfil.user.first_name }} </td>
-                                <td> {{ par.perfil.user.last_name }} </td>
-                                <td> {{ par.perfil.user.email }} </td>
-                                <td> {{ par.perfil.telefono }} </td>
-                                <td> {{ par.parroquia }}, {{ par.parroquia.municipio }}, {{ par.parroquia.municipio.estado }} </td>
+                                <td> {{ est.perfil.user.username }} </td>
+                                <td> {{ est.perfil.user.first_name }} </td>
+                                <td> {{ est.perfil.user.last_name }} </td>
+                                <td> {{ est.perfil.user.email }} </td>
+                                <td> {{ est.perfil.telefono }} </td>
+                                <td> {{ est.estado }}, {{ est.estado.pais }} </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

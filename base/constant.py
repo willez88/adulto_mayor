@@ -13,11 +13,12 @@ NACIONALIDAD = (
 
 ## Establece los diferentes niveles de un usuario
 NIVEL = (
-    (0, 'administrador'),
-    (1, 'Nivel Estadal'),
-    (2, 'Nivel Municipal'),
-    (3, 'Nivel Parroquial'),
-    (4, 'Nivel Comunal'),
+    (0, 'Administrador'),
+    (1, 'Nivel Nacional'),
+    (2, 'Nivel Estadal'),
+    (3, 'Nivel Municipal'),
+    (4, 'Nivel Parroquial'),
+    (5, 'Nivel Comunal'),
 )
 
 ## Mensaje de error para peticiones AJAX
