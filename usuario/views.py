@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .forms import NacionalUpdateForm, EstadalForm, EstadalUpdateForm, MunicipalForm, ParroquialForm, MunicipalUpdateForm, ParroquialUpdateForm, ComunalForm, ComunalUpdateForm
+from .forms import (
+    NacionalUpdateForm, EstadalForm, EstadalUpdateForm, MunicipalForm, ParroquialForm, MunicipalUpdateForm,
+    ParroquialUpdateForm, ComunalForm, ComunalUpdateForm
+)
 from .models import Perfil, Nacional, Estadal, Municipal, Parroquial, Comunal
 from django.contrib.auth.models import User
 from base.models import Estado, Municipio, Parroquia, ConsejoComunal
