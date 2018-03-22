@@ -44,7 +44,9 @@
 {% block extra_footer %}
     <script type="text/javascript">
         $(document).ready(function() {
-            var tabla= $('#tabla').DataTable();
+            var tabla= $('#tabla').DataTable({
+                "order": [[ 5, "asc" ]]
+            });
 
             inicializar_boton_datatable(tabla);
         });

@@ -11,6 +11,9 @@ from base.models import Estado, Municipio, Parroquia, ConsejoComunal
 from django.conf import settings
 from base.constant import EMAIL_SUBJECT_REGISTRO
 from base.functions import enviar_correo
+from django.utils.translation import ugettext_lazy as _
+import logging
+logger = logging.getLogger("usuario")
 
 # Create your views here.
 
@@ -118,6 +121,11 @@ class EstadalCreate(CreateView):
             'apellido':self.request.user.last_name, 'correo':self.request.user.email, 'username':self.object.username, 'clave':form.cleaned_data['password'],
             'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM
         })
+
+        if not enviado:
+            logger.warning(
+                str(_("Ocurrió un inconveniente al enviar por correo las credenciales del usuario [%s]") % self.object.username)
+            )
 
         return super(EstadalCreate, self).form_valid(form)
 
@@ -235,6 +243,11 @@ class MunicipalCreate(CreateView):
             'apellido':self.request.user.last_name, 'correo':self.request.user.email, 'username':self.object.username, 'clave':form.cleaned_data['password'],
             'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM
         })
+
+        if not enviado:
+            logger.warning(
+                str(_("Ocurrió un inconveniente al enviar por correo las credenciales del usuario [%s]") % self.object.username)
+            )
 
         return super(MunicipalCreate, self).form_valid(form)
 
@@ -363,6 +376,11 @@ class ParroquialCreate(CreateView):
             'apellido':self.request.user.last_name, 'correo':self.request.user.email, 'username':self.object.username, 'clave':form.cleaned_data['password'],
             'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM
         })
+
+        if not enviado:
+            logger.warning(
+                str(_("Ocurrió un inconveniente al enviar por correo las credenciales del usuario [%s]") % self.object.username)
+            )
 
         return super(ParroquialCreate, self).form_valid(form)
 
@@ -497,6 +515,11 @@ class ComunalCreate(CreateView):
             'apellido':self.request.user.last_name, 'correo':self.request.user.email, 'username':self.object.username, 'clave':form.cleaned_data['password'],
             'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM
         })
+
+        if not enviado:
+            logger.warning(
+                str(_("Ocurrió un inconveniente al enviar por correo las credenciales del usuario [%s]") % self.object.username)
+            )
 
         return super(ComunalCreate, self).form_valid(form)
 
