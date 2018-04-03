@@ -165,7 +165,7 @@ class NacionalUpdateForm(PerfilForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        username = self.cleaned_data['username']
+        username = self.data.get('username')
         if User.objects.filter(email=email).exclude(username=username):
             raise forms.ValidationError(_("El correo ya esta registrado"))
         return email
@@ -252,6 +252,13 @@ class EstadalUpdateForm(PerfilForm):
         })
     )
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        username = self.data.get('username')
+        if User.objects.filter(email=email).exclude(username=username):
+            raise forms.ValidationError(_("El correo ya esta registrado"))
+        return email
+
     def clean_verificar_contrasenha(self):
         pass
 
@@ -316,6 +323,13 @@ class MunicipalUpdateForm(PerfilForm):
         })
     )
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        username = self.data.get('username')
+        if User.objects.filter(email=email).exclude(username=username):
+            raise forms.ValidationError(_("El correo ya esta registrado"))
+        return email
+
     def clean_verificar_contrasenha(self):
         pass
 
@@ -372,6 +386,13 @@ class ParroquialUpdateForm(PerfilForm):
         })
     )
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        username = self.data.get('username')
+        if User.objects.filter(email=email).exclude(username=username):
+            raise forms.ValidationError(_("El correo ya esta registrado"))
+        return email
+
     def clean_verificar_contrasenha(self):
         pass
 
@@ -418,6 +439,13 @@ class ComunalUpdateForm(PerfilForm):
             'title': _("Indica el nombre del consejo comunal"),
         })
     )
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        username = self.data.get('username')
+        if User.objects.filter(email=email).exclude(username=username):
+            raise forms.ValidationError(_("El correo ya esta registrado"))
+        return email
 
     def clean_verificar_contrasenha(self):
         pass
