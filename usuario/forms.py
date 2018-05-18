@@ -165,7 +165,7 @@ class NacionalUpdateForm(PerfilForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        username = self.data.get('username')
+        username = self.cleaned_data.get('username')
         if User.objects.filter(email=email).exclude(username=username):
             raise forms.ValidationError(_("El correo ya esta registrado"))
         return email
@@ -254,7 +254,7 @@ class EstadalUpdateForm(PerfilForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        username = self.data.get('username')
+        username = self.cleaned_data.get('username')
         if User.objects.filter(email=email).exclude(username=username):
             raise forms.ValidationError(_("El correo ya esta registrado"))
         return email
@@ -325,7 +325,7 @@ class MunicipalUpdateForm(PerfilForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        username = self.data.get('username')
+        username = self.cleaned_data.get('username')
         if User.objects.filter(email=email).exclude(username=username):
             raise forms.ValidationError(_("El correo ya esta registrado"))
         return email
@@ -388,7 +388,7 @@ class ParroquialUpdateForm(PerfilForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        username = self.data.get('username')
+        username = self.cleaned_data.get('username')
         if User.objects.filter(email=email).exclude(username=username):
             raise forms.ValidationError(_("El correo ya esta registrado"))
         return email
@@ -442,7 +442,7 @@ class ComunalUpdateForm(PerfilForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        username = self.data.get('username')
+        username = self.cleaned_data.get('username')
         if User.objects.filter(email=email).exclude(username=username):
             raise forms.ValidationError(_("El correo ya esta registrado"))
         return email
