@@ -193,7 +193,7 @@ LOGGING = dict(version=1, disable_existing_loggers=True, formatters={
         'class': 'logging.handlers.TimedRotatingFileHandler',
         'level': 'DEBUG',
         'formatter': 'std',
-        'filename': os.path.join(LOGS_PATH, 'usuario.log'),
+        'filename': os.path.join(LOGS_PATH, 'user.log'),
         'when': 'w6',
         'interval': 1,
         'backupCount': 52

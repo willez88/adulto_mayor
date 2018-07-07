@@ -14,19 +14,19 @@
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menú<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             {% if request.user.profile.level == 1 %}
-                            <li><a href="{% url 'usuario:state_level_list' %}">Estadal</a></li>
-                            <li><a href="{% url 'usuario:municipal_level_list' %}">Municipal</a></li>
-                            <li><a href="{% url 'usuario:parish_level_list' %}">Parroquial</a></li>
-                            <li><a href="{% url 'usuario:communal_council_level_list' %}">Consejo Comunal</a></li>
+                            <li><a href="{% url 'user:state_level_list' %}">Estadal</a></li>
+                            <li><a href="{% url 'user:municipal_level_list' %}">Municipal</a></li>
+                            <li><a href="{% url 'user:parish_level_list' %}">Parroquial</a></li>
+                            <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
                             {% elif request.user.profile.level == 2 %}
-                            <li><a href="{% url 'usuario:municipal_level_list' %}">Municipal</a></li>
-                            <li><a href="{% url 'usuario:parish_level_list' %}">Parroquial</a></li>
-                            <li><a href="{% url 'usuario:communal_council_level_list' %}">Consejo Comunal</a></li>
+                            <li><a href="{% url 'user:municipal_level_list' %}">Municipal</a></li>
+                            <li><a href="{% url 'user:parish_level_list' %}">Parroquial</a></li>
+                            <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
                             {% elif request.user.profile.level == 3 %}
-                            <li><a href="{% url 'usuario:parish_level_list' %}">Parroquial</a></li>
-                            <li><a href="{% url 'usuario:communal_council_level_list' %}">Consejo Comunal</a></li>
+                            <li><a href="{% url 'user:parish_level_list' %}">Parroquial</a></li>
+                            <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
                             {% elif request.user.profile.level == 4 %}
-                            <li><a href="{% url 'usuario:communal_council_level_list' %}">Consejo Comunal</a></li>
+                            <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
                             {% endif %}
                         </ul>
                     </li>
@@ -36,23 +36,23 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user fa-lg" aria-hidden="true"></i> {{ request.user.username }}</a>
                     <ul class="dropdown-menu">
                         {% if request.user.profile.level == 1 %}
-                        <li><a href="{% url 'usuario:national_level_update' request.user.id %}"> Perfil</a></li>
+                        <li><a href="{% url 'user:national_level_update' request.user.id %}"> Perfil</a></li>
                         {% elif request.user.profile.level == 2 %}
-                        <li><a href="{% url 'usuario:state_level_update' request.user.id %}"> Perfil</a></li>
+                        <li><a href="{% url 'user:state_level_update' request.user.id %}"> Perfil</a></li>
                         {% elif request.user.profile.level == 3 %}
-                        <li><a href="{% url 'usuario:municipal_level_update' request.user.id %}"> Perfil</a></li>
+                        <li><a href="{% url 'user:municipal_level_update' request.user.id %}"> Perfil</a></li>
                         {% elif request.user.profile.level == 4 %}
-                        <li><a href="{% url 'usuario:parish_level_update' request.user.id %}"> Perfil</a></li>
+                        <li><a href="{% url 'user:parish_level_update' request.user.id %}"> Perfil</a></li>
                         {% elif request.user.profile.level == 5 %}
-                        <li><a href="{% url 'usuario:communal_council_level_update' request.user.id %}"> Perfil</a></li>
+                        <li><a href="{% url 'user:communal_council_level_update' request.user.id %}"> Perfil</a></li>
                         {% endif %}
-                        <li><a href="{% url 'usuario:password_change' %}"> Cambiar Clave</a></li>
-                        <li><a href="{% url 'usuario:logout' %}"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> Salir</a></li>
+                        <li><a href="{% url 'user:password_change' %}"> Cambiar Clave</a></li>
+                        <li><a href="{% url 'user:logout' %}"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> Salir</a></li>
                     </ul>
                 </ul>
                 {% else %}
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{% url 'usuario:login' %}"><i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Iniciar Sesión</a></li>
+                    <li><a href="{% url 'user:login' %}"><i class="fa fa-sign-in fa-lg" aria-hidden="true"></i> Iniciar Sesión</a></li>
                 </ul>
                 {% endif %}
             </div>
