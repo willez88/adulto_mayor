@@ -4,7 +4,7 @@
 {% block contenido %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4 class="text-left">Listar - Estadal <a href="{% url 'usuario:state_level_create' %}" class="btn btn-success btn-sm pull-right">Registrar</a></h4>
+            <h4 class="text-left">Listar - Estadal <a href="{% url 'user:state_level_create' %}" class="btn btn-success btn-sm pull-right">Registrar</a></h4>
         </div>
 
         <div class="panel-body">
@@ -44,7 +44,7 @@
 {% block extra_footer %}
     <script type="text/javascript">
         $(document).ready(function() {
-            var table= $('#table').DataTable({
+            var table = $('#table').DataTable({
                 "order": [[ 5, "asc" ]]
             });
 
