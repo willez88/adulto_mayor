@@ -1,4 +1,4 @@
-django====2.0.3
+django==2.0.3
 django-extensions==2.0.6
 npm==0.1.1
 ndg-httpsclient==0.4.4

@@ -1,0 +1,58 @@
+{% extends 'base/base.html' %}
+{% load i18n %}
+{% block content_header_title %}{% trans 'Usuario' %}{% endblock %}
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="text-left">Listar - Parroquial <a href="{% url 'usuario:parish_level_create' %}" class="btn btn-success btn-sm pull-right">Registrar</a></h4>
+        </div>
+
+        <div class="panel-body">
+            <div class="row table-responsive">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <table class="table table-striped table-hover table-bordered display dataTable" id="table">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Correo</th>
+                                <th>Teléfono</th>
+                                <th>Parroquia</th>
+                                <th>Municipio</th>
+                                <th>Estado</th>
+                                <th>País</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for par in object_list %}
+                                <tr>
+                                <td> {{ par.profile.user.username }} </td>
+                                <td> {{ par.profile.user.first_name }} </td>
+                                <td> {{ par.profile.user.last_name }} </td>
+                                <td> {{ par.profile.user.email }} </td>
+                                <td> {{ par.profile.phone }} </td>
+                                <td> {{ par.parish }} </td>
+                                <td> {{ par.parish.municipality }} </td>
+                                <td> {{ par.parish.municipality.state }} </td>
+                                <td> {{ par.parish.municipality.state.country }} </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_footer %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var table = $('#table').DataTable({
+                "order": [[ 7, "asc" ],[ 6, "asc" ],[ 5, "asc" ]]
+            });
+
+            button_datatable(table);
+        });
+    </script>
+{% endblock %}

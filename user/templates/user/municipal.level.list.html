@@ -1,0 +1,56 @@
+{% extends 'base/base.html' %}
+{% load i18n %}
+{% block content_header_title %}{% trans 'Usuario' %}{% endblock %}
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="text-left">Listar - Municipal <a href="{% url 'usuario:municipal_level_create' %}" class="btn btn-success btn-sm pull-right">Registrar</a></h4>
+        </div>
+
+        <div class="panel-body">
+            <div class="row table-responsive">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <table class="table table-striped table-hover table-bordered display dataTable" id="table">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Correo</th>
+                                <th>Teléfono</th>
+                                <th>Municipio</th>
+                                <th>Estado</th>
+                                <th>País</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for mun in object_list %}
+                                <tr>
+                                <td> {{ mun.profile.user.username }} </td>
+                                <td> {{ mun.profile.user.first_name }} </td>
+                                <td> {{ mun.profile.user.last_name }} </td>
+                                <td> {{ mun.profile.user.email }} </td>
+                                <td> {{ mun.profile.phone }} </td>
+                                <td> {{ mun.municipality }} </td>
+                                <td> {{ mun.municipality.state }} </td>
+                                <td> {{ mun.municipality.state.country }} </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_footer %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var table = $('#table').DataTable({
+                "order": [[ 6, "asc" ],[ 5, "asc" ]]
+            });
+
+            button_datatable(table);
+        });
+    </script>
+{% endblock %}

@@ -1,10 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from usuario.models import Nacional, Estadal, Municipal, Parroquial, Comunal
+from user.models import NationalLevel, StateLevel, MunicipalLevel, ParishLevel, CommunalCouncilLevel
 
-# Create your views here.
-
-class InicioView(TemplateView):
+class HomeView(TemplateView):
     """!
     Clase para mostrar la página de inicio según el nivel de usuario
 
@@ -14,39 +12,39 @@ class InicioView(TemplateView):
     @version 1.0.0
     """
 
-    template_name = "base.template.html"
+    template_name = "base/base.html"
 
     def get_context_data(self, **kwargs):
-        context = super(InicioView, self).get_context_data(**kwargs)
-        perfil = self.request.user.perfil
-        if perfil.nivel == 0:
-            context['texto1'] = 'Bienvenido ' + str(perfil)
+        context = super(HomeView, self).get_context_data(**kwargs)
+        profile = self.request.user.profile
+        if profile.level == 0:
+            context['texto1'] = 'Bienvenido ' + str(profile)
             context['texto2'] = 'Usuario nivel administrador. Este usuario permite registrar y eliminar \
             a cualquier usuario desde el panel administrativo'
-        elif perfil.nivel == 1:
-            nacional = Nacional.objects.get(perfil=perfil)
-            context['texto1'] = 'Bienvenido ' + str(perfil)
-            context['texto2'] = 'Usuario nivel nacional ' + str(nacional.pais) + '. Este usuario permite registrar y monitoriar a los representantes de \
+        elif profile.level == 1:
+            national_level = NationalLevel.objects.get(profile=profile)
+            context['texto1'] = 'Bienvenido ' + str(profile)
+            context['texto2'] = 'Usuario nivel nacional ' + str(national_level.country) + '. Este usuario permite registrar y monitoriar a los representantes de \
             cada estado que pertenecen a dicho país'
-        elif perfil.nivel == 2:
-            estadal = Estadal.objects.get(perfil=perfil)
-            context['texto1'] = 'Bienvenido ' + str(perfil)
-            context['texto2'] = 'Usuario nivel estado ' + str(estadal.estado) + '. Este usuario permite registrar y monitoriar a los representantes de \
+        elif profile.level == 2:
+            state_level = StateLevel.objects.get(profile=profile)
+            context['texto1'] = 'Bienvenido ' + str(profile)
+            context['texto2'] = 'Usuario nivel estado ' + str(state_level.state) + '. Este usuario permite registrar y monitoriar a los representantes de \
             cada municipio que pertenecen a dicho estado'
-        elif perfil.nivel == 3:
-            municipal = Municipal.objects.get(perfil=perfil)
-            context['texto1'] = 'Bienvenido ' + str(perfil)
-            context['texto2'] = 'Usuario nivel municipio ' + str(municipal.municipio) + '. Este usuario permite registrar y monitoriar a los representantes \
+        elif profile.level == 3:
+            municipal_level = MunicipalLevel.objects.get(profile=profile)
+            context['texto1'] = 'Bienvenido ' + str(profile)
+            context['texto2'] = 'Usuario nivel municipio ' + str(municipal_level.municipality) + '. Este usuario permite registrar y monitoriar a los representantes \
             de cada parroquia que pertenecen a dicho municipio'
-        elif perfil.nivel == 4:
-            parroquial = Parroquial.objects.get(perfil=perfil)
-            context['texto1'] = 'Bienvenido ' + str(perfil)
-            context['texto2'] = 'Usuario nivel parroquia ' + str(parroquial.parroquia) + '. Este usuario permite registrar y monitoriar a los representantes \
+        elif profile.level == 4:
+            parish_level = ParishLevel.objects.get(profile=profile)
+            context['texto1'] = 'Bienvenido ' + str(profile)
+            context['texto2'] = 'Usuario nivel parroquia ' + str(parish_level.parish) + '. Este usuario permite registrar y monitoriar a los representantes \
             de cada consejo comunal que pertenecen a dicha parroquia'
-        elif perfil.nivel == 5:
-            comunal = Comunal.objects.get(perfil=perfil)
-            context['texto1'] = 'Bienvenido ' + str(perfil)
-            context['texto2'] = 'Usuario nivel consejo comunal ' + str(comunal.consejo_comunal) + '. Este usuario permite registrar, actualizar, eliminar y listar \
+        elif profile.level == 5:
+            communal_council_level = CommunalCouncilLevel.objects.get(profile=profile)
+            context['texto1'] = 'Bienvenido ' + str(profile)
+            context['texto2'] = 'Usuario nivel consejo comunal ' + str(communal_council_level.communal_council) + '. Este usuario permite registrar, actualizar, eliminar y listar \
             a todos los adultos mayores'
         return context
 
@@ -60,4 +58,4 @@ class Error403View(TemplateView):
     @version 1.0.0
     """
 
-    template_name = "base.error.403.html"
+    template_name = "base/error.403.html"

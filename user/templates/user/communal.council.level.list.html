@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load i18n %}
+{% block content_header_title %}{% trans 'Usuario' %}{% endblock %}
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="text-left">Listar - Comunal <a href="{% url 'usuario:communal_council_level_create' %}" class="btn btn-success btn-sm pull-right">Registrar</a></h4>
+        </div>
+
+        <div class="panel-body">
+            <div class="row table-responsive">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <table class="table table-striped table-hover table-bordered display dataTable" id="table">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Correo</th>
+                                <th>Teléfono</th>
+                                <th>Consejo Comunal</th>
+                                <th>Parroquia</th>
+                                <th>Municipio</th>
+                                <th>Estado</th>
+                                <th>País</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cc in object_list %}
+                                <tr>
+                                <td> {{ cc.profile.user.username }} </td>
+                                <td> {{ cc.profile.user.first_name }} </td>
+                                <td> {{ cc.profile.user.last_name }} </td>
+                                <td> {{ cc.profile.user.email }} </td>
+                                <td> {{ cc.profile.phone }} </td>
+                                <td> {{ cc.communal_council }} </td>
+                                <td> {{ cc.communal_council.parish }} </td>
+                                <td> {{ cc.communal_council.parish.municipality }} </td>
+                                <td> {{ cc.communal_council.parish.municipality.state }} </td>
+                                <td> {{ cc.communal_council.parish.municipality.state.country }} </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra_footer %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var table = $('#table').DataTable({
+                "order": [[ 8, "asc" ],[ 7, "asc" ],[ 6, "asc" ],[ 5, "asc" ]]
+            });
+
+            button_datatable(table);
+        });
+    </script>
+{% endblock %}

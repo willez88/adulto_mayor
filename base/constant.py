@@ -4,15 +4,15 @@ from django.utils.translation import ugettext_lazy as _
 APP_NAME = "Adulto Mayor"
 
 ## Asunto del mensaje de bienvenida
-EMAIL_SUBJECT_REGISTRO = "Bienvenido a %s" % APP_NAME
+EMAIL_SUBJECT = "Bienvenido a %s" % APP_NAME
 
 ## Nacionalidades (ABREVIADO)
-NACIONALIDAD = (
+NATIONALITY = (
     ('V', 'V'), ('E', 'E')
 )
 
 ## Establece los diferentes niveles de un usuario
-NIVEL = (
+LEVEL = (
     (0, 'Administrador'),
     (1, 'Nivel Nacional'),
     (2, 'Nivel Estadal'),
