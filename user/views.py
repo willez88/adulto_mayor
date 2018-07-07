@@ -18,7 +18,7 @@ logger = logging.getLogger('user')
 class NationalLevelUpdateView(UpdateView):
     model = User
     form_class = NationalLevelUpdateForm
-    template_name = 'usuario/national.level.update.html'
+    template_name = 'user/national.level.update.html'
     success_url = reverse_lazy('base:home')
 
     def dispatch(self, request, *args, **kwargs):
@@ -54,7 +54,7 @@ class NationalLevelUpdateView(UpdateView):
 
 class StateLevelListView(ListView):
     model = StateLevel
-    template_name = 'usuario/state.level.list.html'
+    template_name = 'user/state.level.list.html'
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.profile.level == 1:
@@ -72,7 +72,7 @@ class StateLevelListView(ListView):
 class StateLevelCreateView(CreateView):
     model = User
     form_class = StateLevelForm
-    template_name = 'usuario/state.level.create.html'
+    template_name = 'user/state.level.create.html'
     success_url = reverse_lazy('usuario:state_level_list')
 
     def dispatch(self, request, *args, **kwargs):
@@ -133,7 +133,7 @@ class StateLevelCreateView(CreateView):
 class StateLevelUpdateView(UpdateView):
     model = User
     form_class = StateLevelUpdateForm
-    template_name = 'usuario/state.level.update.html'
+    template_name = 'user/state.level.update.html'
     success_url = reverse_lazy('base:home')
 
     def dispatch(self, request, *args, **kwargs):
@@ -169,7 +169,7 @@ class StateLevelUpdateView(UpdateView):
 
 class MunicipalLevelListView(ListView):
     model = MunicipalLevel
-    template_name = 'usuario/municipal.level.list.html'
+    template_name = 'user/municipal.level.list.html'
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.profile.level == 1 or self.request.user.profile.level == 2:
@@ -193,7 +193,7 @@ class MunicipalLevelListView(ListView):
 class MunicipalLevelCreateView(CreateView):
     model = User
     form_class = MunicipalLevelForm
-    template_name = 'usuario/municipal.level.create.html'
+    template_name = 'user/municipal.level.create.html'
     success_url = reverse_lazy('usuario:municipal_level_list')
 
     def dispatch(self, request, *args, **kwargs):
@@ -254,7 +254,7 @@ class MunicipalLevelCreateView(CreateView):
 class MunicipalLevelUpdateView(UpdateView):
     model = User
     form_class = MunicipalLevelUpdateForm
-    template_name = 'usuario/municipal.level.update.html'
+    template_name = 'user/municipal.level.update.html'
     success_url = reverse_lazy('base:home')
 
     def dispatch(self, request, *args, **kwargs):
@@ -295,7 +295,7 @@ class MunicipalLevelUpdateView(UpdateView):
 
 class ParishLevelListView(ListView):
     model = ParishLevel
-    template_name = 'usuario/parish.level.list.html'
+    template_name = 'user/parish.level.list.html'
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.profile.level == 1 or self.request.user.profile.level == 2 or self.request.user.profile.level == 3:
@@ -325,7 +325,7 @@ class ParishLevelListView(ListView):
 class ParishLevelCreateView(CreateView):
     model = User
     form_class = ParishLevelForm
-    template_name = 'usuario/parish.level.create.html'
+    template_name = 'user/parish.level.create.html'
     success_url = reverse_lazy('usuario:parish_level_list')
 
     def dispatch(self, request, *args, **kwargs):
@@ -386,7 +386,7 @@ class ParishLevelCreateView(CreateView):
 class ParishLevelUpdateView(UpdateView):
     model = User
     form_class = ParishLevelUpdateForm
-    template_name = 'usuario/parish.level.update.html'
+    template_name = 'user/parish.level.update.html'
     success_url = reverse_lazy('base:home')
 
     def dispatch(self, request, *args, **kwargs):
@@ -463,7 +463,7 @@ class CommunalCouncilLevelListView(ListView):
 class CommunalCouncilLevelCreateView(CreateView):
     model = User
     form_class = CommunalCouncilLevelForm
-    template_name = 'usuario/communal.council.level.create.html'
+    template_name = 'user/communal.council.level.create.html'
     success_url = reverse_lazy('usuario:communal_council_level_list')
 
     def dispatch(self, request, *args, **kwargs):
@@ -524,7 +524,7 @@ class CommunalCouncilLevelCreateView(CreateView):
 class CommunalCouncilLevelUpdateView(UpdateView):
     model = User
     form_class = CommunalCouncilLevelUpdateForm
-    template_name = 'usuario/communal.council.level.update.html'
+    template_name = 'user/communal.council.level.update.html'
     success_url = reverse_lazy('base:home')
 
     def dispatch(self, request, *args, **kwargs):
