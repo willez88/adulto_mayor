@@ -427,7 +427,7 @@ class ParishLevelUpdateView(UpdateView):
 
 class CommunalCouncilLevelListView(ListView):
     model = CommunalCouncilLevel
-    template_name = 'usuario/communal.council.level.list.html'
+    template_name = 'user/communal.council.level.list.html'
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.profile.level == 1 or self.request.user.profile.level == 2 or self.request.user.profile.level == 3 or self.request.user.profile.level == 4:
