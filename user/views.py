@@ -12,6 +12,7 @@ from django.conf import settings
 from base.constant import EMAIL_SUBJECT
 from base.functions import send_email
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.sites.shortcuts import get_current_site
 import logging
 logger = logging.getLogger('user')
 
@@ -116,7 +117,7 @@ class StateLevelCreateView(CreateView):
         sent = send_email(self.object.email, 'usuario/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
             'level':state_level.state,'username':self.object.username, 'password':form.cleaned_data['password'],
-            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM
+            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name
         })
 
         if not sent:
@@ -237,7 +238,7 @@ class MunicipalLevelCreateView(CreateView):
         sent = send_email(self.object.email, 'usuario/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
             'level':municipal_level.municipality,'username':self.object.username, 'password':form.cleaned_data['password'],
-            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM
+            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name
         })
 
         if not sent:
@@ -369,7 +370,7 @@ class ParishLevelCreateView(CreateView):
         sent = send_email(self.object.email, 'usuario/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
             'level':parish_level.parish,'username':self.object.username, 'password':form.cleaned_data['password'],
-            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM
+            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name
         })
 
         if not sent:
@@ -507,7 +508,7 @@ class CommunalCouncilLevelCreateView(CreateView):
         sent = send_email(self.object.email, 'usuario/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
             'level':communal_council_level.communal_council,'username':self.object.username, 'password':form.cleaned_data['password'],
-            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM
+            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name
         })
 
         if not sent:

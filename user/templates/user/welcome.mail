@@ -10,6 +10,10 @@ Las credenciales de su cuenta son:
 Usuario: {{ username }}
 Contraseña: {{ password }}
 
+Para entrar al sistema visite la siguiente dirección:
+
+{{ url }}
+
 Cambie su clave inmediatamente al entrar a su cuenta
 
 Si usted cree que este correo es spam o no fue utilizado en el registro de usuarios bajo su consentimiento,
