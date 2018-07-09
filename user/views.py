@@ -74,7 +74,7 @@ class StateLevelCreateView(CreateView):
     model = User
     form_class = StateLevelForm
     template_name = 'user/state.level.create.html'
-    success_url = reverse_lazy('usuario:state_level_list')
+    success_url = reverse_lazy('user:state_level_list')
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.profile.level == 1:
@@ -114,7 +114,7 @@ class StateLevelCreateView(CreateView):
             admin = settings.ADMINS[0][0]
             admin_email = settings.ADMINS[0][1]
 
-        sent = send_email(self.object.email, 'usuario/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
+        sent = send_email(self.object.email, 'user/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
             'level':state_level.state,'username':self.object.username, 'password':form.cleaned_data['password'],
             'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name
@@ -195,7 +195,7 @@ class MunicipalLevelCreateView(CreateView):
     model = User
     form_class = MunicipalLevelForm
     template_name = 'user/municipal.level.create.html'
-    success_url = reverse_lazy('usuario:municipal_level_list')
+    success_url = reverse_lazy('user:municipal_level_list')
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.profile.level == 2:
@@ -235,7 +235,7 @@ class MunicipalLevelCreateView(CreateView):
             admin = settings.ADMINS[0][0]
             admin_email = settings.ADMINS[0][1]
 
-        sent = send_email(self.object.email, 'usuario/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
+        sent = send_email(self.object.email, 'user/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
             'level':municipal_level.municipality,'username':self.object.username, 'password':form.cleaned_data['password'],
             'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name
@@ -327,7 +327,7 @@ class ParishLevelCreateView(CreateView):
     model = User
     form_class = ParishLevelForm
     template_name = 'user/parish.level.create.html'
-    success_url = reverse_lazy('usuario:parish_level_list')
+    success_url = reverse_lazy('user:parish_level_list')
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.profile.level == 3:
@@ -367,7 +367,7 @@ class ParishLevelCreateView(CreateView):
             admin = settings.ADMINS[0][0]
             admin_email = settings.ADMINS[0][1]
 
-        sent = send_email(self.object.email, 'usuario/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
+        sent = send_email(self.object.email, 'user/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
             'level':parish_level.parish,'username':self.object.username, 'password':form.cleaned_data['password'],
             'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name
@@ -465,7 +465,7 @@ class CommunalCouncilLevelCreateView(CreateView):
     model = User
     form_class = CommunalCouncilLevelForm
     template_name = 'user/communal.council.level.create.html'
-    success_url = reverse_lazy('usuario:communal_council_level_list')
+    success_url = reverse_lazy('user:communal_council_level_list')
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.profile.level == 4:
@@ -505,7 +505,7 @@ class CommunalCouncilLevelCreateView(CreateView):
             admin = settings.ADMINS[0][0]
             admin_email = settings.ADMINS[0][1]
 
-        sent = send_email(self.object.email, 'usuario/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
+        sent = send_email(self.object.email, 'user/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
             'level':communal_council_level.communal_council,'username':self.object.username, 'password':form.cleaned_data['password'],
             'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name
