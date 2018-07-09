@@ -114,10 +114,13 @@ class StateLevelCreateView(CreateView):
             admin = settings.ADMINS[0][0]
             admin_email = settings.ADMINS[0][1]
 
+        national_level = NationalLevel.objects.get(profile=self.request.user.profile)
+
         sent = send_email(self.object.email, 'user/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
-            'level':state_level.state,'username':self.object.username, 'password':form.cleaned_data['password'],
-            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name
+            'level2':state_level.state,'username':self.object.username, 'password':form.cleaned_data['password'],
+            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name,
+            'level1':national_level.country
         })
 
         if not sent:
@@ -235,10 +238,13 @@ class MunicipalLevelCreateView(CreateView):
             admin = settings.ADMINS[0][0]
             admin_email = settings.ADMINS[0][1]
 
+        state_level = StateLevel.objects.get(profile=self.request.user.profile)
+
         sent = send_email(self.object.email, 'user/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
-            'level':municipal_level.municipality,'username':self.object.username, 'password':form.cleaned_data['password'],
-            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name
+            'level2':municipal_level.municipality,'username':self.object.username, 'password':form.cleaned_data['password'],
+            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name,
+            'level1':state_level.state
         })
 
         if not sent:
@@ -367,10 +373,13 @@ class ParishLevelCreateView(CreateView):
             admin = settings.ADMINS[0][0]
             admin_email = settings.ADMINS[0][1]
 
+        municipal_level = MunicipalLevel.objects.get(profile=self.request.user.profile)
+
         sent = send_email(self.object.email, 'user/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
-            'level':parish_level.parish,'username':self.object.username, 'password':form.cleaned_data['password'],
-            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name
+            'level2':parish_level.parish,'username':self.object.username, 'password':form.cleaned_data['password'],
+            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name,
+            'level1':municipal_level.municipality
         })
 
         if not sent:
@@ -505,10 +514,13 @@ class CommunalCouncilLevelCreateView(CreateView):
             admin = settings.ADMINS[0][0]
             admin_email = settings.ADMINS[0][1]
 
+        parish_level = ParishLevel.objects.get(profile=self.request.user.profile)
+
         sent = send_email(self.object.email, 'user/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
-            'level':communal_council_level.communal_council,'username':self.object.username, 'password':form.cleaned_data['password'],
-            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name
+            'level2':communal_council_level.communal_council,'username':self.object.username, 'password':form.cleaned_data['password'],
+            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name,
+            'level1':parish_level.parish
         })
 
         if not sent:

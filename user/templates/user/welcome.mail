@@ -3,12 +3,13 @@ Ud ha sido registrado en el sistema Adulto Mayor.
 Datos del administrador:
 
 {{ first_name }} {{ last_name }}, {{ email }}, {{ phone }}
-Representante: {{ level }}
+Representante: {{ level1 }}
 
 Las credenciales de su cuenta son:
 
 Usuario: {{ username }}
 Contraseña: {{ password }}
+Representante: {{ level2 }}
 
 Para entrar al sistema visite la siguiente dirección:
 
