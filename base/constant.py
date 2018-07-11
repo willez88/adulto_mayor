@@ -11,6 +11,14 @@ NATIONALITY = (
     ('V', 'V'), ('E', 'E')
 )
 
+RIF_TYPE = (
+    ('C', 'C'),
+)
+
+PHONE_PREFIX = (
+    ('+58', 'VE +58'),
+)
+
 ## Establece los diferentes niveles de un usuario
 LEVEL = (
     (0, 'Administrador'),

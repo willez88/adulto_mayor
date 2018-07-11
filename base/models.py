@@ -151,10 +151,10 @@ class CommunalCouncil(models.Model):
     )
 
     ## Nombre del Consejo Comunal
-    name = models.CharField(max_length=500)
+    name = models.CharField(max_length=500, verbose_name='Nombre')
 
     ## Parroquia en el que se encuetra ubicado el Consejo Comunal
-    parish = models.ForeignKey(Parish,on_delete=models.CASCADE)
+    parish = models.ForeignKey(Parish,on_delete=models.CASCADE, verbose_name='Parroquia')
 
     def __str__(self):
         return self.rif + ' | ' + self.name

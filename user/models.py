@@ -7,13 +7,13 @@ from base.constant import LEVEL, NATIONALITY
 class Profile(models.Model):
 
     phone = models.CharField(
-        max_length=15,
+        max_length=15, verbose_name='Teléfono'
     )
 
-    level = models.IntegerField(choices=LEVEL)
+    level = models.IntegerField(choices=LEVEL, verbose_name='Nivel')
 
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE
+        User, on_delete=models.CASCADE, verbose_name='Usuario'
     )
 
     def __str__(self):
@@ -26,11 +26,11 @@ class Profile(models.Model):
 class NationalLevel(models.Model):
 
     country = models.OneToOneField(
-        Country, on_delete=models.CASCADE
+        Country, on_delete=models.CASCADE, verbose_name='País'
     )
 
     profile = models.OneToOneField(
-        Profile, on_delete=models.CASCADE
+        Profile, on_delete=models.CASCADE, verbose_name='Perfil'
     )
 
     def __str__(self):
@@ -44,11 +44,11 @@ class NationalLevel(models.Model):
 class StateLevel(models.Model):
 
     state = models.OneToOneField(
-        State, on_delete=models.CASCADE
+        State, on_delete=models.CASCADE, verbose_name='Estado'
     )
 
     profile = models.OneToOneField(
-        Profile, on_delete=models.CASCADE
+        Profile, on_delete=models.CASCADE, verbose_name='Perfil'
     )
 
     def __str__(self):
@@ -62,11 +62,11 @@ class StateLevel(models.Model):
 class MunicipalLevel(models.Model):
 
     municipality = models.OneToOneField(
-        Municipality, on_delete=models.CASCADE
+        Municipality, on_delete=models.CASCADE, verbose_name='Municipio'
     )
 
     profile = models.OneToOneField(
-        Profile, on_delete=models.CASCADE
+        Profile, on_delete=models.CASCADE, verbose_name='Perfil'
     )
 
     def __str__(self):
@@ -80,11 +80,11 @@ class MunicipalLevel(models.Model):
 class ParishLevel(models.Model):
 
     parish = models.ForeignKey(
-        Parish, on_delete=models.CASCADE
+        Parish, on_delete=models.CASCADE, verbose_name='Parroquia'
     )
 
     profile = models.OneToOneField(
-        Profile, on_delete=models.CASCADE
+        Profile, on_delete=models.CASCADE, verbose_name='Perfil'
     )
 
     def __str__(self):
@@ -98,11 +98,11 @@ class ParishLevel(models.Model):
 class CommunalCouncilLevel(models.Model):
 
     communal_council = models.OneToOneField(
-        CommunalCouncil, on_delete=models.CASCADE
+        CommunalCouncil, on_delete=models.CASCADE, verbose_name='Consejo Comunal'
     )
 
     profile = models.OneToOneField(
-        Profile, on_delete=models.CASCADE
+        Profile, on_delete=models.CASCADE, verbose_name='Perfil'
     )
 
     def __str__(self):

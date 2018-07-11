@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.core import validators
-from base.fields import IdentificationCardField
+from base.fields import IdentificationCardField, PhoneField
 from .models import NationalLevel, StateLevel, MunicipalLevel, ParishLevel, CommunalCouncilLevel
 from base.models import State, Municipality, Parish, CommunalCouncil
 
@@ -23,7 +23,7 @@ class ProfileForm(forms.ModelForm):
                 r'^[VE][\d]{8}$',
                 _("Introduzca un número de cédula válido. Solo se permiten números y una longitud de 8 carácteres. Se agregan ceros (0) si la longitud es de 7 o menos caracteres.")
             ),
-        ], help_text=_("V00000000 ó E00000000")
+        ],
     )
 
     ## Nombres del usuario
@@ -60,22 +60,13 @@ class ProfileForm(forms.ModelForm):
     )
 
     ## Teléfono del usuario
-    phone = forms.CharField(
-        label=_("Teléfono:"),
-        max_length=15,
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control input-sm', 'data-toggle': 'tooltip', 'data-mask': '+00-000-0000000',
-                'title': _("Indique el número telefónico de contacto"),
-            }
-        ),
+    phone = PhoneField(
         validators=[
             validators.RegexValidator(
                 r'^\+\d{2}-\d{3}-\d{7}$',
                 _("Número telefónico inválido. Solo se permiten números y los símbolos: + -")
             ),
         ],
-        help_text=_("+58-416-0000000")
     )
 
     ## Clave de acceso del usuario
@@ -402,6 +393,40 @@ class ParishLevelUpdateForm(ProfileForm):
             'profile','level','password','confirm_password','date_joined','last_login','is_active',
             'is_superuser','is_staff','parish'
         ]
+
+class CommunalCouncilLevelAdminForm(forms.ModelForm):
+
+    ## Estado donde se ecnuetra ubicado el municipio
+    state = forms.ModelChoiceField(
+        label=_("Estado:"), queryset=State.objects.all(), empty_label=_("Seleccione..."),
+        widget=forms.Select(attrs={
+            'class': 'form-control select2', 'data-toggle': 'tooltip',
+            'title': _("Seleccione el estado en donde se encuentra ubicada"),
+        })
+    )
+
+    ## Municipio donde se encuentra ubicada la parroquia
+    municipality = forms.ModelChoiceField(
+        label=_("Municipio:"), queryset=Municipality.objects.all(), empty_label=_("Seleccione..."),
+        widget=forms.Select(attrs={
+            'class': 'form-control select2', 'data-toggle': 'tooltip', 'disabled': 'true',
+            'title': _("Seleccione el municipio en donde se encuentra ubicada"),
+        })
+    )
+
+    ## Parroquia donde se encuentra ubicado el consejo comunal
+    parish = forms.ModelChoiceField(
+        label=_("Parroquia:"), queryset=Parish.objects.all(), empty_label=_("Seleccione..."),
+        widget=forms.Select(attrs={
+            'class': 'form-control select2', 'data-toggle': 'tooltip', 'disabled': 'true',
+            'title': _("Seleccione la parroquia en donde se encuentra ubicada"),
+        })
+    )
+
+    class Meta:
+
+        model = User
+        fields = '__all__'
 
 class CommunalCouncilLevelForm(ProfileForm):
 
