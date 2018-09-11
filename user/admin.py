@@ -6,7 +6,7 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user','level','phone',)
     list_filter = ('level',)
     #list_per_page = 25
-    ordering = ('user',)
+    ordering = ('user__username',)
     #search_fields = ('telefono','nivel','user',)
 admin.site.register(Profile, ProfileAdmin)
 
