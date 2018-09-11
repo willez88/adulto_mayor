@@ -15,7 +15,7 @@ class HomeTemplateView(TemplateView):
     template_name = 'base/base.html'
 
     def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
+        context = super(HomeTemplateView, self).get_context_data(**kwargs)
         profile = self.request.user.profile
         if profile.level == 0:
             context['texto1'] = 'Bienvenido ' + str(profile)
