@@ -7,7 +7,6 @@ class CommunalCouncilAdmin(admin.ModelAdmin):
     change_form_template = 'base/admin/change_form.html'
     list_display = ('rif','name','parish',)
     list_filter = ('parish',)
-    #list_per_page = 25
-    ordering = ('parish',)
+    ordering = ('parish__name',)
 
 admin.site.register(CommunalCouncil, CommunalCouncilAdmin)

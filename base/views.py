@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from user.models import NationalLevel, StateLevel, MunicipalLevel, ParishLevel, CommunalCouncilLevel
 
-class HomeView(TemplateView):
+class HomeTemplateView(TemplateView):
     """!
     Clase para mostrar la página de inicio según el nivel de usuario
 
@@ -12,7 +12,7 @@ class HomeView(TemplateView):
     @version 1.0.0
     """
 
-    template_name = "base/base.html"
+    template_name = 'base/base.html'
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
@@ -48,7 +48,7 @@ class HomeView(TemplateView):
             a todos los adultos mayores'
         return context
 
-class Error403View(TemplateView):
+class Error403TemplateView(TemplateView):
     """!
     Clase para mostrar error de permiso
 
@@ -58,4 +58,4 @@ class Error403View(TemplateView):
     @version 1.0.0
     """
 
-    template_name = "base/error.403.html"
+    template_name = 'base/error.403.html'

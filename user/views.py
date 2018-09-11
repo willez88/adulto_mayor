@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .forms import (
-    NationalLevelUpdateForm, StateLevelForm, StateLevelUpdateForm, MunicipalLevelForm, ParishLevelForm, MunicipalLevelUpdateForm,
-    ParishLevelUpdateForm, CommunalCouncilLevelForm, CommunalCouncilLevelUpdateForm
+    NationalLevelUpdateForm, StateLevelForm, StateLevelUpdateForm, MunicipalLevelForm,
+    ParishLevelForm, MunicipalLevelUpdateForm, ParishLevelUpdateForm,
+    CommunalCouncilLevelForm, CommunalCouncilLevelUpdateForm
 )
 from .models import Profile, NationalLevel, StateLevel, MunicipalLevel, ParishLevel, CommunalCouncilLevel
 from django.contrib.auth.models import User

@@ -19,6 +19,6 @@ from django.urls import path, include
 ## urls para incluir las aplicaciones principales del sistema
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('base.urls', namespace='base')),
-    path('usuario/', include('user.urls', namespace='user')),
+    path('', include('base.urls')),
+    path('user/', include('user.urls')),
 ]

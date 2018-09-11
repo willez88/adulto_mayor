@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.core import validators
-from base.fields import IdentificationCardField, PhoneField
+from base.fields import IdentityCardField, PhoneField
 from .models import NationalLevel, StateLevel, MunicipalLevel, ParishLevel, CommunalCouncilLevel
 from base.models import State, Municipality, Parish, CommunalCouncil
 
@@ -17,44 +17,44 @@ class ProfileForm(forms.ModelForm):
     """
 
     ## Username para identificar al usuario, en este caso se usa la cédula
-    username = IdentificationCardField(
+    username = IdentityCardField(
         validators=[
             validators.RegexValidator(
                 r'^[VE][\d]{8}$',
-                _("Introduzca un número de cédula válido. Solo se permiten números y una longitud de 8 carácteres. Se agregan ceros (0) si la longitud es de 7 o menos caracteres.")
+                _('Introduzca un número de cédula válido. Solo se permiten números y una longitud de 8 carácteres. Se agregan ceros (0) si la longitud es de 7 o menos caracteres.')
             ),
         ],
     )
 
     ## Nombres del usuario
     first_name = forms.CharField(
-        label=_("Nombres:"), max_length=100,
+        label=_('Nombres:'), max_length=100,
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control input-sm', 'data-toggle': 'tooltip',
-                'title': _("Indique los Nombres"),
+                'title': _('Indique los Nombres.'),
             }
         )
     )
 
     ## Apellidos del usuario
     last_name = forms.CharField(
-        label=_("Apellidos:"), max_length=100,
+        label=_('Apellidos:'), max_length=100,
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control input-sm', 'data-toggle': 'tooltip',
-                'title': _("Indique los Apellidos"),
+                'title': _('Indique los Apellidos.'),
             }
         )
     )
 
     ## Correo del usuario
     email = forms.EmailField(
-        label=_("Correo Electrónico:"), max_length=100,
+        label=_('Correo Electrónico:'), max_length=100,
         widget=forms.EmailInput(
             attrs={
                 'class': 'form-control input-sm email-mask', 'data-toggle': 'tooltip',
-                'title': _("Indique el correo electrónico de contacto")
+                'title': _('Indique el correo electrónico de contacto.')
             }
         )
     )
@@ -64,29 +64,29 @@ class ProfileForm(forms.ModelForm):
         validators=[
             validators.RegexValidator(
                 r'^\+\d{2}-\d{3}-\d{7}$',
-                _("Número telefónico inválido. Solo se permiten números y los símbolos: + -")
+                _('Número telefónico inválido. Debe tener el formato que aparece en la ayuda.')
             ),
         ],
     )
 
     ## Clave de acceso del usuario
     password = forms.CharField(
-        label=_("Contraseña:"), max_length=128,
+        label=_('Contraseña:'), max_length=128,
         widget=forms.PasswordInput(
             attrs={
                 'class': 'form-control input-sm', 'data-toggle': 'tooltip',
-                'title': _("Indique una contraseña de aceso al sistema")
+                'title': _('Indique una contraseña de aceso al sistema.')
             }
         )
     )
 
     ## Confirmación de clave de acceso del usuario
     confirm_password = forms.CharField(
-        label=_("Verificar Contraseña:"), max_length=128,
+        label=_('Confirmar Contraseña:'), max_length=128,
         widget=forms.PasswordInput(
             attrs={
                 'class': 'form-control input-sm', 'data-toggle': 'tooltip',
-                'title': _("Indique nuevamente la contraseña de aceso al sistema")
+                'title': _('Indique nuevamente la contraseña de aceso al sistema.')
             }
         )
     )
@@ -94,15 +94,14 @@ class ProfileForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email):
-            raise forms.ValidationError(_("El correo ya esta registrado"))
+            raise forms.ValidationError(_('El correo ya esta registrado.'))
         return email
 
     def clean_confirm_password(self):
         confirm_password = self.cleaned_data['confirm_password']
-        password = self.data['password']
+        password = self.cleaned_data.get('password')
         if password != confirm_password:
-            raise forms.ValidationError(_("La contraseña no es la misma"))
-
+            raise forms.ValidationError(_('La contraseña no es la misma.'))
         return confirm_password
 
     class Meta:
@@ -147,10 +146,10 @@ class NationalLevelUpdateForm(ProfileForm):
 
     ## Estado donde se encuentra el usuario
     country = forms.CharField(
-        label=_("País:"),
+        label=_('País:'),
         widget=forms.TextInput(attrs={
             'class': 'form-control input-sm', 'data-toggle': 'tooltip', 'readonly':'true',
-            'title': _("Indica el nombre del pais"),
+            'title': _('Indica el nombre del país.'),
         })
     )
 
@@ -158,7 +157,7 @@ class NationalLevelUpdateForm(ProfileForm):
         email = self.cleaned_data['email']
         username = self.cleaned_data.get('username')
         if User.objects.filter(email=email).exclude(username=username):
-            raise forms.ValidationError(_("El correo ya esta registrado"))
+            raise forms.ValidationError(_('El correo ya esta registrado.'))
         return email
 
     def clean_confirm_password(self):
@@ -195,16 +194,14 @@ class StateLevelForm(ProfileForm):
         label=_('Estado:'),
         widget=forms.Select(attrs={
             'class': 'form-control select2', 'data-toggle': 'tooltip',
-            'title': _("Seleccione el estado"),
+            'title': _('Seleccione el estado.'),
         })
     )
 
     def clean_state(self):
         state = self.cleaned_data['state']
-
         if StateLevel.objects.filter(state=state):
-            raise forms.ValidationError(_("Ya existe un usuario asignado a este estado"))
-
+            raise forms.ValidationError(_('Ya existe un usuario asignado a este estado.'))
         return state
 
 class StateLevelUpdateForm(ProfileForm):
@@ -236,10 +233,10 @@ class StateLevelUpdateForm(ProfileForm):
 
     ## Estado donde se encuentra el usuario
     state = forms.CharField(
-        label=_("Estado:"),
+        label=_('Estado:'),
         widget=forms.TextInput(attrs={
             'class': 'form-control input-sm', 'data-toggle': 'tooltip', 'readonly': 'true',
-            'title': _("Indica el nombre del estado"),
+            'title': _('Indica el nombre del estado.'),
         })
     )
 
@@ -247,7 +244,7 @@ class StateLevelUpdateForm(ProfileForm):
         email = self.cleaned_data['email']
         username = self.cleaned_data.get('username')
         if User.objects.filter(email=email).exclude(username=username):
-            raise forms.ValidationError(_("El correo ya esta registrado"))
+            raise forms.ValidationError(_('El correo ya esta registrado.'))
         return email
 
     def clean_confirm_password(self):
@@ -281,19 +278,17 @@ class MunicipalLevelForm(ProfileForm):
         self.fields['municipality'].choices = list_municipality
 
     municipality = forms.ChoiceField(
-        label=_("Municipio:"),
+        label=_('Municipio:'),
         widget=forms.Select(attrs={
             'class': 'form-control select2', 'data-toggle': 'tooltip',
-            'title': _("Seleccione el municipio"),
+            'title': _('Seleccione el municipio.'),
         })
     )
 
     def clean_municipality(self):
         municipality = self.cleaned_data['municipality']
-
         if MunicipalLevel.objects.filter(municipality=municipality):
-            raise forms.ValidationError(_("Ya existe un usuario asignado a este municipio"))
-
+            raise forms.ValidationError(_('Ya existe un usuario asignado a este municipio.'))
         return municipality
 
 class MunicipalLevelUpdateForm(ProfileForm):
@@ -307,10 +302,10 @@ class MunicipalLevelUpdateForm(ProfileForm):
         self.fields['confirm_password'].widget.attrs['disabled'] = True
 
     municipality = forms.CharField(
-        label=_("Municipio:"),
+        label=_('Municipio:'),
         widget=forms.TextInput(attrs={
             'class': 'form-control input-sm', 'data-toggle': 'tooltip', 'readonly': 'true',
-            'title': _("Indica el nombre del municipio"),
+            'title': _('Indica el nombre del municipio.'),
         })
     )
 
@@ -318,7 +313,7 @@ class MunicipalLevelUpdateForm(ProfileForm):
         email = self.cleaned_data['email']
         username = self.cleaned_data.get('username')
         if User.objects.filter(email=email).exclude(username=username):
-            raise forms.ValidationError(_("El correo ya esta registrado"))
+            raise forms.ValidationError(_('El correo ya esta registrado.'))
         return email
 
     def clean_verificar_contrasenha(self):
@@ -327,8 +322,8 @@ class MunicipalLevelUpdateForm(ProfileForm):
     class Meta:
         model = User
         exclude = [
-            'perfil','nivel','password','verificar_contrasenha','date_joined','last_login','is_active',
-            'is_superuser','is_staff','municipio'
+            'profile','level','password','confirm_password','date_joined','last_login','is_active',
+            'is_superuser','is_staff','municipality'
         ]
 
 class ParishLevelForm(ProfileForm):
@@ -343,19 +338,18 @@ class ParishLevelForm(ProfileForm):
         self.fields['parish'].choices = list_parish
 
     parish = forms.ChoiceField(
-        label=_("Parroquia:"),
+        label=_('Parroquia:'),
         widget=forms.Select(attrs={
             'class': 'form-control select2', 'data-toggle': 'tooltip',
-            'title': _("Seleccione la parroquia"),
+            'title': _('Seleccione la parroquia.'),
         })
     )
 
     def clean_parish(self):
         parish = self.cleaned_data['parish']
         parish_level = ParishLevel.objects.filter(parish=parish)
-        #print(parroquial.count())
         if parish_level.count() >= 5:
-            raise forms.ValidationError(_("Solo se pueden asignar 5 usuarios para esta parroquia"))
+            raise forms.ValidationError(_('Solo se pueden asignar 5 usuarios para esta parroquia.'))
 
         return parish
 
@@ -370,10 +364,10 @@ class ParishLevelUpdateForm(ProfileForm):
         self.fields['confirm_password'].widget.attrs['disabled'] = True
 
     parish = forms.CharField(
-        label=_("Parroquia:"),
+        label=_('Parroquia:'),
         widget=forms.TextInput(attrs={
             'class': 'form-control input-sm', 'data-toggle': 'tooltip', 'readonly': 'true',
-            'title': _("Indica el nombre de la parroquia"),
+            'title': _('Indica el nombre de la parroquia.'),
         })
     )
 
@@ -381,7 +375,7 @@ class ParishLevelUpdateForm(ProfileForm):
         email = self.cleaned_data['email']
         username = self.cleaned_data.get('username')
         if User.objects.filter(email=email).exclude(username=username):
-            raise forms.ValidationError(_("El correo ya esta registrado"))
+            raise forms.ValidationError(_('El correo ya esta registrado.'))
         return email
 
     def clean_confirm_password(self):
@@ -398,28 +392,28 @@ class CommunalCouncilLevelAdminForm(forms.ModelForm):
 
     ## Estado donde se ecnuetra ubicado el municipio
     state = forms.ModelChoiceField(
-        label=_("Estado:"), queryset=State.objects.all(), empty_label=_("Seleccione..."),
+        label=_('Estado:'), queryset=State.objects.all(), empty_label=_('Seleccione...'),
         widget=forms.Select(attrs={
             'class': 'form-control select2', 'data-toggle': 'tooltip',
-            'title': _("Seleccione el estado en donde se encuentra ubicada"),
+            'title': _('Seleccione el estado en donde se encuentra ubicada.'),
         })
     )
 
     ## Municipio donde se encuentra ubicada la parroquia
     municipality = forms.ModelChoiceField(
-        label=_("Municipio:"), queryset=Municipality.objects.all(), empty_label=_("Seleccione..."),
+        label=_('Municipio:'), queryset=Municipality.objects.all(), empty_label=_('Seleccione...'),
         widget=forms.Select(attrs={
             'class': 'form-control select2', 'data-toggle': 'tooltip', 'disabled': 'true',
-            'title': _("Seleccione el municipio en donde se encuentra ubicada"),
+            'title': _('Seleccione el municipio en donde se encuentra ubicada.'),
         })
     )
 
     ## Parroquia donde se encuentra ubicado el consejo comunal
     parish = forms.ModelChoiceField(
-        label=_("Parroquia:"), queryset=Parish.objects.all(), empty_label=_("Seleccione..."),
+        label=_('Parroquia:'), queryset=Parish.objects.all(), empty_label=_('Seleccione...'),
         widget=forms.Select(attrs={
             'class': 'form-control select2', 'data-toggle': 'tooltip', 'disabled': 'true',
-            'title': _("Seleccione la parroquia en donde se encuentra ubicada"),
+            'title': _('Seleccione la parroquia en donde se encuentra ubicada.'),
         })
     )
 
@@ -440,10 +434,10 @@ class CommunalCouncilLevelForm(ProfileForm):
         self.fields['communal_council'].choices = list_communal_council
 
     communal_council = forms.ChoiceField(
-        label=_("Consejo Comunal:"),
+        label=_('Consejo Comunal:'),
         widget=forms.Select(attrs={
             'class': 'form-control select2', 'data-toggle': 'tooltip',
-            'title': _("Seleccione el consejo comunal"),
+            'title': _('Seleccione el consejo comunal.'),
         })
     )
 
@@ -458,10 +452,10 @@ class CommunalCouncilLevelUpdateForm(ProfileForm):
         self.fields['confirm_password'].widget.attrs['disabled'] = True
 
     communal_council = forms.CharField(
-        label=_("Consejo Comunal:"),
+        label=_('Consejo Comunal:'),
         widget=forms.TextInput(attrs={
             'class': 'form-control input-sm', 'data-toggle': 'tooltip', 'readonly': 'true',
-            'title': _("Indica el nombre del consejo comunal"),
+            'title': _('Indica el nombre del consejo comunal.'),
         })
     )
 
@@ -469,7 +463,7 @@ class CommunalCouncilLevelUpdateForm(ProfileForm):
         email = self.cleaned_data['email']
         username = self.cleaned_data.get('username')
         if User.objects.filter(email=email).exclude(username=username):
-            raise forms.ValidationError(_("El correo ya esta registrado"))
+            raise forms.ValidationError(_('El correo ya esta registrado.'))
         return email
 
     def clean_confirm_password(self):
