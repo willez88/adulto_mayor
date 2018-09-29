@@ -13,7 +13,7 @@ class Country(models.Model):
     """
 
     ## Nombre del pais
-    name = models.CharField(max_length=80)
+    name = models.CharField(_('nombre'),max_length=80)
 
     def __str__(self):
         """!
@@ -26,6 +26,10 @@ class Country(models.Model):
         """
 
         return self.name
+
+    class Meta:
+        verbose_name = _('País')
+        verbose_name_plural = _('Paises')
 
 class State(models.Model):
     """!
@@ -39,10 +43,10 @@ class State(models.Model):
     """
 
     ## Nombre del Estado
-    name = models.CharField(max_length=50)
+    name = models.CharField(_('nombre'),max_length=50)
 
     ## Pais en donde esta ubicado el Estado
-    country = models.ForeignKey(Country,on_delete=models.CASCADE)
+    country = models.ForeignKey(Country,on_delete=models.CASCADE,verbose_name=_('país'))
 
     def __str__(self):
         """!
@@ -55,6 +59,10 @@ class State(models.Model):
         """
 
         return self.name
+
+    class Meta:
+        verbose_name = _('Estado')
+        verbose_name_plural = _('Estados')
 
 class Municipality(models.Model):
     """!
@@ -68,10 +76,10 @@ class Municipality(models.Model):
     """
 
     ## Nombre del Municipio
-    name = models.CharField(max_length=50)
+    name = models.CharField(_('nombre'),max_length=50)
 
     ## Estado en donde se encuentra el Municipio
-    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    state = models.ForeignKey(State,on_delete=models.CASCADE,verbose_name=_('estado'))
 
     def __str__(self):
         """!
@@ -84,6 +92,10 @@ class Municipality(models.Model):
         """
 
         return self.name
+
+    class Meta:
+        verbose_name = _('Municipio')
+        verbose_name_plural = _('Municipios')
 
 class City(models.Model):
     """!
@@ -97,10 +109,10 @@ class City(models.Model):
     """
 
     ## Nombre de la Ciudad
-    name = models.CharField(max_length=50)
+    name = models.CharField(_('nombre'),max_length=50)
 
     ## Estado en donde se encuentra ubicada la Ciudad
-    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    state = models.ForeignKey(State,on_delete=models.CASCADE,verbose_name=_('estado'))
 
     def __str__(self):
         """!
@@ -113,6 +125,10 @@ class City(models.Model):
         """
 
         return self.name
+
+    class Meta:
+        verbose_name = _('Ciudad')
+        verbose_name_plural = _('Ciudades')
 
 class Parish(models.Model):
     """!
@@ -126,10 +142,10 @@ class Parish(models.Model):
     """
 
     ## Nombre de la Parroquia
-    name = models.CharField(max_length=50)
+    name = models.CharField(_('nombre'),max_length=50)
 
     ## Municipio en el que se encuentra ubicada la Parroquia
-    municipality = models.ForeignKey(Municipality,on_delete=models.CASCADE)
+    municipality = models.ForeignKey(Municipality,on_delete=models.CASCADE,verbose_name=_('municipio'))
 
     def __str__(self):
         """!
@@ -142,6 +158,10 @@ class Parish(models.Model):
         """
 
         return self.name
+
+    class Meta:
+        verbose_name = _('Parroquia')
+        verbose_name_plural = _('Parroquias')
 
 class CommunalCouncil(models.Model):
 
@@ -162,3 +182,4 @@ class CommunalCouncil(models.Model):
     class Meta:
         verbose_name = _('Consejo Comunal')
         verbose_name_plural = _('Consejos Comunales')
+        ordering = ['parish__name']

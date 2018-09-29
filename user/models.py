@@ -22,6 +22,7 @@ class Profile(models.Model):
     class Meta:
         verbose_name = _('Perfil')
         verbose_name_plural = _('Perfiles')
+        ordering = ['user__name']
 
 class NationalLevel(models.Model):
 
@@ -40,6 +41,7 @@ class NationalLevel(models.Model):
     class Meta:
         verbose_name = _('Nivel Nacional')
         verbose_name_plural = _('Nivel Nacionales')
+        ordering = ['country']
 
 class StateLevel(models.Model):
 
@@ -58,6 +60,7 @@ class StateLevel(models.Model):
     class Meta:
         verbose_name = _('Nivel Estadal')
         verbose_name_plural = _('Nivel Estadales')
+        ordering = ['state__name']
 
 class MunicipalLevel(models.Model):
 
@@ -76,6 +79,7 @@ class MunicipalLevel(models.Model):
     class Meta:
         verbose_name = _('Nivel Municipal')
         verbose_name_plural = _('Nivel Municipales')
+        ordering = ['municipality__name']
 
 class ParishLevel(models.Model):
 
@@ -94,6 +98,7 @@ class ParishLevel(models.Model):
     class Meta:
         verbose_name = _('Nivel Parroquial')
         verbose_name_plural = _('Nivel Parroquiales')
+        ordering = ['parish__name']
 
 class CommunalCouncilLevel(models.Model):
 
@@ -112,3 +117,4 @@ class CommunalCouncilLevel(models.Model):
     class Meta:
         verbose_name = _('Nivel Consejo Comunal')
         verbose_name_plural = _('Nivel Consejos Comunales')
+        ordering = ['communal_council']
