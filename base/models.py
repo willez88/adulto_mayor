@@ -183,3 +183,91 @@ class CommunalCouncil(models.Model):
         verbose_name = _('Consejo Comunal')
         verbose_name_plural = _('Consejos Comunales')
         ordering = ['parish__name']
+
+class MaritalStatus(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Estado Civil')
+        verbose_name_plural = _('Estados Civiles')
+        ordering = ('name',)
+
+class InstructionDegree(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Grado de Instrucción')
+        verbose_name_plural = _('Grados de Instrucción')
+        ordering = ('name',)
+
+class EducationalMission(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Misión Educativa')
+        verbose_name_plural = _('Misiones Educativas')
+        ordering = ('name',)
+
+class SocialMission(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Misión Social')
+        verbose_name_plural = _('Misiones Sociales')
+        ordering = ('name',)
+
+class IncomeType(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Tipo de Ingreso')
+        verbose_name_plural = _('Tipos de Ingreso')
+        ordering = ('name',)
+
+class Gender(models.Model):
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Género')
+        verbose_name_plural = _('Géneros')
+        ordering = ('name',)
+
+class Disease(models.Model):
+    name = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Enfermedad')
+        verbose_name_plural = _('Enfermedades')
+        ordering = ('name',)
+
+class Disability(models.Model):
+    name = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Discapacidad')
+        verbose_name_plural = _('Discapacidades')
+        ordering = ('name',)

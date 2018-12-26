@@ -140,13 +140,12 @@ STATIC_ROOT = ''
 
 STATIC_URL = '/static/'
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = ''
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static/'),
-    os.path.join(BASE_DIR, 'media/'),
 )
 
 LOGIN_URL = 'user:login'
@@ -155,14 +154,18 @@ LOGIN_REDIRECT_URL = 'base:home'
 
 LOGOUT_REDIRECT_URL = 'user:login'
 
-#EMAIL_USE_TLS = True
-#EMAIL_HOST = 'smtp.gmail.com'
-#EMAIL_PORT = 587
-EMAIL_HOST_USER = 'email@email.com'
-#EMAIL_HOST_PASSWORD = 'password'
-EMAIL_FROM = EMAIL_HOST_USER
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+if DEBUG:
+    ## Configuración para entornos de desarrollo
+    EMAIL_HOST_USER = 'email@email.com'
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    ## Configuración para entornos de producción (configurado para cuenta gmail) (EMAIL_USE_TLS o EMAIL_USE_SSL)
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = 'email@email.com'
+    EMAIL_HOST_PASSWORD = 'password'
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ## Registro de mensajes al usuario
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
