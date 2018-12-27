@@ -1,7 +1,7 @@
 from django.db import models
 from base.models import (
     Gender,MaritalStatus,InstructionDegree,EducationalMission,SocialMission,IncomeType,
-    Disease,Disability
+    Disease,Disability,CommunalCouncil
 )
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
@@ -72,6 +72,9 @@ class Person(models.Model):
     ## Establece la Discapacidad que tiene la Persona
     disabilities = models.ManyToManyField(Disability)
 
+    ## Establece la relación de la persona con el consejo comunal
+    communal_council = models.ForeignKey(CommunalCouncil,on_delete=models.CASCADE)
+
     ## Establece la relación de la Persona con un usuario del sistema
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
@@ -96,7 +99,7 @@ class Person(models.Model):
         @return Devuelve una cadena de caracteres con el nombre, apellido y cédula de la persona
         """
 
-        return self.first_name + ' ' + self.last_name + ', ' + str(self.identity_card)
+        return self.first_name + ' ' + self.last_name + ' | ' + str(self.identity_card)
 
     class Meta:
         verbose_name = _('Persona')
