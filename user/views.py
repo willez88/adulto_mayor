@@ -45,7 +45,7 @@ class NationalLevelUpdateView(UpdateView):
         self.object.save()
 
         if Profile.objects.filter(user=self.object):
-            profile = Perfil.objects.get(user=self.object)
+            profile = Profile.objects.get(user=self.object)
             profile.phone = form.cleaned_data['phone']
             profile.save()
         return super(NationalLevelUpdateView, self).form_valid(form)
@@ -120,7 +120,7 @@ class StateLevelCreateView(CreateView):
         sent = send_email(self.object.email, 'user/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
             'level2':state_level.state,'username':self.object.username, 'password':form.cleaned_data['password'],
-            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name,
+            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_HOST_USER, 'url':get_current_site(self.request).name,
             'level1':national_level.country
         })
 
@@ -244,7 +244,7 @@ class MunicipalLevelCreateView(CreateView):
         sent = send_email(self.object.email, 'user/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
             'level2':municipal_level.municipality,'username':self.object.username, 'password':form.cleaned_data['password'],
-            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name,
+            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_HOST_USER, 'url':get_current_site(self.request).name,
             'level1':state_level.state
         })
 
@@ -379,7 +379,7 @@ class ParishLevelCreateView(CreateView):
         sent = send_email(self.object.email, 'user/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
             'level2':parish_level.parish,'username':self.object.username, 'password':form.cleaned_data['password'],
-            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name,
+            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_HOST_USER, 'url':get_current_site(self.request).name,
             'level1':municipal_level.municipality
         })
 
@@ -520,7 +520,7 @@ class CommunalCouncilLevelCreateView(CreateView):
         sent = send_email(self.object.email, 'user/welcome.mail', EMAIL_SUBJECT, {'first_name':self.request.user.first_name,
             'last_name':self.request.user.last_name, 'email':self.request.user.email, 'phone':self.request.user.profile.phone,
             'level2':communal_council_level.communal_council,'username':self.object.username, 'password':form.cleaned_data['password'],
-            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_FROM, 'url':get_current_site(self.request).name,
+            'admin':admin, 'admin_email':admin_email, 'emailapp':settings.EMAIL_HOST_USER, 'url':get_current_site(self.request).name,
             'level1':parish_level.parish
         })
 

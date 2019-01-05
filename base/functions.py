@@ -23,7 +23,7 @@ def send_email(email, template, subject, vars = None):
     try:
         ## Obtiene la plantilla de correo a implementar
         t = get_template(template).render(vars)
-        send_mail(subject, t, settings.EMAIL_FROM, [email], fail_silently=False)
+        send_mail(subject, t, settings.EMAIL_HOST_USER, [email], fail_silently=False)
         #logger.info("Correo enviado a %s usando la plantilla %s" % (email, template))
         return True
     except smtplib.SMTPException as e:

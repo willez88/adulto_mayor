@@ -1,12 +1,13 @@
-#django==2.1.4
-#django-extensions==2.1.4
+django==2.1.4
+django-extensions==2.1.4
 #psycopg2==2.7.6.1
-#pygraphviz==1.5
+psycopg2-binary==2.7.6.1
+pygraphviz==1.5
 
 ## Actualizaciones de paquetas
 #django
 #django-extensions
-#psycopg2
+#psycopg2-binary
 #pygraphviz
 #ndg-httpsclient==0.4.4
 #pyopenssl==17.5.0

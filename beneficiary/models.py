@@ -3,7 +3,7 @@ from base.models import (
     Gender,MaritalStatus,InstructionDegree,EducationalMission,SocialMission,IncomeType,
     Disease,Disability,CommunalCouncil
 )
-from django.contrib.auth.models import User
+from user.models import CommunalCouncilLevel
 from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
@@ -72,11 +72,8 @@ class Person(models.Model):
     ## Establece la Discapacidad que tiene la Persona
     disabilities = models.ManyToManyField(Disability)
 
-    ## Establece la relación de la persona con el consejo comunal
-    communal_council = models.ForeignKey(CommunalCouncil,on_delete=models.CASCADE)
-
     ## Establece la relación de la Persona con un usuario del sistema
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    communal_council_level = models.ForeignKey(CommunalCouncilLevel,on_delete=models.CASCADE)
 
     ## Cacula la edad en años que tiene una persona según su fecha de nacimiento
     def age(self):

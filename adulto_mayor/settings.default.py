@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'base',
     'user.apps.UserConfig',
+    'beneficiary',
 ]
 
 MIDDLEWARE = [
