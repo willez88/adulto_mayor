@@ -22,7 +22,7 @@ class Profile(models.Model):
     class Meta:
         verbose_name = _('Perfil')
         verbose_name_plural = _('Perfiles')
-        ordering = ['user__name']
+        ordering = ['user__username']
 
 class NationalLevel(models.Model):
 
