@@ -1,6 +1,10 @@
 from django import forms
 from .models import Person
 from base.fields import IdentityCardField
+from django.utils.translation import ugettext_lazy as _
+from django.core import validators
+from base.fields import IdentityCardField, PhoneField
+from base.models import Gender, MaritalStatus, InstructionDegree, EducationalMission, IncomeType, Disease, Disability
 
 class PersonForm(forms.ModelForm):
 
@@ -55,7 +59,6 @@ class PersonForm(forms.ModelForm):
 
     ## Cédula
     identity_card = IdentityCardField(
-        required=False,
         validators=[
             validators.RegexValidator(
                 r'^[VE][\d]{8}$',
@@ -71,7 +74,7 @@ class PersonForm(forms.ModelForm):
                 r'^\+\d{2}-\d{3}-\d{7}$',
                 _('Número telefónico inválido. Debe tener el formato que aparece en la ayuda.')
             ),
-        ],
+        ]
     )
 
     ## Correo del usuario
@@ -82,7 +85,7 @@ class PersonForm(forms.ModelForm):
                 'class': 'form-control input-sm email-mask', 'data-toggle': 'tooltip',
                 'title': _('Indique el correo electrónico de contacto.')
             }
-        )
+        ), required = False
     )
 
     gender = forms.ModelChoiceField(

@@ -27,6 +27,8 @@
                             <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
                             {% elif request.user.profile.level == 4 %}
                             <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
+                            {% elif request.user.profile.level == 5 %}
+                            <li><a href="{% url 'beneficiary:person_list' %}">Personas</a></li>
                             {% endif %}
                         </ul>
                     </li>
