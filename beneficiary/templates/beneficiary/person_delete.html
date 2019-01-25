@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load i18n %}
+{% block content_header_title %}{% trans 'Personas' %}{% endblock %}
+{% block contenido %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="text-left">Eliminar</h4>
+        </div>
+
+        <div class="panel-body">
+            <form method="post">
+                {% csrf_token %}
+                <p>¿Estás seguro que deseas eliminar los datos de este usuario "{{ object.first_name }} {{ object.last_name }}, {{ object.identity_card }}"?</p>
+                <div class="text-right">
+                    <a href="{% url 'beneficiary:person_list' %}" class="btn btn-primary btn-sm">Atrás</a>
+                    <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip">{% trans 'Eliminar' %}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

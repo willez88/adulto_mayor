@@ -1,0 +1,415 @@
+[
+{
+  "model": "base.maritalstatus",
+  "pk": 1,
+  "fields": {
+    "name": "Casado(a)"
+  }
+},
+{
+  "model": "base.maritalstatus",
+  "pk": 2,
+  "fields": {
+    "name": "Concubino(a) Formal"
+  }
+},
+{
+  "model": "base.maritalstatus",
+  "pk": 3,
+  "fields": {
+    "name": "Concubino(a) Informal"
+  }
+},
+{
+  "model": "base.maritalstatus",
+  "pk": 4,
+  "fields": {
+    "name": "Divirciado(a)"
+  }
+},
+{
+  "model": "base.maritalstatus",
+  "pk": 5,
+  "fields": {
+    "name": "Soltero(a)"
+  }
+},
+{
+  "model": "base.maritalstatus",
+  "pk": 6,
+  "fields": {
+    "name": "Viudo(a)"
+  }
+},
+{
+  "model": "base.gender",
+  "pk": 1,
+  "fields": {
+    "name": "Masculino"
+  }
+},
+{
+  "model": "base.gender",
+  "pk": 2,
+  "fields": {
+    "name": "Femenino"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 1,
+  "fields": {
+    "name": "Bachiller"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 2,
+  "fields": {
+    "name": "Cuarto Grado"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 3,
+  "fields": {
+    "name": "Lactante"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 4,
+  "fields": {
+    "name": "No Estudi\u00f3"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 5,
+  "fields": {
+    "name": "Noveno Grado"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 6,
+  "fields": {
+    "name": "Octavo Grado"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 7,
+  "fields": {
+    "name": "Preescolar"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 8,
+  "fields": {
+    "name": "Primer A\u00f1o Diversificado"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 9,
+  "fields": {
+    "name": "Primer Grado"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 10,
+  "fields": {
+    "name": "Quinto Grado"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 11,
+  "fields": {
+    "name": "Segundo A\u00f1o Diversificado"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 12,
+  "fields": {
+    "name": "Segundo Grado"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 13,
+  "fields": {
+    "name": "Septimo Grado"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 14,
+  "fields": {
+    "name": "Sexto Grado"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 15,
+  "fields": {
+    "name": "Tercer Grado"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 16,
+  "fields": {
+    "name": "T\u00e9cnico Medio"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 17,
+  "fields": {
+    "name": "T\u00e9cnico Superior Universitario"
+  }
+},
+{
+  "model": "base.instructiondegree",
+  "pk": 18,
+  "fields": {
+    "name": "Universitario"
+  }
+},
+{
+  "model": "base.educationalmission",
+  "pk": 1,
+  "fields": {
+    "name": "Misi\u00f3n Alma Mater"
+  }
+},
+{
+  "model": "base.educationalmission",
+  "pk": 2,
+  "fields": {
+    "name": "Misi\u00f3n Ciencia"
+  }
+},
+{
+  "model": "base.educationalmission",
+  "pk": 3,
+  "fields": {
+    "name": "Misi\u00f3n Cultura Coraz\u00f3n Abierto"
+  }
+},
+{
+  "model": "base.educationalmission",
+  "pk": 4,
+  "fields": {
+    "name": "Misi\u00f3n M\u00fasica"
+  }
+},
+{
+  "model": "base.educationalmission",
+  "pk": 5,
+  "fields": {
+    "name": "Misi\u00f3n Rivas"
+  }
+},
+{
+  "model": "base.educationalmission",
+  "pk": 6,
+  "fields": {
+    "name": "Misi\u00f3n Robinson 1"
+  }
+},
+{
+  "model": "base.educationalmission",
+  "pk": 7,
+  "fields": {
+    "name": "Misi\u00f3n Robinson 2"
+  }
+},
+{
+  "model": "base.educationalmission",
+  "pk": 8,
+  "fields": {
+    "name": "Misi\u00f3n Sucre"
+  }
+},
+{
+  "model": "base.educationalmission",
+  "pk": 9,
+  "fields": {
+    "name": "Ninguna"
+  }
+},
+{
+  "model": "base.socialmission",
+  "pk": 1,
+  "fields": {
+    "name": "Barrio Adentro Deportivo"
+  }
+},
+{
+  "model": "base.socialmission",
+  "pk": 2,
+  "fields": {
+    "name": "En Amor Mayor"
+  }
+},
+{
+  "model": "base.socialmission",
+  "pk": 3,
+  "fields": {
+    "name": "Guaicaipuro y Piar"
+  }
+},
+{
+  "model": "base.socialmission",
+  "pk": 4,
+  "fields": {
+    "name": "Hogares de la Patria"
+  }
+},
+{
+  "model": "base.socialmission",
+  "pk": 5,
+  "fields": {
+    "name": "Identidad"
+  }
+},
+{
+  "model": "base.socialmission",
+  "pk": 6,
+  "fields": {
+    "name": "Jos\u00e9 Gregorio Hern\u00e1ndez"
+  }
+},
+{
+  "model": "base.socialmission",
+  "pk": 7,
+  "fields": {
+    "name": "J\u00f3venes de la Patria"
+  }
+},
+{
+  "model": "base.socialmission",
+  "pk": 8,
+  "fields": {
+    "name": "Madres del Barrio"
+  }
+},
+{
+  "model": "base.socialmission",
+  "pk": 9,
+  "fields": {
+    "name": "Negra Hip\u00f3lita"
+  }
+},
+{
+  "model": "base.socialmission",
+  "pk": 10,
+  "fields": {
+    "name": "Nevado"
+  }
+},
+{
+  "model": "base.socialmission",
+  "pk": 11,
+  "fields": {
+    "name": "Ninguna"
+  }
+},
+{
+  "model": "base.socialmission",
+  "pk": 12,
+  "fields": {
+    "name": "Vivienda"
+  }
+},
+{
+  "model": "base.incometype",
+  "pk": 1,
+  "fields": {
+    "name": "1 Sueldo M\u00ednimo"
+  }
+},
+{
+  "model": "base.incometype",
+  "pk": 2,
+  "fields": {
+    "name": "2 Sueldos M\u00ednimos"
+  }
+},
+{
+  "model": "base.incometype",
+  "pk": 3,
+  "fields": {
+    "name": "Menos de un Sueldo M\u00ednimo"
+  }
+},
+{
+  "model": "base.incometype",
+  "pk": 4,
+  "fields": {
+    "name": "M\u00e1s de 1 sueldo M\u00ednimo"
+  }
+},
+{
+  "model": "base.incometype",
+  "pk": 5,
+  "fields": {
+    "name": "M\u00e1s de 2 Sueldos M\u00ednimos"
+  }
+},
+{
+  "model": "base.incometype",
+  "pk": 6,
+  "fields": {
+    "name": "Ninguno"
+  }
+},
+{
+  "model": "base.disability",
+  "pk": 1,
+  "fields": {
+    "name": "Auditiva"
+  }
+},
+{
+  "model": "base.disability",
+  "pk": 2,
+  "fields": {
+    "name": "Mental - Intelectual"
+  }
+},
+{
+  "model": "base.disability",
+  "pk": 3,
+  "fields": {
+    "name": "Mental - Psicosocial"
+  }
+},
+{
+  "model": "base.disability",
+  "pk": 4,
+  "fields": {
+    "name": "Motriz"
+  }
+},
+{
+  "model": "base.disability",
+  "pk": 5,
+  "fields": {
+    "name": "Verbal"
+  }
+},
+{
+  "model": "base.disability",
+  "pk": 6,
+  "fields": {
+    "name": "Visual"
+  }
+}
+]

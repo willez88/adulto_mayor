@@ -103,6 +103,157 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group {% if form.birthdate.errors %}has-error{% endif %}">
+                            <label class="col-md-3 col-xs-3 col-sm-3 control-label" for="{{ form.birthdate.auto_id }}">
+                                {{ form.birthdate.label }}
+                            </label>
+                            <div class="col-md-9 col-xs-9 col-sm-9">
+                                <div class="form-inline">
+                                    {{ form.birthdate }}
+                                    <i class="ion ion-ios-medical item-requerido"></i>
+                                </div>
+                                {% include 'base/form.errors.html' with form_errors=form.birthdate.errors col_title_error='col-sm-2' col_msg_error='col-sm-10' %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group {% if form.marital_status.errors %}has-error{% endif %}">
+                            <label class="col-md-3 col-xs-3 col-sm-3 control-label" for="{{ form.marital_status.auto_id }}">
+                                {{ form.marital_status.label }}
+                            </label>
+                            <div class="col-md-9 col-xs-9 col-sm-9">
+                                <div class="form-inline">
+                                    {{ form.marital_status }}
+                                    <i class="ion ion-ios-medical item-requerido"></i>
+                                </div>
+                                {% include 'base/form.errors.html' with form_errors=form.marital_status.errors col_title_error='col-sm-2' col_msg_error='col-sm-10' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group {% if form.instruction_degree.errors %}has-error{% endif %}">
+                            <label class="col-md-3 col-xs-3 col-sm-3 control-label" for="{{ form.instruction_degree.auto_id }}">
+                                {{ form.instruction_degree.label }}
+                            </label>
+                            <div class="col-md-9 col-xs-9 col-sm-9">
+                                <div class="form-inline">
+                                    {{ form.instruction_degree }}
+                                    <i class="ion ion-ios-medical item-requerido"></i>
+                                </div>
+                                {% include 'base/form.errors.html' with form_errors=form.instruction_degree.errors col_title_error='col-sm-2' col_msg_error='col-sm-10' %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group {% if form.educational_mission.errors %}has-error{% endif %}">
+                            <label class="col-md-3 col-xs-3 col-sm-3 control-label" for="{{ form.educational_mission.auto_id }}">
+                                {{ form.educational_mission.label }}
+                            </label>
+                            <div class="col-md-9 col-xs-9 col-sm-9">
+                                <div class="form-inline">
+                                    {{ form.educational_mission }}
+                                    <i class="ion ion-ios-medical item-requerido"></i>
+                                </div>
+                                {% include 'base/form.errors.html' with form_errors=form.educational_mission.errors col_title_error='col-sm-2' col_msg_error='col-sm-10' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group {% if form.social_mission.errors %}has-error{% endif %}">
+                            <label class="col-md-3 col-xs-3 col-sm-3 control-label" for="{{ form.social_mission.auto_id }}">
+                                {{ form.social_mission.label }}
+                            </label>
+                            <div class="col-md-9 col-xs-9 col-sm-9">
+                                <div class="form-inline">
+                                    {{ form.social_mission }}
+                                    <i class="ion ion-ios-medical item-requerido"></i>
+                                </div>
+                                {% include 'base/form.errors.html' with form_errors=form.social_mission.errors col_title_error='col-sm-2' col_msg_error='col-sm-10' %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group {% if form.income_type.errors %}has-error{% endif %}">
+                            <label class="col-md-3 col-xs-3 col-sm-3 control-label" for="{{ form.income_type.auto_id }}">
+                                {{ form.income_type.label }}
+                            </label>
+                            <div class="col-md-9 col-xs-9 col-sm-9">
+                                <div class="form-inline">
+                                    {{ form.income_type }}
+                                    <i class="ion ion-ios-medical item-requerido"></i>
+                                </div>
+                                {% include 'base/form.errors.html' with form_errors=form.income_type.errors col_title_error='col-sm-2' col_msg_error='col-sm-10' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group {% if form.pensioner.errors %}has-error{% endif %}">
+                            <label class="col-md-3 col-xs-3 col-sm-3 control-label" for="{{ form.pensioner.auto_id }}">
+                                {{ form.pensioner.label }}
+                            </label>
+                            <div class="col-md-9 col-xs-9 col-sm-9">
+                                <div class="form-inline">
+                                    {{ form.pensioner }}
+                                </div>
+                                {% include 'base/form.errors.html' with form_errors=form.pensioner.errors col_title_error='col-sm-2' col_msg_error='col-sm-10' %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group {% if form.retired.errors %}has-error{% endif %}">
+                            <label class="col-md-3 col-xs-3 col-sm-3 control-label" for="{{ form.retired.auto_id }}">
+                                {{ form.retired.label }}
+                            </label>
+                            <div class="col-md-9 col-xs-9 col-sm-9">
+                                <div class="form-inline">
+                                    {{ form.retired }}
+                                </div>
+                                {% include 'base/form.errors.html' with form_errors=form.retired.errors col_title_error='col-sm-2' col_msg_error='col-sm-10' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group {% if form.diseases.errors %}has-error{% endif %}">
+                            <label class="col-md-3 col-xs-3 col-sm-3 control-label" for="{{ form.diseases.auto_id }}">
+                                {{ form.diseases.label }}
+                            </label>
+                            <div class="col-md-9 col-xs-9 col-sm-9">
+                                <div class="form-inline">
+                                    {{ form.diseases }}
+                                </div>
+                                {% include 'base/form.errors.html' with form_errors=form.diseases.errors col_title_error='col-sm-2' col_msg_error='col-sm-10' %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="form-group {% if form.disabilities.errors %}has-error{% endif %}">
+                            <label class="col-md-3 col-xs-3 col-sm-3 control-label" for="{{ form.disabilities.auto_id }}">
+                                {{ form.disabilities.label }}
+                            </label>
+                            <div class="col-md-9 col-xs-9 col-sm-9">
+                                <div class="form-inline">
+                                    {{ form.disabilities }}
+                                </div>
+                                {% include 'base/form.errors.html' with form_errors=form.disabilities.errors col_title_error='col-sm-2' col_msg_error='col-sm-10' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="text-right">
                     <a href="{% url 'beneficiary:person_list' %}" class="btn btn-primary btn-sm">{% trans 'Atrás' %}</a>
                     <button type="reset" class="btn btn-primary btn-sm" data-toggle="tooltip">{% trans 'Limpiar' %}</button>
@@ -111,4 +262,26 @@
             </form>
         </div>
     </div>
+{% endblock %}
+{% block extra_footer %}
+  <script>
+    $(document).ready(function(){
+      $('.datepicker').datepicker({
+        format: "yyyy-mm-dd",
+        language: "es",
+        autoclose: true,
+        todayHighlight: true,
+      });
+      var diseases = [];
+      {% for dl in diseases_list %}
+        diseases.push({{ dl.id }});
+      {% endfor %}
+      $("#id_diseases").val(diseases).change();
+      var disabilities = [];
+      {% for di in disabilities_list %}
+        disabilities.push({{ di.id }});
+      {% endfor %}
+      $("#id_disabilities").val(disabilities).change();
+    });
+  </script>
 {% endblock %}

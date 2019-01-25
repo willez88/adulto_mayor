@@ -15,8 +15,21 @@
                             <tr>
                                 <th>Nombres</th>
                                 <th>Apellidos</th>
+                                <th>Cédula de Identidad</th>
                                 <th>Correo</th>
                                 <th>Teléfono</th>
+                                <th>Género</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Edad</th>
+                                <th>Estado Civil</th>
+                                <th>Grado de Instrucción</th>
+                                <th>Misión Educativa</th>
+                                <th>Misión Social</th>
+                                <th>Tipo de Ingreso</th>
+                                <th>Pensionado</th>
+                                <th>Jubilado</th>
+                                <th>Enfermedad</th>
+                                <th>Discapacidad</th>
                                 <th>Consejo Comunal</th>
                                 <th>Acciones</th>
                             </tr>
@@ -26,10 +39,39 @@
                                 <tr>
                                 <td> {{ pe.first_name }} </td>
                                 <td> {{ pe.last_name }} </td>
+                                <td> {{ pe.identity_card }} </td>
                                 <td> {{ pe.email }} </td>
                                 <td> {{ pe.phone }} </td>
+                                <td> {{ pe.gender }} </td>
+                                <td> {{ pe.birthdate }} </td>
+                                <td> {{ pe.age }} </td>
+                                <td> {{ pe.marital_status }} </td>
+                                <td> {{ pe.instruction_degree }} </td>
+                                <td> {{ pe.educational_mission }} </td>
+                                <td> {{ pe.social_mission }} </td>
+                                <td> {{ pe.income_type }} </td>
+                                {% if pe.pensioner %}
+                                  <td> Si </td>
+                                {% else %}
+                                  <td> No </td>
+                                {% endif %}
+                                {% if pe.retired %}
+                                  <td> Si </td>
+                                {% else %}
+                                  <td> No </td>
+                                {% endif %}
+                                <td>
+                                  {% for d in pe.diseases.all %}
+                                    {{ d }}<br>
+                                  {% endfor %}
+                                </td>
+                                <td>
+                                  {% for d in pe.disabilities.all %}
+                                    {{ d }}<br>
+                                  {% endfor %}
+                                </td>
                                 <td> {{ pe.communal_council_level.communal_council }} </td>
-                                <td> <a href="#" title="Actualizar"><i class="fa fa-pencil"></i></a> <a href="#" title="Eliminar"><i class="fa fa-remove"></i</a> </td>
+                                <td> <a href="{% url 'beneficiary:person_update' pe.id %}" title="Actualizar"><i class="fa fa-pencil"></i></a> <a href="{% url 'beneficiary:person_delete' pe.id %}" title="Eliminar"><i class="fa fa-remove"></i</a> </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

@@ -5,6 +5,7 @@ from base.models import (
 )
 from user.models import CommunalCouncilLevel
 from django.utils.translation import ugettext_lazy as _
+import datetime
 
 # Create your models here.
 
@@ -66,10 +67,10 @@ class Person(models.Model):
     retired = models.BooleanField()
 
     ## Establece la Enfermedad que presenta la Persona
-    diseases = models.ManyToManyField(Disease)
+    diseases = models.ManyToManyField(Disease, blank=True)
 
     ## Establece la Discapacidad que tiene la Persona
-    disabilities = models.ManyToManyField(Disability)
+    disabilities = models.ManyToManyField(Disability, blank=True)
 
     ## Establece la relación de la Persona con un usuario del sistema
     communal_council_level = models.ForeignKey(CommunalCouncilLevel,on_delete=models.CASCADE)

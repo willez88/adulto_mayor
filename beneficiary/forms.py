@@ -4,7 +4,10 @@ from base.fields import IdentityCardField
 from django.utils.translation import ugettext_lazy as _
 from django.core import validators
 from base.fields import IdentityCardField, PhoneField
-from base.models import Gender, MaritalStatus, InstructionDegree, EducationalMission, IncomeType, Disease, Disability
+from base.models import (
+    Gender, MaritalStatus, InstructionDegree, EducationalMission, IncomeType,
+    Disease, Disability, SocialMission
+)
 
 class PersonForm(forms.ModelForm):
 
@@ -144,7 +147,7 @@ class PersonForm(forms.ModelForm):
     )
 
     social_mission = forms.ModelChoiceField(
-        label=_('Misión Social:'), queryset=Gender.objects.all(),
+        label=_('Misión Social:'), queryset=SocialMission.objects.all(),
         empty_label = _('Seleccione...'),
         widget=forms.Select(
             attrs={
