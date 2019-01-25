@@ -56,6 +56,12 @@ class PersonUpdateView(UpdateView):
         else:
             return redirect('base:error_403')
 
+    def get_context_data(self, **kwargs):
+        context = super(PersonUpdateView, self).get_context_data(**kwargs)
+        context['diseases_list'] = self.object.diseases.all()
+        context['disabilities_list'] = self.object.disabilities.all()
+        return context
+
 class PersonDeleteView(DeleteView):
     model = Person
     template_name = 'beneficiary/person_delete.html'
