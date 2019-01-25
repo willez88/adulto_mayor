@@ -39,8 +39,19 @@
                                 <tr>
                                 <td> {{ pe.first_name }} </td>
                                 <td> {{ pe.last_name }} </td>
-                                <td> {{ pe.identity_card }} </td>
-                                <td> {{ pe.email }} </td>
+
+                                {% if pe.identity_card %}
+                                    <td> {{ pe.identity_card }} </td>
+                                {% else %}
+                                    <td> </td>
+                                {% endif %}
+
+                                {% if pe.email %}
+                                    <td> {{ pe.email }} </td>
+                                {% else %}
+                                    <td> </td>
+                                {% endif %}
+
                                 <td> {{ pe.phone }} </td>
                                 <td> {{ pe.gender }} </td>
                                 <td> {{ pe.birthdate }} </td>

@@ -50,8 +50,8 @@
                             <div class="col-md-9 col-xs-9 col-sm-9">
                                 <div class="form-inline">
                                     {{ form.identity_card }}
-                                    <i class="ion ion-ios-medical item-requerido"></i>
                                 </div>
+                                <span class="text-muted">{{ form.identity_card.help_text }}</span>
                                 {% include 'base/form.errors.html' with form_errors=form.identity_card.errors col_title_error='col-sm-2' col_msg_error='col-sm-10' %}
                             </div>
                         </div>
@@ -66,6 +66,7 @@
                                     {{ form.phone }}
                                     <i class="ion ion-ios-medical item-requerido"></i>
                                 </div>
+                                <span class="text-muted">{{ form.phone.help_text }}</span>
                                 {% include 'base/form.errors.html' with form_errors=form.phone.errors col_title_error='col-sm-2' col_msg_error='col-sm-10' %}
                             </div>
                         </div>
@@ -81,7 +82,6 @@
                             <div class="col-md-9 col-xs-9 col-sm-9">
                                 <div class="form-inline">
                                     {{ form.email }}
-                                    <i class="ion ion-ios-medical item-requerido"></i>
                                 </div>
                                 {% include 'base/form.errors.html' with form_errors=form.email.errors col_title_error='col-sm-2' col_msg_error='col-sm-10' %}
                             </div>

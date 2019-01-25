@@ -27,6 +27,7 @@ class Person(models.Model):
     identity_card = models.CharField(
         max_length=9,
         unique=True,
+        null=True
     )
 
     # +58-416-0708340
@@ -36,7 +37,7 @@ class Person(models.Model):
 
     ## Establece el correo de la persona
     email = models.CharField(
-        max_length=100, help_text=('correo@correo.com'), blank=True
+        max_length=100, help_text=('correo@correo.com'), unique=True, null=True
     )
 
     ## Establece el sexo de la Persona

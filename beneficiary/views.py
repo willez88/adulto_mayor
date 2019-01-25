@@ -39,6 +39,12 @@ class PersonCreateView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         communal_council_level = CommunalCouncilLevel.objects.get(profile=self.request.user.profile)
+
+        if form.cleaned_data['identity_card'] == '':
+            self.object.identity_card = None
+
+        if form.cleaned_data['email'] == '':
+            self.object.email = None
         self.object.communal_council_level = communal_council_level
         self.object.save()
         return super(PersonCreateView, self).form_valid(form)
@@ -61,6 +67,16 @@ class PersonUpdateView(UpdateView):
         context['diseases_list'] = self.object.diseases.all()
         context['disabilities_list'] = self.object.disabilities.all()
         return context
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        if form.cleaned_data['identity_card'] == '':
+            self.object.identity_card = None
+
+        if form.cleaned_data['email'] == '':
+            self.object.email = None
+        self.object.save()
+        return super(PersonUpdateView, self).form_valid(form)
 
 class PersonDeleteView(DeleteView):
     model = Person

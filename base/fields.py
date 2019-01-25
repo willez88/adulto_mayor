@@ -52,8 +52,8 @@ class IdentityCardField(forms.MultiValueField):
         }
 
         fields = (
-            forms.ChoiceField(choices=NATIONALITY),
-            forms.CharField(max_length=8)
+            forms.ChoiceField(choices=NATIONALITY,required=False),
+            forms.CharField(max_length=8, required=False)
         )
 
         label = _('Cédula de Identidad:')
@@ -61,7 +61,7 @@ class IdentityCardField(forms.MultiValueField):
         help_text = _('V-00000000 ó E-00000000')
 
         super(IdentityCardField, self).__init__(
-            error_messages=error_messages, fields=fields, label=label, help_text=help_text, require_all_fields=True, *args, **kwargs
+            error_messages=error_messages, fields=fields, label=label, help_text=help_text, require_all_fields=False, *args, **kwargs
         )
 
     def compress(self, data_list):

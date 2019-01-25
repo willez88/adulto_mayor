@@ -8,6 +8,7 @@ from base.models import (
     Gender, MaritalStatus, InstructionDegree, EducationalMission, IncomeType,
     Disease, Disability, SocialMission
 )
+import re
 
 class PersonForm(forms.ModelForm):
 
@@ -48,27 +49,8 @@ class PersonForm(forms.ModelForm):
         )
     )
 
-    ## ¿Tiene cédula?
-    has_identity_card = forms.ChoiceField(
-        label=_('¿Tiene Cédula?:'),
-        choices=(('S',_('Si')),)+(('N',_('No')),),
-        widget=forms.Select(
-            attrs={
-                'class': 'form-control select2', 'data-toggle': 'tooltip',
-                'title': _('Seleccione si tiene cédula'), 'onchange': "_has_identity_card(this.value)",
-            }
-        ), required = False
-    )
-
     ## Cédula
-    identity_card = IdentityCardField(
-        validators=[
-            validators.RegexValidator(
-                r'^[VE][\d]{8}$',
-                _("Introduzca un número de cédula válido. Solo se permiten números y una longitud de 8 carácteres. Se agrega un 0 si la longitud es de 7 carácteres.")
-            ),
-        ]
-    )
+    identity_card = IdentityCardField(required=False)
 
     ## Teléfono del usuario
     phone = PhoneField(
@@ -204,6 +186,18 @@ class PersonForm(forms.ModelForm):
         ),
         required = False
     )
+
+    def clean_identity_card(self):
+        identity_card = self.cleaned_data['identity_card']
+        if identity_card == 'V' or identity_card == 'E':
+            identity_card = ''
+            return identity_card
+        else:
+            result = re.match(r'^[VE][\d]{8}$', identity_card)
+            if result:
+                return identity_card
+            else:
+                raise forms.ValidationError(_('La cédula es incorrecta'))
 
     class Meta:
 
