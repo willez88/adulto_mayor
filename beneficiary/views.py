@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import Person
-from user.models import CommunalCouncilLevel
+from user.models import NationalLevel, StateLevel, MunicipalLevel, ParishLevel, CommunalCouncilLevel
 from .forms import PersonForm
 
 # Create your views here.
@@ -13,14 +13,39 @@ class PersonListView(ListView):
     template_name = 'beneficiary/person_list.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.profile.level == 5:
+        if self.request.user.profile.level == 1 or self.request.user.profile.level == 2 or self.request.user.profile.level == 3 or self.request.user.profile.level == 4 or self.request.user.profile.level == 5:
             return super(PersonListView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
 
     def get_queryset(self):
-        communal_council_level = CommunalCouncilLevel.objects.get(profile=self.request.user.profile)
-        if Person.objects.filter(communal_council_level=communal_council_level):
+
+        ## usuario nacional puede ver al nivel personas
+        if NationalLevel.objects.filter(profile=self.request.user.profile):
+            national_level = NationalLevel.objects.get(profile=self.request.user.profile)
+            queryset = Person.objects.filter(communal_council_level__communal_council__parish__municipality__state__country=national_level.country)
+            return queryset
+
+        ## usuario estadal puede ver al nivel personas
+        if StateLevel.objects.filter(profile=self.request.user.profile):
+            state_level = StateLevel.objects.get(profile=self.request.user.profile)
+            queryset = Person.objects.filter(communal_council_level__communal_council__parish__municipality__state=state_level.state)
+            return queryset
+
+        ## usuario municipal puede ver al nivel personas
+        if MunicipalLevel.objects.filter(profile=self.request.user.profile):
+            municipal_level = MunicipalLevel.objects.get(profile=self.request.user.profile)
+            queryset = Person.objects.filter(communal_council_level__communal_council__parish__municipality=municipal_level.municipality)
+            return queryset
+
+        ## usuario parroquial puede ver al nivel personas
+        if ParishLevel.objects.filter(profile=self.request.user.profile):
+            parish_level = ParishLevel.objects.get(profile=self.request.user.profile)
+            queryset = Person.objects.filter(communal_council_level__communal_council__parish=parish_level.parish)
+            return queryset
+
+        if CommunalCouncilLevel.objects.get(profile=self.request.user.profile):
+            communal_council_level = CommunalCouncilLevel.objects.get(profile=self.request.user.profile)
             queryset = Person.objects.filter(communal_council_level=communal_council_level)
             return queryset
 

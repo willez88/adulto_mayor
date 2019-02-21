@@ -9,7 +9,7 @@ def send_email(email, template, subject, vars = None):
 
     @author Ing. Roldan Vargas (rvargas at cenditel.gob.ve)
     @author William Páez (wpaez at cenditel.gob.ve)
-    @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
     @date 22-08-2016
     @param email    <b>{string}</b> Dirección de correo electrónico del destinatario.
     @param template <b>{string}</b> Nombre de la plantilla de correo electrónico a utilizar.

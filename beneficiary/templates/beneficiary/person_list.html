@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 {% load i18n %}
-{% block content_header_title %}{% trans 'Personas' %}{% endblock %}
+{% block content_header_title %}{% trans 'Adultos Mayores' %}{% endblock %}
 {% block contenido %}
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -31,6 +31,9 @@
                                 <th>Enfermedad</th>
                                 <th>Discapacidad</th>
                                 <th>Consejo Comunal</th>
+                                <th>Parroquia</th>
+                                <th>Municipio</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -82,6 +85,9 @@
                                   {% endfor %}
                                 </td>
                                 <td> {{ pe.communal_council_level.communal_council }} </td>
+                                <td> {{ pe.communal_council_level.communal_council.parish }} </td>
+                                <td> {{ pe.communal_council_level.communal_council.parish.municipality }} </td>
+                                <td> {{ pe.communal_council_level.communal_council.parish.municipality.state }} </td>
                                 <td> <a href="{% url 'beneficiary:person_update' pe.id %}" title="Actualizar"><i class="fa fa-pencil"></i></a> <a href="{% url 'beneficiary:person_delete' pe.id %}" title="Eliminar"><i class="fa fa-remove"></i</a> </td>
                                 </tr>
                             {% endfor %}

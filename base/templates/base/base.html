@@ -18,17 +18,21 @@
                             <li><a href="{% url 'user:municipal_level_list' %}">Municipal</a></li>
                             <li><a href="{% url 'user:parish_level_list' %}">Parroquial</a></li>
                             <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
+                            <li><a href="{% url 'beneficiary:person_list' %}">Adultos Mayores</a></li>
                             {% elif request.user.profile.level == 2 %}
                             <li><a href="{% url 'user:municipal_level_list' %}">Municipal</a></li>
                             <li><a href="{% url 'user:parish_level_list' %}">Parroquial</a></li>
                             <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
+                            <li><a href="{% url 'beneficiary:person_list' %}">Adultos Mayores</a></li>
                             {% elif request.user.profile.level == 3 %}
                             <li><a href="{% url 'user:parish_level_list' %}">Parroquial</a></li>
                             <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
+                            <li><a href="{% url 'beneficiary:person_list' %}">Adultos Mayores</a></li>
                             {% elif request.user.profile.level == 4 %}
                             <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
+                            <li><a href="{% url 'beneficiary:person_list' %}">Adultos Mayores</a></li>
                             {% elif request.user.profile.level == 5 %}
-                            <li><a href="{% url 'beneficiary:person_list' %}">Personas</a></li>
+                            <li><a href="{% url 'beneficiary:person_list' %}">Adultos Mayores</a></li>
                             {% endif %}
                         </ul>
                     </li>

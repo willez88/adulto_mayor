@@ -14,7 +14,7 @@ class Person(models.Model):
     Clase que contiene los datos de las personas adultas mayores
 
     @author William Páez (wpaez at cenditel.gob.ve)
-    @copyright <a href='http://conocimientolibre.cenditel.gob.ve/licencia-de-software-v-1-3/'>Licencia de Software CENDITEL versión 1.2</a>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
     """
 
     ## Nombre de la Persona

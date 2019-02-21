@@ -7,7 +7,7 @@ class Country(models.Model):
 
     @author Ing. Roldan Vargas (rvargas at cenditel.gob.ve)
     @author William Páez (wpaez at cenditel.gob.ve)
-    @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
     @date 14-01-2018
     @version 1.0.0
     """
@@ -20,7 +20,7 @@ class Country(models.Model):
         Función para representar la clase de forma amigable
 
         @author William Páez (wpaez at cenditel.gob.ve)
-        @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+        @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
         @date 14-01-2018
         @version 1.0.0
         """
@@ -37,7 +37,7 @@ class State(models.Model):
 
     @author Ing. Roldan Vargas (rvargas at cenditel.gob.ve)
     @author William Páez (wpaez at cenditel.gob.ve)
-    @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
     @date 14-01-2018
     @version 1.0.0
     """
@@ -53,7 +53,7 @@ class State(models.Model):
         Función para representar la clase de forma amigable
 
         @author William Páez (wpaez at cenditel.gob.ve)
-        @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+        @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
         @date 14-01-2018
         @version 1.0.0
         """
@@ -70,7 +70,7 @@ class Municipality(models.Model):
 
     @author Ing. Roldan Vargas (rvargas at cenditel.gob.ve)
     @author William Páez (wpaez at cenditel.gob.ve)
-    @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
     @date 14-01-2018
     @version 1.0.0
     """
@@ -86,7 +86,7 @@ class Municipality(models.Model):
         Función para representar la clase de forma amigable
 
         @author William Páez (wpaez at cenditel.gob.ve)
-        @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+        @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
         @date 14-01-2018
         @version 1.0.0
         """
@@ -103,7 +103,7 @@ class City(models.Model):
 
     @author Ing. Roldan Vargas (rvargas at cenditel.gob.ve)
     @author William Páez (wpaez at cenditel.gob.ve)
-    @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
     @date 14-01-2018
     @version 1.0.0
     """
@@ -119,7 +119,7 @@ class City(models.Model):
         Función para representar la clase de forma amigable
 
         @author William Páez (wpaez at cenditel.gob.ve)
-        @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+        @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
         @date 14-01-2018
         @version 1.0.0
         """
@@ -136,7 +136,7 @@ class Parish(models.Model):
 
     @author Ing. Roldan Vargas (rvargas at cenditel.gob.ve)
     @author William Páez (wpaez at cenditel.gob.ve)
-    @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
     @date 14-01-2018
     @version 1.0.0
     """
@@ -152,7 +152,7 @@ class Parish(models.Model):
         Función para representar la clase de forma amigable
 
         @author William Páez (wpaez at cenditel.gob.ve)
-        @copyright <a href='http://www.gnu.org/licenses/gpl-3.0.html'>GNU Public License versión 3 (GPLv3)</a>
+        @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
         @date 14-01-2018
         @version 1.0.0
         """
