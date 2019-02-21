@@ -81,9 +81,10 @@ class PersonUpdateView(UpdateView):
     success_url = reverse_lazy('beneficiary:person_list')
 
     def dispatch(self, request, *args, **kwargs):
-        communal_council_level = CommunalCouncilLevel.objects.get(profile=self.request.user.profile)
-        if self.request.user.profile.level == 5 and Person.objects.filter(pk=self.kwargs['pk'],communal_council_level=communal_council_level):
-            return super(PersonUpdateView, self).dispatch(request, *args, **kwargs)
+        if CommunalCouncilLevel.objects.filter(profile=self.request.user.profile):
+            communal_council_level = CommunalCouncilLevel.objects.get(profile=self.request.user.profile)
+            if self.request.user.profile.level == 5 and Person.objects.filter(pk=self.kwargs['pk'],communal_council_level=communal_council_level):
+                return super(PersonUpdateView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
 
@@ -109,8 +110,9 @@ class PersonDeleteView(DeleteView):
     success_url = reverse_lazy('beneficiary:person_list')
 
     def dispatch(self, request, *args, **kwargs):
-        communal_council_level = CommunalCouncilLevel.objects.get(profile=self.request.user.profile)
-        if self.request.user.profile.level == 5 and Person.objects.filter(pk=self.kwargs['pk'],communal_council_level=communal_council_level):
-            return super(PersonDeleteView, self).dispatch(request, *args, **kwargs)
+        if CommunalCouncilLevel.objects.filter(profile=self.request.user.profile):
+            communal_council_level = CommunalCouncilLevel.objects.get(profile=self.request.user.profile)
+            if CommunalCouncilLevel.objects.filter(profile=self.request.user.profile) and self.request.user.profile.level == 5 and Person.objects.filter(pk=self.kwargs['pk'],communal_council_level=communal_council_level):
+                return super(PersonDeleteView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
