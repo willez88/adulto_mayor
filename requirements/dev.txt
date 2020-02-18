@@ -1,4 +1,4 @@
-django==2.1.4
+django==2.2.10
 django-extensions==2.1.4
 #psycopg2==2.7.6.1
 psycopg2-binary==2.7.6.1
