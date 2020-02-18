@@ -87,6 +87,7 @@ DATABASES = {
     #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     #}
 
+    ## Configuración de base de datos por defecto
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'adulto_mayor',
