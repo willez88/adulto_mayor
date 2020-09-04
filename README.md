@@ -113,7 +113,7 @@ Hacer las migraciones
 
     (adulto_mayor) ~$ python manage.py migrate
 
-    (adulto_mayor) ~$ python manage.py loaddata 1_country.json 2_state.json 3_municipality.json 4_city.json 5_parish.json 6_communal_council.json base.json
+    (adulto_mayor) ~$ python manage.py loaddata 1_country.json 2_state.json 3_municipality.json 4_city.json 5_parish.json 6_communal_council.json base.json auth_group.json
 
 Crear usuario administrador
 
