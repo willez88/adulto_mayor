@@ -13,7 +13,9 @@ class PersonListView(ListView):
     template_name = 'beneficiary/person_list.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.profile.level == 1 or self.request.user.profile.level == 2 or self.request.user.profile.level == 3 or self.request.user.profile.level == 4 or self.request.user.profile.level == 5:
+        if self.request.user.groups.filter(name='Nivel Nacional') or self.request.user.groups.filter(name='Nivel Estadal') \
+            or self.request.user.groups.filter(name='Nivel Municipal') or self.request.user.groups.filter(name='Nivel Parroquial') \
+            or self.request.user.groups.filter(name='Nivel Comunal'):
             return super(PersonListView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
@@ -56,7 +58,7 @@ class PersonCreateView(CreateView):
     success_url = reverse_lazy('beneficiary:person_list')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.profile.level == 5:
+        if self.request.user.groups.filter(name='Nivel Comunal'):
             return super(PersonCreateView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
@@ -83,7 +85,7 @@ class PersonUpdateView(UpdateView):
     def dispatch(self, request, *args, **kwargs):
         if CommunalCouncilLevel.objects.filter(profile=self.request.user.profile):
             communal_council_level = CommunalCouncilLevel.objects.get(profile=self.request.user.profile)
-            if self.request.user.profile.level == 5 and Person.objects.filter(pk=self.kwargs['pk'],communal_council_level=communal_council_level):
+            if self.request.user.groups.filter(name='Nivel Comunal') and Person.objects.filter(pk=self.kwargs['pk'],communal_council_level=communal_council_level):
                 return super(PersonUpdateView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
@@ -112,7 +114,8 @@ class PersonDeleteView(DeleteView):
     def dispatch(self, request, *args, **kwargs):
         if CommunalCouncilLevel.objects.filter(profile=self.request.user.profile):
             communal_council_level = CommunalCouncilLevel.objects.get(profile=self.request.user.profile)
-            if CommunalCouncilLevel.objects.filter(profile=self.request.user.profile) and self.request.user.profile.level == 5 and Person.objects.filter(pk=self.kwargs['pk'],communal_council_level=communal_council_level):
+            if CommunalCouncilLevel.objects.filter(profile=self.request.user.profile) and self.request.user.groups.filter(name='Nivel Comunal') \
+                and Person.objects.filter(pk=self.kwargs['pk'],communal_council_level=communal_council_level):
                 return super(PersonDeleteView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load i18n %}
+{% load auth_extra %}
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE|default:"es-ve" }}">
     {% include 'base/head.html' %}
@@ -13,25 +14,25 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menú<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            {% if request.user.profile.level == 1 %}
+                            {% if request.user|has_group:'Nivel Nacional' %}
                             <li><a href="{% url 'user:state_level_list' %}">Estadal</a></li>
                             <li><a href="{% url 'user:municipal_level_list' %}">Municipal</a></li>
                             <li><a href="{% url 'user:parish_level_list' %}">Parroquial</a></li>
                             <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
                             <li><a href="{% url 'beneficiary:person_list' %}">Adultos Mayores</a></li>
-                            {% elif request.user.profile.level == 2 %}
+                            {% elif request.user|has_group:'Nivel Estadal' %}
                             <li><a href="{% url 'user:municipal_level_list' %}">Municipal</a></li>
                             <li><a href="{% url 'user:parish_level_list' %}">Parroquial</a></li>
                             <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
                             <li><a href="{% url 'beneficiary:person_list' %}">Adultos Mayores</a></li>
-                            {% elif request.user.profile.level == 3 %}
+                            {% elif request.user|has_group:'Nivel Municipal' %}
                             <li><a href="{% url 'user:parish_level_list' %}">Parroquial</a></li>
                             <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
                             <li><a href="{% url 'beneficiary:person_list' %}">Adultos Mayores</a></li>
-                            {% elif request.user.profile.level == 4 %}
+                            {% elif request.user|has_group:'Nivel Parroquial' %}
                             <li><a href="{% url 'user:communal_council_level_list' %}">Consejo Comunal</a></li>
                             <li><a href="{% url 'beneficiary:person_list' %}">Adultos Mayores</a></li>
-                            {% elif request.user.profile.level == 5 %}
+                            {% elif request.user|has_group:'Nivel Comunal' %}
                             <li><a href="{% url 'beneficiary:person_list' %}">Adultos Mayores</a></li>
                             {% endif %}
                         </ul>
@@ -41,15 +42,15 @@
                     <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user fa-lg" aria-hidden="true"></i> {{ request.user.username }}</a>
                     <ul class="dropdown-menu">
-                        {% if request.user.profile.level == 1 %}
+                        {% if request.user|has_group:'Nivel Nacional' %}
                         <li><a href="{% url 'user:national_level_update' request.user.id %}"> Perfil</a></li>
-                        {% elif request.user.profile.level == 2 %}
+                        {% elif request.user|has_group:'Nivel Estadal' %}
                         <li><a href="{% url 'user:state_level_update' request.user.id %}"> Perfil</a></li>
-                        {% elif request.user.profile.level == 3 %}
+                        {% elif request.user|has_group:'Nivel Municipal' %}
                         <li><a href="{% url 'user:municipal_level_update' request.user.id %}"> Perfil</a></li>
-                        {% elif request.user.profile.level == 4 %}
+                        {% elif request.user|has_group:'Nivel Parroquial' %}
                         <li><a href="{% url 'user:parish_level_update' request.user.id %}"> Perfil</a></li>
-                        {% elif request.user.profile.level == 5 %}
+                        {% elif request.user|has_group:'Nivel Comunal' %}
                         <li><a href="{% url 'user:communal_council_level_update' request.user.id %}"> Perfil</a></li>
                         {% endif %}
                         <li><a href="{% url 'user:password_change' %}"> Cambiar Clave</a></li>

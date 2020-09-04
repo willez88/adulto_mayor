@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.core import validators
 from base.fields import IdentityCardField, PhoneField
-from .models import NationalLevel, StateLevel, MunicipalLevel, ParishLevel, CommunalCouncilLevel
+from .models import Profile, NationalLevel, StateLevel, MunicipalLevel, ParishLevel, CommunalCouncilLevel
 from base.models import State, Municipality, Parish, CommunalCouncil
 
 class ProfileForm(forms.ModelForm):
@@ -104,19 +104,6 @@ class ProfileForm(forms.ModelForm):
             raise forms.ValidationError(_('La contraseña no es la misma.'))
         return confirm_password
 
-    class Meta:
-        """!
-        Meta clase del formulario que establece algunas propiedades
-
-        @author William Páez (wpaez at cenditel.gob.ve)
-        @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
-        @date 14-01-2018
-        @version 1.0.0
-        """
-
-        model = User
-        exclude = ['profile','level','date_joined']
-
 class NationalLevelUpdateForm(ProfileForm):
     """!
     Clase que contiene el formulario para poder actualizar los datos de un usuario que tiene nivel Nacional
@@ -173,10 +160,9 @@ class NationalLevelUpdateForm(ProfileForm):
         @version 1.0.0
         """
 
-        model = User
-        exclude = [
-            'profile','level','password','confirm_password','date_joined','last_login','is_active',
-            'is_superuser','is_staff', 'pcountry'
+        model = Profile
+        fields = [
+            'username','first_name','last_name','email','phone','password','confirm_password',
         ]
 
 class StateLevelForm(ProfileForm):
@@ -203,6 +189,19 @@ class StateLevelForm(ProfileForm):
         if StateLevel.objects.filter(state=state):
             raise forms.ValidationError(_('Ya existe un usuario asignado a este estado.'))
         return state
+
+    class Meta:
+        """!
+        Meta clase del formulario que establece algunas propiedades
+
+        @author William Páez (wpaez at cenditel.gob.ve)
+        @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
+        """
+
+        model = User
+        fields = [
+            'username','first_name','last_name','email','phone','password','confirm_password',
+        ]
 
 class StateLevelUpdateForm(ProfileForm):
     """!
@@ -260,10 +259,9 @@ class StateLevelUpdateForm(ProfileForm):
         @version 1.0.0
         """
 
-        model = User
-        exclude = [
-            'profile','level','password','confirm_password','date_joined','last_login','is_active',
-            'is_superuser','is_staff','state'
+        model = Profile
+        fields = [
+            'username','first_name','last_name','email','phone','password','confirm_password',
         ]
 
 class MunicipalLevelForm(ProfileForm):
@@ -290,6 +288,19 @@ class MunicipalLevelForm(ProfileForm):
         if MunicipalLevel.objects.filter(municipality=municipality):
             raise forms.ValidationError(_('Ya existe un usuario asignado a este municipio.'))
         return municipality
+
+    class Meta:
+        """!
+        Meta clase del formulario que establece algunas propiedades
+
+        @author William Páez (wpaez at cenditel.gob.ve)
+        @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
+        """
+
+        model = User
+        fields = [
+            'username','first_name','last_name','email','phone','password','confirm_password',
+        ]
 
 class MunicipalLevelUpdateForm(ProfileForm):
     def __init__(self, *args, **kwargs):
@@ -320,10 +331,9 @@ class MunicipalLevelUpdateForm(ProfileForm):
         pass
 
     class Meta:
-        model = User
-        exclude = [
-            'profile','level','password','confirm_password','date_joined','last_login','is_active',
-            'is_superuser','is_staff','municipality'
+        model = Profile
+        fields = [
+            'username','first_name','last_name','email','phone','password','confirm_password',
         ]
 
 class ParishLevelForm(ProfileForm):
@@ -350,8 +360,20 @@ class ParishLevelForm(ProfileForm):
         parish_level = ParishLevel.objects.filter(parish=parish)
         if parish_level.count() >= 5:
             raise forms.ValidationError(_('Solo se pueden asignar 5 usuarios para esta parroquia.'))
-
         return parish
+
+    class Meta:
+        """!
+        Meta clase del formulario que establece algunas propiedades
+
+        @author William Páez (wpaez at cenditel.gob.ve)
+        @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
+        """
+
+        model = User
+        fields = [
+            'username','first_name','last_name','email','phone','password','confirm_password',
+        ]
 
 class ParishLevelUpdateForm(ProfileForm):
     def __init__(self, *args, **kwargs):
@@ -382,10 +404,9 @@ class ParishLevelUpdateForm(ProfileForm):
         pass
 
     class Meta:
-        model = User
-        exclude = [
-            'profile','level','password','confirm_password','date_joined','last_login','is_active',
-            'is_superuser','is_staff','parish'
+        model = Profile
+        fields = [
+            'username','first_name','last_name','email','phone','password','confirm_password',
         ]
 
 class CommunalCouncilLevelAdminForm(forms.ModelForm):
@@ -441,6 +462,19 @@ class CommunalCouncilLevelForm(ProfileForm):
         })
     )
 
+    class Meta:
+        """!
+        Meta clase del formulario que establece algunas propiedades
+
+        @author William Páez (wpaez at cenditel.gob.ve)
+        @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>GNU Public License versión 2 (GPLv2)</a>
+        """
+
+        model = User
+        fields = [
+            'username','first_name','last_name','email','phone','password','confirm_password',
+        ]
+
 class CommunalCouncilLevelUpdateForm(ProfileForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
@@ -470,8 +504,7 @@ class CommunalCouncilLevelUpdateForm(ProfileForm):
         pass
 
     class Meta:
-        model = User
-        exclude = [
-            'profile','level','password','confirm_password','date_joined','last_login','is_active',
-            'is_superuser','is_staff','communal_council'
+        model = Profile
+        fields = [
+            'username','first_name','last_name','email','phone','password','confirm_password',
         ]

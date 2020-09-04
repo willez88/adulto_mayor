@@ -114,7 +114,8 @@ class PersonForm(forms.ModelForm):
                 'class': 'form-control select2', 'data-toggle': 'tooltip',
                 'title': _('Seleccione el grado de instrucción'),
             }
-        )
+        ),
+        required = False
     )
 
     educational_mission = forms.ModelChoiceField(
@@ -125,7 +126,8 @@ class PersonForm(forms.ModelForm):
                 'class': 'form-control select2', 'data-toggle': 'tooltip',
                 'title': _('Seleccione la misión educativa'),
             }
-        )
+        ),
+        required = False
     )
 
     social_mission = forms.ModelChoiceField(
@@ -136,7 +138,8 @@ class PersonForm(forms.ModelForm):
                 'class': 'form-control select2', 'data-toggle': 'tooltip',
                 'title': _('Seleccione la misión social'),
             }
-        )
+        ),
+        required = False
     )
 
     income_type = forms.ModelChoiceField(
@@ -147,7 +150,8 @@ class PersonForm(forms.ModelForm):
                 'class': 'form-control select2', 'data-toggle': 'tooltip',
                 'title': _('Seleccione el tipo de ingreso'),
             }
-        )
+        ),
+        required = False
     )
 
     ## ¿Es pensionado?

@@ -3,8 +3,7 @@ from .models import Profile, NationalLevel, StateLevel, MunicipalLevel, ParishLe
 from .forms import CommunalCouncilLevelAdminForm
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user','level','phone',)
-    list_filter = ('level',)
+    list_display = ('user','phone',)
     ordering = ('user__username',)
     search_fields = ('user__username',)
 admin.site.register(Profile, ProfileAdmin)

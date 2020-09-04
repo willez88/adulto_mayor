@@ -7,7 +7,7 @@ from .forms import (
     CommunalCouncilLevelForm, CommunalCouncilLevelUpdateForm
 )
 from .models import Profile, NationalLevel, StateLevel, MunicipalLevel, ParishLevel, CommunalCouncilLevel
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from base.models import State, Municipality, Parish, CommunalCouncil
 from django.conf import settings
 from base.constant import EMAIL_SUBJECT
@@ -18,36 +18,40 @@ import logging
 logger = logging.getLogger('user')
 
 class NationalLevelUpdateView(UpdateView):
-    model = User
+    model = Profile
     form_class = NationalLevelUpdateForm
     template_name = 'user/national.level.update.html'
     success_url = reverse_lazy('base:home')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.id == self.kwargs['pk'] and self.request.user.profile.level == 1:
+        if self.request.user.id == self.kwargs['pk'] and self.request.user.groups.filter(name='Nivel Nacional'):
             return super(NationalLevelUpdateView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
 
     def get_initial(self):
         initial_data = super(NationalLevelUpdateView, self).get_initial()
-        initial_data['phone'] = self.object.profile.phone
-        national_level = NationalLevel.objects.get(profile=self.object.profile)
+        profile = self.request.user.profile
+        initial_data['username'] = profile.user.username
+        initial_data['first_name'] = profile.user.first_name
+        initial_data['last_name'] = profile.user.last_name
+        initial_data['email'] = profile.user.email
+        national_level = NationalLevel.objects.get(profile=profile)
         initial_data['country'] = national_level.country
         return initial_data
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.username = form.cleaned_data['username']
-        self.object.first_name = form.cleaned_data['first_name']
-        self.object.last_name = form.cleaned_data['last_name']
-        self.object.email = form.cleaned_data['email']
-        self.object.save()
+        if User.objects.filter(username=self.object.user.username):
+            user = User.objects.get(username=self.object.user.username)
+            user.username = form.cleaned_data['username']
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.email = form.cleaned_data['email']
+            user.save()
 
-        if Profile.objects.filter(user=self.object):
-            profile = Profile.objects.get(user=self.object)
-            profile.phone = form.cleaned_data['phone']
-            profile.save()
+        self.object = form.save(commit=False)
+        self.object.phone = form.cleaned_data['phone']
+        self.object.save()
         return super(NationalLevelUpdateView, self).form_valid(form)
 
     def form_invalid(self, form):
@@ -59,13 +63,13 @@ class StateLevelListView(ListView):
     template_name = 'user/state.level.list.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.profile.level == 1:
+        if self.request.user.groups.filter(name='Nivel Nacional'):
             return super(StateLevelListView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
 
     def get_queryset(self):
-        ## usuario nacioanl puede ver al nivel estadal
+        ## usuario nacional puede ver al nivel estadal
         if NationalLevel.objects.filter(profile=self.request.user.profile):
             national_level = NationalLevel.objects.get(profile=self.request.user.profile)
             queryset = StateLevel.objects.filter(state__country=national_level.country)
@@ -78,7 +82,7 @@ class StateLevelCreateView(CreateView):
     success_url = reverse_lazy('user:state_level_list')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.profile.level == 1:
+        if self.request.user.groups.filter(name='Nivel Nacional'):
             return super(StateLevelCreateView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
@@ -97,10 +101,10 @@ class StateLevelCreateView(CreateView):
         self.object.set_password(form.cleaned_data['password'])
         self.object.is_active = True
         self.object.save()
+        self.object.groups.add(Group.objects.get(name='Nivel Estadal'))
 
         profile = Profile.objects.create(
             phone=form.cleaned_data['phone'],
-            level = 2,
             user= self.object
         )
 
@@ -136,36 +140,40 @@ class StateLevelCreateView(CreateView):
         return super(StateLevelCreateView, self).form_invalid(form)
 
 class StateLevelUpdateView(UpdateView):
-    model = User
+    model = Profile
     form_class = StateLevelUpdateForm
     template_name = 'user/state.level.update.html'
     success_url = reverse_lazy('base:home')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.id == self.kwargs['pk'] and self.request.user.profile.level == 2:
+        if self.request.user.id == self.kwargs['pk'] and self.request.user.groups.filter(name='Nivel Estadal'):
             return super(StateLevelUpdateView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
 
     def get_initial(self):
         initial_data = super(StateLevelUpdateView, self).get_initial()
-        initial_data['phone'] = self.object.profile.phone
-        state_level = StateLevel.objects.get(profile=self.object.profile)
+        profile = self.request.user.profile
+        initial_data['username'] = profile.user.username
+        initial_data['first_name'] = profile.user.first_name
+        initial_data['last_name'] = profile.user.last_name
+        initial_data['email'] = profile.user.email
+        state_level = StateLevel.objects.get(profile=profile)
         initial_data['state'] = state_level.state
         return initial_data
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.username = form.cleaned_data['username']
-        self.object.first_name = form.cleaned_data['first_name']
-        self.object.last_name = form.cleaned_data['last_name']
-        self.object.email = form.cleaned_data['email']
-        self.object.save()
+        if User.objects.filter(username=self.object.user.username):
+            user = User.objects.get(username=self.object.user.username)
+            user.username = form.cleaned_data['username']
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.email = form.cleaned_data['email']
+            user.save()
 
-        if Profile.objects.filter(user=self.object):
-            profile = Profile.objects.get(user=self.object)
-            profile.phone = form.cleaned_data['phone']
-            profile.save()
+        self.object = form.save(commit=False)
+        self.object.phone = form.cleaned_data['phone']
+        self.object.save()
         return super(StateLevelUpdateView, self).form_valid(form)
 
     def form_invalid(self, form):
@@ -177,7 +185,7 @@ class MunicipalLevelListView(ListView):
     template_name = 'user/municipal.level.list.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.profile.level == 1 or self.request.user.profile.level == 2:
+        if self.request.user.groups.filter(name='Nivel Nacional') or self.request.user.groups.filter(name='Nivel Estadal'):
             return super(MunicipalLevelListView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
@@ -202,7 +210,7 @@ class MunicipalLevelCreateView(CreateView):
     success_url = reverse_lazy('user:municipal_level_list')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.profile.level == 2:
+        if self.request.user.groups.filter(name='Nivel Estadal'):
             return super(MunicipalLevelCreateView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
@@ -221,10 +229,10 @@ class MunicipalLevelCreateView(CreateView):
         self.object.set_password(form.cleaned_data['password'])
         self.object.is_active = True
         self.object.save()
+        self.object.groups.add(Group.objects.get(name='Nivel Municipal'))
 
         profile = Profile.objects.create(
             phone=form.cleaned_data['phone'],
-            level = 3,
             user= self.object
         )
 
@@ -260,13 +268,13 @@ class MunicipalLevelCreateView(CreateView):
         return super(MunicipalLevelCreateView, self).form_invalid(form)
 
 class MunicipalLevelUpdateView(UpdateView):
-    model = User
+    model = Profile
     form_class = MunicipalLevelUpdateForm
     template_name = 'user/municipal.level.update.html'
     success_url = reverse_lazy('base:home')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.id == self.kwargs['pk'] and self.request.user.profile.level == 3:
+        if self.request.user.id == self.kwargs['pk'] and self.request.user.groups.filter(name='Nivel Municipal'):
             return super(MunicipalLevelUpdateView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
@@ -278,23 +286,27 @@ class MunicipalLevelUpdateView(UpdateView):
 
     def get_initial(self):
         initial_data = super(MunicipalLevelUpdateView, self).get_initial()
-        initial_data['phone'] = self.object.profile.phone
-        municipal_level = MunicipalLevel.objects.get(profile=self.object.profile)
+        profile = self.request.user.profile
+        initial_data['username'] = profile.user.username
+        initial_data['first_name'] = profile.user.first_name
+        initial_data['last_name'] = profile.user.last_name
+        initial_data['email'] = profile.user.email
+        municipal_level = MunicipalLevel.objects.get(profile=profile)
         initial_data['municipality'] = municipal_level.municipality
         return initial_data
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.username = form.cleaned_data['username']
-        self.object.first_name = form.cleaned_data['first_name']
-        self.object.last_name = form.cleaned_data['last_name']
-        self.object.email = form.cleaned_data['email']
-        self.object.save()
+        if User.objects.filter(username=self.object.user.username):
+            user = User.objects.get(username=self.object.user.username)
+            user.username = form.cleaned_data['username']
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.email = form.cleaned_data['email']
+            user.save()
 
-        if Profile.objects.filter(user=self.object):
-            profile = Profile.objects.get(user=self.object)
-            profile.phone = form.cleaned_data['phone']
-            profile.save()
+        self.object = form.save(commit=False)
+        self.object.phone = form.cleaned_data['phone']
+        self.object.save()
         return super(MunicipalLevelUpdateView, self).form_valid(form)
 
     def form_invalid(self, form):
@@ -306,7 +318,8 @@ class ParishLevelListView(ListView):
     template_name = 'user/parish.level.list.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.profile.level == 1 or self.request.user.profile.level == 2 or self.request.user.profile.level == 3:
+        if self.request.user.groups.filter(name='Nivel Nacional') or self.request.user.groups.filter(name='Nivel Estadal') \
+            or self.request.user.groups.filter(name='Nivel Municipal'):
             return super(ParishLevelListView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
@@ -337,7 +350,7 @@ class ParishLevelCreateView(CreateView):
     success_url = reverse_lazy('user:parish_level_list')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.profile.level == 3:
+        if self.request.user.groups.filter(name='Nivel Municipal'):
             return super(ParishLevelCreateView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
@@ -356,10 +369,10 @@ class ParishLevelCreateView(CreateView):
         self.object.set_password(form.cleaned_data['password'])
         self.object.is_active = True
         self.object.save()
+        self.object.groups.add(Group.objects.get(name='Nivel Parroquial'))
 
         profile = Profile.objects.create(
             phone=form.cleaned_data['phone'],
-            level = 4,
             user= self.object
         )
 
@@ -395,13 +408,13 @@ class ParishLevelCreateView(CreateView):
         return super(ParishLevelCreateView, self).form_invalid(form)
 
 class ParishLevelUpdateView(UpdateView):
-    model = User
+    model = Profile
     form_class = ParishLevelUpdateForm
     template_name = 'user/parish.level.update.html'
     success_url = reverse_lazy('base:home')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.id == self.kwargs['pk'] and self.request.user.profile.level == 4:
+        if self.request.user.id == self.kwargs['pk'] and self.request.user.groups.filter(name='Nivel Parroquial'):
             return super(ParishLevelUpdateView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
@@ -413,23 +426,27 @@ class ParishLevelUpdateView(UpdateView):
 
     def get_initial(self):
         initial_data = super(ParishLevelUpdateView, self).get_initial()
-        initial_data['phone'] = self.object.profile.phone
-        parish_level = ParishLevel.objects.get(profile=self.object.profile)
+        profile = self.request.user.profile
+        initial_data['username'] = profile.user.username
+        initial_data['first_name'] = profile.user.first_name
+        initial_data['last_name'] = profile.user.last_name
+        initial_data['email'] = profile.user.email
+        parish_level = ParishLevel.objects.get(profile=profile)
         initial_data['parish'] = parish_level.parish
         return initial_data
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.username = form.cleaned_data['username']
-        self.object.first_name = form.cleaned_data['first_name']
-        self.object.last_name = form.cleaned_data['last_name']
-        self.object.email = form.cleaned_data['email']
-        self.object.save()
+        if User.objects.filter(username=self.object.user.username):
+            user = User.objects.get(username=self.object.user.username)
+            user.username = form.cleaned_data['username']
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.email = form.cleaned_data['email']
+            user.save()
 
-        if Profile.objects.filter(user=self.object):
-            profile = Profile.objects.get(user=self.object)
-            profile.phone = form.cleaned_data['phone']
-            profile.save()
+        self.object = form.save(commit=False)
+        self.object.phone = form.cleaned_data['phone']
+        self.object.save()
         return super(ParishLevelUpdateView, self).form_valid(form)
 
     def form_invalid(self, form):
@@ -441,7 +458,8 @@ class CommunalCouncilLevelListView(ListView):
     template_name = 'user/communal.council.level.list.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.profile.level == 1 or self.request.user.profile.level == 2 or self.request.user.profile.level == 3 or self.request.user.profile.level == 4:
+        if self.request.user.groups.filter(name='Nivel Nacional') or self.request.user.groups.filter(name='Nivel Estadal') \
+            or self.request.user.groups.filter(name='Nivel Municipal') or self.request.user.groups.filter(name='Nivel Parroquial'):
             return super(CommunalCouncilLevelListView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
@@ -478,7 +496,7 @@ class CommunalCouncilLevelCreateView(CreateView):
     success_url = reverse_lazy('user:communal_council_level_list')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.profile.level == 4:
+        if self.request.user.groups.filter(name='Nivel Parroquial'):
             return super(CommunalCouncilLevelCreateView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
@@ -497,10 +515,10 @@ class CommunalCouncilLevelCreateView(CreateView):
         self.object.set_password(form.cleaned_data['password'])
         self.object.is_active = True
         self.object.save()
+        self.object.groups.add(Group.objects.get(name='Nivel Comunal'))
 
         profile = Profile.objects.create(
             phone=form.cleaned_data['phone'],
-            level = 5,
             user= self.object
         )
 
@@ -536,13 +554,13 @@ class CommunalCouncilLevelCreateView(CreateView):
         return super(CommunalCouncilLevelCreateView, self).form_invalid(form)
 
 class CommunalCouncilLevelUpdateView(UpdateView):
-    model = User
+    model = Profile
     form_class = CommunalCouncilLevelUpdateForm
     template_name = 'user/communal.council.level.update.html'
     success_url = reverse_lazy('base:home')
 
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.id == self.kwargs['pk'] and self.request.user.profile.level == 5:
+        if self.request.user.id == self.kwargs['pk'] and self.request.user.groups.filter(name='Nivel Comunal'):
             return super(CommunalCouncilLevelUpdateView, self).dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
@@ -554,23 +572,27 @@ class CommunalCouncilLevelUpdateView(UpdateView):
 
     def get_initial(self):
         initial_data = super(CommunalCouncilLevelUpdateView, self).get_initial()
-        initial_data['phone'] = self.object.profile.phone
-        communal_council_level = CommunalCouncilLevel.objects.get(profile=self.object.profile)
+        profile = self.request.user.profile
+        initial_data['username'] = profile.user.username
+        initial_data['first_name'] = profile.user.first_name
+        initial_data['last_name'] = profile.user.last_name
+        initial_data['email'] = profile.user.email
+        communal_council_level = CommunalCouncilLevel.objects.get(profile=profile)
         initial_data['communal_council'] = communal_council_level.communal_council
         return initial_data
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.username = form.cleaned_data['username']
-        self.object.first_name = form.cleaned_data['first_name']
-        self.object.last_name = form.cleaned_data['last_name']
-        self.object.email = form.cleaned_data['email']
-        self.object.save()
+        if User.objects.filter(username=self.object.user.username):
+            user = User.objects.get(username=self.object.user.username)
+            user.username = form.cleaned_data['username']
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.email = form.cleaned_data['email']
+            user.save()
 
-        if Profile.objects.filter(user=self.object):
-            profile = Profile.objects.get(user=self.object)
-            profile.phone = form.cleaned_data['phone']
-            profile.save()
+        self.object = form.save(commit=False)
+        self.object.phone = form.cleaned_data['phone']
+        self.object.save()
         return super(CommunalCouncilLevelUpdateView, self).form_valid(form)
 
     def form_invalid(self, form):

@@ -59,11 +59,37 @@
                                 <td> {{ pe.gender }} </td>
                                 <td> {{ pe.birthdate }} </td>
                                 <td> {{ pe.age }} </td>
-                                <td> {{ pe.marital_status }} </td>
-                                <td> {{ pe.instruction_degree }} </td>
-                                <td> {{ pe.educational_mission }} </td>
-                                <td> {{ pe.social_mission }} </td>
-                                <td> {{ pe.income_type }} </td>
+
+                                {% if pe.marital_status %}
+                                  <td> {{ pe.marital_status }} </td>
+                                {% else %}
+                                  <td>  </td>
+                                {% endif %}
+
+                                {% if pe.instruction_degree %}
+                                  <td> {{ pe.instruction_degree }} </td>
+                                {% else %}
+                                  <td>  </td>
+                                {% endif %}
+
+                                {% if pe.educational_mission %}
+                                  <td> {{ pe.educational_mission }} </td>
+                                {% else %}
+                                  <td>  </td>
+                                {% endif %}
+
+                                {% if pe.social_mission %}
+                                  <td> {{ pe.social_mission }} </td>
+                                {% else %}
+                                  <td>  </td>
+                                {% endif %}
+
+                                {% if pe.income_type %}
+                                  <td> {{ pe.income_type }} </td>
+                                {% else %}
+                                  <td>  </td>
+                                {% endif %}
+
                                 {% if pe.pensioner %}
                                   <td> Si </td>
                                 {% else %}

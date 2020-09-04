@@ -10,8 +10,6 @@ class Profile(models.Model):
         _('teléfono'), max_length=15,
     )
 
-    level = models.IntegerField(_('nivel'), choices=LEVEL)
-
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, verbose_name=_('usuario')
     )

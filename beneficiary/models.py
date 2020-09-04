@@ -50,16 +50,16 @@ class Person(models.Model):
     marital_status = models.ForeignKey(MaritalStatus, on_delete=models.CASCADE)
 
     ## Establece el Grado de Instrucción de la Persona
-    instruction_degree = models.ForeignKey(InstructionDegree, on_delete=models.CASCADE)
+    instruction_degree = models.ForeignKey(InstructionDegree, on_delete=models.CASCADE, null=True, blank=True)
 
     ## Establece la Misión Educativa que tiene la Persona
-    educational_mission = models.ForeignKey(EducationalMission, on_delete=models.CASCADE)
+    educational_mission = models.ForeignKey(EducationalMission, on_delete=models.CASCADE, null=True, blank=True)
 
     ## Establece la Misión Social que tiene la Persona
-    social_mission = models.ForeignKey(SocialMission, on_delete=models.CASCADE)
+    social_mission = models.ForeignKey(SocialMission, on_delete=models.CASCADE, null=True, blank=True)
 
     ## Establece los ingresos de dinero de la Persona
-    income_type = models.ForeignKey(IncomeType, on_delete=models.CASCADE)
+    income_type = models.ForeignKey(IncomeType, on_delete=models.CASCADE, null=True, blank=True)
 
     ## Establece si la persona tiene o no ingresos por ser pensionado
     pensioner = models.BooleanField()
