@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from base.models import Country, State, Municipality, Parish, CommunalCouncil
 from django.utils.translation import ugettext_lazy as _
-from base.constant import LEVEL, NATIONALITY
+from base.constant import NATIONALITY
 
 class Profile(models.Model):
 

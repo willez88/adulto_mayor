@@ -3,5 +3,5 @@
 *.sqlite3
 settings.py
 migrations
-static/node_modules
-*.log
+static/node_modules/*
+logs/*

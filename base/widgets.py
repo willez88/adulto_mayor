@@ -1,37 +1,56 @@
 from django import forms
-from .constant import NATIONALITY, RIF_TYPE, PHONE_PREFIX
-from django.utils.translation import ugettext_lazy as _
+
+from .constant import NATIONALITY, PHONE_PREFIX, RIF_TYPE
+
 
 class RifWidget(forms.MultiWidget):
+    """!
+    Clase que agrupa los widgets de los campos del tipo de rif, número de rif y
+    dígito validador del rif
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @author Ing. Roldan Vargas <rvargas@cenditel.gob.ve>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
 
     def __init__(self, attrs=None, *args, **kwargs):
+        """!
+        Método que permite inicializar la clase
+
+        @author William Páez <wpaez@cenditel.gob.ve>
+        @param self <b>{object}</b> Objeto que instancia la clase
+        @param *args <b>{tupla}</b> Tupla de valores, inicialmente vacia
+        @param *kwargs <b>{dict}</b> Diccionario de datos, inicialmente vacio
+        """
 
         self.attrs = attrs or {}
-
         widgets = (
             forms.Select(
                 attrs={
                     'class': 'select2 form-control', 'data-toggle': 'tooltip',
-                    'title': _('Seleccione el tipo de R.I.F.')
+                    'title': 'Seleccione el tipo de R.I.F.'
                 }, choices=RIF_TYPE
             ),
             forms.TextInput(
                 attrs={
-                    'class': 'form-control text-center', 'placeholder': '00000000', 'data-mask': '00000000',
-                    'data-toggle': 'tooltip', 'maxlength': '8','size':'7',
-                    'title': _('Indique el número de R.I.F., si es menor a 8 dígitos complete con ceros a la izquierda.')
+                    'class': 'form-control text-center',
+                    'placeholder': '00000000', 'data-mask': '00000000',
+                    'data-toggle': 'tooltip', 'maxlength': '8', 'size': '7',
+                    'title': 'Indique el número de R.I.F., si es menor a 8 \
+                        dígitos complete con ceros a la izquierda'
                 }
             ),
             forms.TextInput(
                 attrs={
                     'class': 'form-control text-center', 'data-mask': '0',
-                    'title': _('Indique el último dígito del R.I.F.'), 'placeholder': '0', 'maxlength': '1',
+                    'title': 'Indique el último dígito del R.I.F.',
+                    'placeholder': '0', 'maxlength': '1',
                     'size': '1', 'data-toggle': 'tooltip',
                 }
             )
         )
-
-        super(RifWidget, self).__init__(widgets, attrs, *args, **kwargs)
+        super().__init__(widgets, attrs, *args, **kwargs)
 
     def format_output(self, rendered_widgets):
         return ' - '.join(rendered_widgets)
@@ -41,27 +60,45 @@ class RifWidget(forms.MultiWidget):
             return [value[0], value[1:-1], value[-1]]
         return [None, None, None]
 
+
 class IdentityCardWidget(forms.MultiWidget):
+    """!
+    Clase que agrupa los widgets de los campos de nacionalidad y número de
+    cédula de identidad
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @author Ing. Roldan Vargas <rvargas@cenditel.gob.ve>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
 
     def __init__(self, *args, **kwargs):
+        """!
+        Método que permite inicializar la clase
+
+        @author William Páez <wpaez@cenditel.gob.ve>
+        @param self <b>{object}</b> Objeto que instancia la clase
+        @param *args <b>{tupla}</b> Tupla de valores, inicialmente vacia
+        @param *kwargs <b>{dict}</b> Diccionario de datos, inicialmente vacio
+        """
 
         widgets = (
             forms.Select(
                 attrs={
                     'class': 'select2 form-control', 'data-toggle': 'tooltip',
-                    'title': _('Seleccione la nacionalidad.')
+                    'title': 'Seleccione la nacionalidad'
                 }, choices=NATIONALITY
             ),
             forms.TextInput(
                 attrs={
-                    'class': 'form-control text-center input-sm', 'placeholder': '00000000', 'data-mask': '00000000',
-                    'data-toggle': 'tooltip',
-                    'title': _('Indique el número de Cédula de Identidad.')
+                    'class': 'form-control text-center input-sm',
+                    'placeholder': '00000000', 'data-mask': '00000000',
+                    'data-toggle': 'tooltip', 'maxlength': '8', 'size': '7',
+                    'title': 'Indique el número de Cédula de Identidad'
                 }
             )
         )
-
-        super(IdentityCardWidget, self).__init__(widgets, *args, **kwargs)
+        super().__init__(widgets, *args, **kwargs)
 
     def format_output(self, rendered_widgets):
         return ' - '.join(rendered_widgets)
@@ -71,27 +108,43 @@ class IdentityCardWidget(forms.MultiWidget):
             return [value[0], value[1:]]
         return [None, None]
 
+
 class PhoneWidget(forms.MultiWidget):
+    """!
+    Clase que agrupa los widgets de los campos de un número telefónico
+
+    @author William Páez (wpaez at cenditel.gob.ve)
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
 
     def __init__(self, *args, **kwargs):
+        """!
+        Método que permite inicializar la clase
+
+        @author William Páez <wpaez@cenditel.gob.ve>
+        @param self <b>{object}</b> Objeto que instancia la clase
+        @param *args <b>{tupla}</b> Tupla de valores, inicialmente vacia
+        @param *kwargs <b>{dict}</b> Diccionario de datos, inicialmente vacio
+        """
 
         widgets = (
             forms.Select(
                 attrs={
                     'class': 'select2 form-control', 'data-toggle': 'tooltip',
-                    'title': _('Seleccione el código telefónico de país.')
+                    'title': 'Seleccione el código telefónico de país'
                 }, choices=PHONE_PREFIX
             ),
             forms.TextInput(
                 attrs={
-                    'class': 'form-control input-sm', 'placeholder': '-000-0000000', 'data-mask': '-000-0000000',
+                    'class': 'form-control input-sm',
+                    'placeholder': '-000-0000000', 'data-mask': '-000-0000000',
                     'data-toggle': 'tooltip',
-                    'title': _('Indique el número de teléfono.')
+                    'title': 'Indique el número de teléfono'
                 }
             )
         )
-
-        super(PhoneWidget, self).__init__(widgets, *args, **kwargs)
+        super().__init__(widgets, *args, **kwargs)
 
     def format_output(self, rendered_widgets):
         return ' - '.join(rendered_widgets)

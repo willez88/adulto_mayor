@@ -1,48 +1,131 @@
 from django.contrib import admin
-from .models import (
-    CommunalCouncil, MaritalStatus, InstructionDegree, EducationalMission,
-    SocialMission, IncomeType, Gender, Disease, Disability
-)
+
 from .forms import CommunalCouncilAdminForm
+from .models import (
+    CommunalCouncil, Disability, Disease, EducationalMission, Gender,
+    IncomeType, InstructionDegree, MaritalStatus, SocialMission,
+)
+
 
 class CommunalCouncilAdmin(admin.ModelAdmin):
+    """!
+    Clase que agrega modelo CommunalCouncil al panel administrativo
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     form = CommunalCouncilAdminForm
     change_form_template = 'base/admin/change_form.html'
-    list_display = ('rif','name','parish',)
-    list_filter = ('parish__municipality__state','parish__municipality',)
-    search_fields = ('rif','name','parish__name',)
+    list_display = ('rif', 'name', 'parish',)
+    list_filter = ('parish__municipality__state', 'parish__municipality',)
+    search_fields = ('rif', 'name', 'parish__name',)
+
 
 class MaritalStatusAdmin(admin.ModelAdmin):
+    """!
+    Clase que agrega modelo MaritalStatus al panel administrativo
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     list_display = ('name',)
     search_fields = ('name',)
+
 
 class InstructionDegreeAdmin(admin.ModelAdmin):
+    """!
+    Clase que agrega modelo InstructionDegree al panel administrativo
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     list_display = ('name',)
     search_fields = ('name',)
+
 
 class EducationalMissionAdmin(admin.ModelAdmin):
+    """!
+    Clase que agrega modelo EducationalMission al panel administrativo
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     list_display = ('name',)
     search_fields = ('name',)
+
 
 class SocialMissionAdmin(admin.ModelAdmin):
+    """!
+    Clase que agrega modelo SocialMission al panel administrativo
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     list_display = ('name',)
     search_fields = ('name',)
+
 
 class IncomeTypeAdmin(admin.ModelAdmin):
+    """!
+    Clase que agrega modelo IncomeType al panel administrativo
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     list_display = ('name',)
     search_fields = ('name',)
+
 
 class GenderAdmin(admin.ModelAdmin):
+    """!
+    Clase que agrega modelo Gender al panel administrativo
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     list_display = ('name',)
     search_fields = ('name',)
+
 
 class DiseaseAdmin(admin.ModelAdmin):
+    """!
+    Clase que agrega modelo DiseaseAdmin al panel administrativo
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     list_display = ('name',)
     search_fields = ('name',)
 
+
 class DisabilityAdmin(admin.ModelAdmin):
+    """!
+    Clase que agrega modelo Disability al panel administrativo
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     list_display = ('name',)
     search_fields = ('name',)
+
 
 admin.site.register(CommunalCouncil, CommunalCouncilAdmin)
 admin.site.register(MaritalStatus, MaritalStatusAdmin)

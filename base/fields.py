@@ -1,20 +1,40 @@
 from django import forms
-from .constant import NATIONALITY, RIF_TYPE, PHONE_PREFIX
-from .widgets import RifWidget, IdentityCardWidget, PhoneWidget
-from django.utils.translation import ugettext_lazy as _
+
+from .constant import NATIONALITY, PHONE_PREFIX, RIF_TYPE
+from .widgets import IdentityCardWidget, PhoneWidget, RifWidget
+
 
 class RifField(forms.MultiValueField):
+    """!
+    Clase que agrupa los campos del tipo de rif, número de rif y dígito
+    validador del rif en un solo campo del formulario
+
+    @author Ing. Roldan Vargas <rvargas@cenditel.gob.ve>
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     widget = RifWidget
     default_error_messages = {
-        'invalid_choices': _('Debe seleccionar un tipo de RIF válido.')
+        'invalid_choices': 'Debe seleccionar un tipo de RIF válido'
     }
 
     def __init__(self, *args, **kwargs):
+        """!
+        Método que permite inicializar la clase
+
+        @author William Páez <wpaez@cenditel.gob.ve> |
+            <paez.william8@gmail.com>
+        @param self <b>{object}</b> Objeto que instancia la clase
+        @param *args <b>{tupla}</b> Tupla de valores, inicialmente vacia
+        @param *kwargs <b>{dict}</b> Diccionario de datos, inicialmente vacio
+        """
 
         error_messages = {
-            'required': _('Debe indicar un numero de RIF.'),
-            'invalid': _('El valor indicado no es válido.'),
-            'incomplete': _('El número de RIF esta incompleto.')
+            'required': 'Debe indicar un numero de RIF',
+            'invalid': 'El valor indicado no es válido',
+            'incomplete': 'El número de RIF esta incompleto'
         }
 
         fields = (
@@ -23,45 +43,66 @@ class RifField(forms.MultiValueField):
             forms.CharField(max_length=1, min_length=1)
         )
 
-        label = _('R.I.F.:')
+        label = 'R.I.F.:'
 
-        help_text = _('C-00000000-0')
+        help_text = 'C-00000000-0'
 
         super(RifField, self).__init__(
-            error_messages=error_messages, fields=fields, label=label, help_text=help_text, require_all_fields=True, *args, **kwargs
+            error_messages=error_messages, fields=fields, label=label,
+            help_text=help_text, require_all_fields=True, *args, **kwargs
         )
 
     def compress(self, data_list):
-
         if data_list:
             return ''.join(data_list)
         return ''
 
+
 class IdentityCardField(forms.MultiValueField):
+    """!
+    Clase que agrupa los campos de la nacionalidad y número de cédula de
+    identidad en un solo campo del formulario
+
+    @author Ing. Roldan Vargas <rvargas@cenditel.gob.ve>
+    @author William Páez <wpaez@cenditel.gob.ve>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     widget = IdentityCardWidget
     default_error_messages = {
-        'invalid_choices': _('Debe seleccionar una nacionalidad válida.')
+        'invalid_choices': 'Debe seleccionar una nacionalidad válida'
     }
 
     def __init__(self, *args, **kwargs):
+        """!
+        Método que permite inicializar la clase
+
+        @author William Páez <wpaez@cenditel.gob.ve> |
+            <paez.william8@gmail.com>
+        @param self <b>{object}</b> Objeto que instancia la clase
+        @param *args <b>{tupla}</b> Tupla de valores, inicialmente vacia
+        @param *kwargs <b>{dict}</b> Diccionario de datos, inicialmente vacio
+        """
 
         error_messages = {
-            'required': _('Debe indicar un número de Cédula.'),
-            'invalid': _('El valor indicado no es válido.'),
-            'incomplete': _('El número de Cédula esta incompleto.')
+            'required': 'Debe indicar un número de Cédula',
+            'invalid': 'El valor indicado no es válido',
+            'incomplete': 'El número de Cédula esta incompleto'
         }
 
         fields = (
-            forms.ChoiceField(choices=NATIONALITY,required=False),
-            forms.CharField(max_length=8, required=False)
+            forms.ChoiceField(choices=NATIONALITY),
+            forms.CharField(max_length=8)
         )
 
-        label = _('Cédula de Identidad:')
+        label = 'Cédula de Identidad:'
 
-        help_text = _('V-00000000 ó E-00000000')
+        help_text = 'V-00000000 ó E-00000000'
 
         super(IdentityCardField, self).__init__(
-            error_messages=error_messages, fields=fields, label=label, help_text=help_text, require_all_fields=False, *args, **kwargs
+            error_messages=error_messages, fields=fields, label=label,
+            help_text=help_text, require_all_fields=True, *args, **kwargs
         )
 
     def compress(self, data_list):
@@ -69,18 +110,37 @@ class IdentityCardField(forms.MultiValueField):
             return ''.join(data_list)
         return ''
 
+
 class PhoneField(forms.MultiValueField):
+    """!
+    Clase que agrupa los campos de un número teléfónico
+
+    @author William Páez <wpaez@cenditel.gob.ve>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     widget = PhoneWidget
     default_error_messages = {
-        'invalid_choices': _('Debe seleccionar un prefijo de teléfono de país válido.')
+        'invalid_choices': 'Debe seleccionar un prefijo de teléfono de \
+        país válido'
     }
 
     def __init__(self, *args, **kwargs):
+        """!
+        Método que permite inicializar la clase
+
+        @author William Páez <wpaez@cenditel.gob.ve> |
+            <paez.william8@gmail.com>
+        @param self <b>{object}</b> Objeto que instancia la clase
+        @param *args <b>{tupla}</b> Tupla de valores, inicialmente vacia
+        @param *kwargs <b>{dict}</b> Diccionario de datos, inicialmente vacio
+        """
 
         error_messages = {
-            'required': _('Debe indicar un número de Teléfono.'),
-            'invalid': _('El valor indicado no es válido.'),
-            'incomplete': _('El número de teléfono esta incompleto.')
+            'required': 'Debe indicar un número de Teléfono',
+            'invalid': 'El valor indicado no es válido',
+            'incomplete': 'El número de teléfono esta incompleto'
         }
 
         fields = (
@@ -88,12 +148,13 @@ class PhoneField(forms.MultiValueField):
             forms.CharField(max_length=12)
         )
 
-        label = _('Teléfono:')
+        label = 'Teléfono:'
 
-        help_text = _('+58-416-0000000')
+        help_text = '+58-416-0000000'
 
         super(PhoneField, self).__init__(
-            error_messages=error_messages, fields=fields, label=label, require_all_fields=True, help_text=help_text, *args, **kwargs
+            error_messages=error_messages, fields=fields, label=label,
+            require_all_fields=True, help_text=help_text, *args, **kwargs
         )
 
     def compress(self, data_list):

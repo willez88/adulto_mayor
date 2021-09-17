@@ -10,11 +10,15 @@ Cuando accedemos al usuario root del sistema, en el terminal se mostrará el sig
 
 Probado en Debian y Ubuntu en sus últimas versiones estables. Instalar los siguientes programas
 
-    ~# apt install curl git graphviz graphviz-dev phppgadmin postgresql python3-dev virtualenv
+    ~# apt install curl git graphviz graphviz-dev libmysqlclient-dev mysql-server phpmyadmin phppgadmin postgresql python3-dev virtualenv
 
 Para instalar npm hacer lo siguiente
 
-    ~# curl -sL https://deb.nodesource.com/setup_13.x | bash -
+    // Ubuntu
+    ~$ curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+
+    // Debian
+    ~# curl -sL https://deb.nodesource.com/setup_lts.x | bash -
 
     ~# apt install -y nodejs
 
@@ -102,6 +106,31 @@ Crear la base de datos para __adulto_mayor__ usando PostgresSQL
 Puedes crear la base de datos usando la interfaz gráfica de phppgadmin o desde cualquier otra que desee
 
     // Nombre de la base de datos: adulto_mayor
+
+Opcional:
+
+    Crear la base de datos para __django_example__ usando MariaDB
+
+      // Acesso al usuario root del sistema
+      # mysql
+
+      // Crea el usuario
+      CREATE USER 'admin'@'localhost' IDENTIFIED BY '123';
+
+      // Se Otorgan todos los permisos
+      GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost';
+
+      FLUSH PRIVILEGES;
+
+      Puedes crear la base de datos usando la interfaz gráfica phpmyadmin
+
+      // Desde algún navegador ir al siguiente sitio y entrar con el usuario que se acaba de crear
+      localhost/phpmyadmin
+
+      // Si phpmyadmin no abre, ejecutar el siguiente comando
+      ~# ln -s /usr/share/phpmyadmin /var/www/html
+
+      // Nombre de la base de datos: django_example
 
 Instalamos los requemientos que el sistema necesita en el entorno virtual
 

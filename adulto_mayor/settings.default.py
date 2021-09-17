@@ -10,10 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
-import os
+from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-## Identifica a los administradores del sistema
+# Identifica a los administradores del sistema
 ADMINS = [
     ('William Páez', 'wpaez@cenditel.gob.ve'),
 ]
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'base',
     'user.apps.UserConfig',
-    'beneficiary',
+    'beneficiary.apps.BeneficiaryConfig',
 ]
 
 MIDDLEWARE = [
@@ -82,12 +82,12 @@ WSGI_APPLICATION = 'adulto_mayor.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    #'default': {
+    # 'default': {
     #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #}
+    #    'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 
-    ## Configuración de base de datos por defecto
+    # Configuración de base de datos por defecto
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'adulto_mayor',
@@ -97,6 +97,18 @@ DATABASES = {
         'PORT': '5432',
         'ATOMIC_REQUESTS': True,
     }
+
+    # 'default': {
+    #    'ENGINE': 'django.db.backends.mysql',
+    #    'NAME': 'adulto_mayor',
+    #    'USER':'admin',
+    #    'PASSWORD':'123',
+    #    'HOST':'localhost',
+    #    'PORT':'3306',
+    #    'OPTIONS': {
+    #        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+    #    }
+    # }
 }
 
 
@@ -144,10 +156,11 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = ''
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static/'),
+    BASE_DIR / 'static/',
+    BASE_DIR / 'media/',
 )
 
 LOGIN_URL = 'user:login'
@@ -157,11 +170,12 @@ LOGIN_REDIRECT_URL = 'base:home'
 LOGOUT_REDIRECT_URL = 'user:login'
 
 if DEBUG:
-    ## Configuración para entornos de desarrollo
+    # Configuración para entornos de desarrollo
     EMAIL_HOST_USER = 'email@email.com'
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
-    ## Configuración para entornos de producción (configurado para cuenta gmail) (EMAIL_USE_TLS o EMAIL_USE_SSL)
+    # Configuración para entornos de producción
+    # (configurado para cuenta gmail) (EMAIL_USE_TLS o EMAIL_USE_SSL)
     EMAIL_USE_TLS = True
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_PORT = 587
@@ -169,16 +183,14 @@ else:
     EMAIL_HOST_PASSWORD = 'password'
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-## Registro de mensajes al usuario
+# Registro de mensajes al usuario
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
-## Registro de vitácoras de errores (logs)
-LOGS_PATH = ''
-
-## Configuración de los niveles de vitácoras (logs) a registrar
+# Configuración de los niveles de vitácoras (logs) a registrar
 LOGGING = dict(version=1, disable_existing_loggers=True, formatters={
     'std': {
-        'format': '%(asctime)s %(levelname)-8s [modulo: %(module)s, funcion: %(funcName)s, linea: %(lineno)d]. %(message)s',
+        'format': '%(asctime)s %(levelname)-8s [modulo: %(module)s,\
+        funcion: %(funcName)s, linea: %(lineno)d]. %(message)s',
     }
 }, handlers={
     'null': {
@@ -189,7 +201,7 @@ LOGGING = dict(version=1, disable_existing_loggers=True, formatters={
         'class': 'logging.handlers.TimedRotatingFileHandler',
         'level': 'DEBUG',
         'formatter': 'std',
-        'filename': os.path.join(LOGS_PATH, 'base.log'),
+        'filename': BASE_DIR / 'logs/base.log',
         'when': 'w6',
         'interval': 1,
         'backupCount': 52
@@ -198,7 +210,7 @@ LOGGING = dict(version=1, disable_existing_loggers=True, formatters={
         'class': 'logging.handlers.TimedRotatingFileHandler',
         'level': 'DEBUG',
         'formatter': 'std',
-        'filename': os.path.join(LOGS_PATH, 'user.log'),
+        'filename': BASE_DIR / 'logs/user.log',
         'when': 'w6',
         'interval': 1,
         'backupCount': 52
@@ -224,3 +236,8 @@ LOGGING = dict(version=1, disable_existing_loggers=True, formatters={
         'propagate': False,
     }
 })
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
