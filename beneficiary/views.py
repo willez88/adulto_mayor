@@ -11,6 +11,13 @@ from .models import Person
 
 
 class PersonListView(ListView):
+    """!
+    Clase para listar personas
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
 
     model = Person
     template_name = 'beneficiary/person_list.html'
@@ -78,6 +85,14 @@ class PersonListView(ListView):
 
 
 class PersonCreateView(CreateView):
+    """!
+    Clase para registrar personas
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     model = Person
     form_class = PersonForm
     template_name = 'beneficiary/person_create.html'
@@ -85,13 +100,15 @@ class PersonCreateView(CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.groups.filter(name='Nivel Comunal'):
-            return super(PersonCreateView, self).dispatch(request, *args, **kwargs)
+            return super().dispatch(request, *args, **kwargs)
         else:
             return redirect('base:error_403')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        communal_council_level = CommunalCouncilLevel.objects.get(profile=self.request.user.profile)
+        communal_council_level = CommunalCouncilLevel.objects.get(
+            profile=self.request.user.profile
+        )
 
         if form.cleaned_data['identity_card'] == '':
             self.object.identity_card = None
@@ -104,6 +121,14 @@ class PersonCreateView(CreateView):
 
 
 class PersonUpdateView(UpdateView):
+    """!
+    Clase para actualizar personas
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     model = Person
     form_class = PersonForm
     template_name = 'beneficiary/person_create.html'
@@ -143,6 +168,14 @@ class PersonUpdateView(UpdateView):
 
 
 class PersonDeleteView(DeleteView):
+    """!
+    Clase para eliminar personas
+
+    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
+    @copyright <a href='https://tinyurl.com/y3tfnema'>
+        Licencia de Software CENDITEL versión 1.2</a>
+    """
+
     model = Person
     template_name = 'beneficiary/person_delete.html'
     success_url = reverse_lazy('beneficiary:person_list')
