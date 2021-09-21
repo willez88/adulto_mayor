@@ -98,7 +98,7 @@ class Person(models.Model):
     # Establece la relación de la Persona con un usuario del sistema
     communal_council_level = models.ForeignKey(
         CommunalCouncilLevel, on_delete=models.CASCADE,
-        verbose_name='nivel consejo comunal'
+        verbose_name='nivel consejo comunal', null=True
     )
 
     def age(self):

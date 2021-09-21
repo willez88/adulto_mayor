@@ -1,0 +1,82 @@
+[
+{
+    "model": "user.communalcouncillevel",
+    "pk": 1,
+    "fields": {
+        "communal_council": "112",
+        "profile": 202
+    }
+},
+{
+    "model": "user.communalcouncillevel",
+    "pk": 2,
+    "fields": {
+        "communal_council": "1336",
+        "profile": 203
+    }
+},
+{
+    "model": "user.communalcouncillevel",
+    "pk": 3,
+    "fields": {
+        "communal_council": "1642",
+        "profile": 204
+    }
+},
+{
+    "model": "user.communalcouncillevel",
+    "pk": 4,
+    "fields": {
+        "communal_council": "312",
+        "profile": 205
+    }
+},
+{
+    "model": "user.communalcouncillevel",
+    "pk": 5,
+    "fields": {
+        "communal_council": "806",
+        "profile": 223
+    }
+},
+{
+    "model": "user.communalcouncillevel",
+    "pk": 6,
+    "fields": {
+        "communal_council": "1504",
+        "profile": 224
+    }
+},
+{
+    "model": "user.communalcouncillevel",
+    "pk": 7,
+    "fields": {
+        "communal_council": "1707",
+        "profile": 225
+    }
+},
+{
+    "model": "user.communalcouncillevel",
+    "pk": 8,
+    "fields": {
+        "communal_council": "1346",
+        "profile": 226
+    }
+},
+{
+    "model": "user.communalcouncillevel",
+    "pk": 9,
+    "fields": {
+        "communal_council": "1339",
+        "profile": 227
+    }
+},
+{
+    "model": "user.communalcouncillevel",
+    "pk": 10,
+    "fields": {
+        "communal_council": "411",
+        "profile": 228
+    }
+}
+]

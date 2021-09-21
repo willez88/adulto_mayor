@@ -24,6 +24,7 @@ class CommunalCouncilAdminForm(forms.ModelForm):
         """
 
         super().__init__(*args, **kwargs)
+        print(kwargs)
         # Si se ha seleccionado un estado establece el listado de municipios y
         # elimina el atributo disable
         if 'state' in self.data and self.data['state']:

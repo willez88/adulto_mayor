@@ -243,7 +243,7 @@ class CommunalCouncilLevel(models.Model):
 
     communal_council = models.OneToOneField(
         CommunalCouncil, on_delete=models.CASCADE,
-        verbose_name='consejo comunal'
+        verbose_name='consejo comunal', null=True
     )
 
     profile = models.OneToOneField(
