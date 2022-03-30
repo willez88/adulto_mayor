@@ -7,9 +7,9 @@ class Profile(models.Model):
     """!
     Clase que contiene los perfiles
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Teléfono
@@ -24,8 +24,7 @@ class Profile(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -37,8 +36,7 @@ class Profile(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Perfil'
@@ -50,15 +48,17 @@ class NationalLevel(models.Model):
     """!
     Clase que contiene los niveles nacionales
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
+    # Relación con el País
     country = models.OneToOneField(
         Country, on_delete=models.CASCADE, verbose_name='país'
     )
 
+    # Relación con el Perfil
     profile = models.OneToOneField(
         Profile, on_delete=models.CASCADE, verbose_name='perfil'
     )
@@ -67,8 +67,7 @@ class NationalLevel(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -84,8 +83,7 @@ class NationalLevel(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Nivel Nacional'
@@ -97,9 +95,9 @@ class StateLevel(models.Model):
     """!
     Clase que contiene los niveles estadales
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     state = models.OneToOneField(
@@ -114,8 +112,7 @@ class StateLevel(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -130,8 +127,7 @@ class StateLevel(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Nivel Estadal'
@@ -143,9 +139,9 @@ class MunicipalLevel(models.Model):
     """!
     Clase que contiene los niveles municipales
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     municipality = models.OneToOneField(
@@ -160,8 +156,7 @@ class MunicipalLevel(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -177,8 +172,7 @@ class MunicipalLevel(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Nivel Municipal'
@@ -190,9 +184,9 @@ class ParishLevel(models.Model):
     """!
     Clase que contiene los niveles parroquiales
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     parish = models.ForeignKey(
@@ -207,8 +201,7 @@ class ParishLevel(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -223,8 +216,7 @@ class ParishLevel(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Nivel Parroquial'
@@ -236,9 +228,9 @@ class CommunalCouncilLevel(models.Model):
     """!
     Clase que contiene los niveles consejo comunal
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     communal_council = models.OneToOneField(
@@ -254,8 +246,7 @@ class CommunalCouncilLevel(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -271,8 +262,7 @@ class CommunalCouncilLevel(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Nivel Consejo Comunal'

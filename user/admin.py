@@ -11,9 +11,9 @@ class ProfileAdmin(admin.ModelAdmin):
     """!
     Clase que agrega modelo Profile al panel administrativo
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     list_display = ('user', 'phone',)
@@ -25,9 +25,9 @@ class NationalLevelAdmin(admin.ModelAdmin):
     """!
     Clase que agrega modelo NationalLevel al panel administrativo
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     list_display = ('profile', 'country',)
@@ -41,9 +41,9 @@ class StateLevelAdmin(admin.ModelAdmin):
     """!
     Clase que agrega modelo StateLevel al panel administrativo
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     list_display = ('profile', 'state',)
@@ -55,9 +55,9 @@ class MunicipalLevelAdmin(admin.ModelAdmin):
     """!
     Clase que agrega modelo MunicipalLevel al panel administrativo
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     list_display = ('profile', 'municipality',)
@@ -69,9 +69,9 @@ class ParishLevelAdmin(admin.ModelAdmin):
     """!
     Clase que agrega modelo ParishLevel al panel administrativo
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     list_display = ('profile', 'parish',)
@@ -83,9 +83,9 @@ class CommunalCouncilLevelAdmin(admin.ModelAdmin):
     """!
     Clase que agrega modelo CommunalCouncilLevel al panel administrativo
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     form = CommunalCouncilLevelAdminForm

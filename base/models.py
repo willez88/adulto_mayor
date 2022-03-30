@@ -6,10 +6,9 @@ class Country(models.Model):
     """!
     Clase que contiene los paises
 
-    @author Ing. Roldan Vargas <rvargas@cenditel.gob.ve>
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Nombre del país
@@ -19,8 +18,7 @@ class Country(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -32,10 +30,9 @@ class State(models.Model):
     """!
     Clase que contiene los estados
 
-    @author Ing. Roldan Vargas <rvargas@cenditel.gob.ve>
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Nombre del Estado
@@ -48,8 +45,7 @@ class State(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -61,10 +57,9 @@ class Municipality(models.Model):
     """!
     Clase que contiene los municipios
 
-    @author Ing. Roldan Vargas <rvargas@cenditel.gob.ve>
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Nombre del Municipio
@@ -77,8 +72,7 @@ class Municipality(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -90,10 +84,9 @@ class City(models.Model):
     """!
     Clase que contiene las ciudades
 
-    @author Ing. Roldan Vargas <rvargas@cenditel.gob.ve>
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Nombre de la Ciudad
@@ -106,8 +99,7 @@ class City(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -119,10 +111,9 @@ class Parish(models.Model):
     """!
     Clase que contiene las parroquias
 
-    @author Ing. Roldan Vargas <rvargas@cenditel.gob.ve>
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Nombre de la Parroquia
@@ -135,8 +126,7 @@ class Parish(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -148,9 +138,9 @@ class CommunalCouncil(models.Model):
     """!
     Clase que contiene los consejos comunales
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Número de rif del consejo comunal
@@ -178,11 +168,9 @@ class CommunalCouncil(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
-            comunal
         """
 
         return self.name
@@ -191,8 +179,7 @@ class CommunalCouncil(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Consejo Comunal'
@@ -203,9 +190,9 @@ class MaritalStatus(models.Model):
     """!
     Clase que contiene los estados civiles
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Nombre
@@ -215,8 +202,7 @@ class MaritalStatus(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -227,8 +213,7 @@ class MaritalStatus(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Estado Civil'
@@ -240,9 +225,9 @@ class InstructionDegree(models.Model):
     """!
     Clase que contiene los estados civiles
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Nombre
@@ -252,8 +237,7 @@ class InstructionDegree(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -264,8 +248,7 @@ class InstructionDegree(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Grado de Instrucción'
@@ -277,9 +260,9 @@ class EducationalMission(models.Model):
     """!
     Clase que contiene las misiones educativas
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Nombre
@@ -289,8 +272,7 @@ class EducationalMission(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -301,8 +283,7 @@ class EducationalMission(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Misión Educativa'
@@ -314,9 +295,9 @@ class SocialMission(models.Model):
     """!
     Clase que contiene las misiones sociales
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Nombre
@@ -326,8 +307,7 @@ class SocialMission(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -338,8 +318,7 @@ class SocialMission(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Misión Social'
@@ -351,9 +330,9 @@ class IncomeType(models.Model):
     """!
     Clase que contiene los tipos de ingreso
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Nombre
@@ -363,8 +342,7 @@ class IncomeType(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -375,8 +353,7 @@ class IncomeType(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Tipo de Ingreso'
@@ -388,9 +365,9 @@ class Gender(models.Model):
     """!
     Clase que contiene los géneros
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Nombre
@@ -400,8 +377,7 @@ class Gender(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -412,8 +388,7 @@ class Gender(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Género'
@@ -425,9 +400,9 @@ class Disease(models.Model):
     """!
     Clase que contiene las enfermedades
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Nombre
@@ -437,8 +412,7 @@ class Disease(models.Model):
         """!
         Método para representar la clase de forma amigable
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @return Devuelve una cadena de caracteres
         """
@@ -449,8 +423,7 @@ class Disease(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Enfermedad'
@@ -462,9 +435,9 @@ class Disability(models.Model):
     """!
     Clase que contiene las discapacidades
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Nombre
@@ -474,8 +447,7 @@ class Disability(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         return self.name
@@ -484,8 +456,7 @@ class Disability(models.Model):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         verbose_name = 'Discapacidad'

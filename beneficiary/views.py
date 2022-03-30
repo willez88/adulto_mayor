@@ -14,9 +14,9 @@ class PersonListView(ListView):
     """!
     Clase para listar personas
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     model = Person
@@ -88,9 +88,9 @@ class PersonCreateView(CreateView):
     """!
     Clase para registrar personas
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     model = Person
@@ -124,9 +124,9 @@ class PersonUpdateView(UpdateView):
     """!
     Clase para actualizar personas
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     model = Person
@@ -171,9 +171,9 @@ class PersonDeleteView(DeleteView):
     """!
     Clase para eliminar personas
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     model = Person

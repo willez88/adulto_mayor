@@ -15,17 +15,16 @@ class PersonForm(forms.ModelForm):
     """!
     Clase que contiene los campos del formulario
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     def __init__(self, *args, **kwargs):
         """!
         Método que permite inicializar el formulario
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @param *args <b>{tupla}</b> Tupla de valores, inicialmente vacia
         @param *kwargs <b>{dict}</b> Diccionario de datos, inicialmente vacio
@@ -241,8 +240,7 @@ class PersonForm(forms.ModelForm):
         """!
         Meta clase del modelo que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         model = Person

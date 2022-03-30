@@ -8,17 +8,16 @@ class RifWidget(forms.MultiWidget):
     Clase que agrupa los widgets de los campos del tipo de rif, número de rif y
     dígito validador del rif
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @author Ing. Roldan Vargas <rvargas@cenditel.gob.ve>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     def __init__(self, attrs=None, *args, **kwargs):
         """!
         Método que permite inicializar la clase
 
-        @author William Páez <wpaez@cenditel.gob.ve>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @param *args <b>{tupla}</b> Tupla de valores, inicialmente vacia
         @param *kwargs <b>{dict}</b> Diccionario de datos, inicialmente vacio
@@ -66,17 +65,16 @@ class IdentityCardWidget(forms.MultiWidget):
     Clase que agrupa los widgets de los campos de nacionalidad y número de
     cédula de identidad
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @author Ing. Roldan Vargas <rvargas@cenditel.gob.ve>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     def __init__(self, *args, **kwargs):
         """!
         Método que permite inicializar la clase
 
-        @author William Páez <wpaez@cenditel.gob.ve>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @param *args <b>{tupla}</b> Tupla de valores, inicialmente vacia
         @param *kwargs <b>{dict}</b> Diccionario de datos, inicialmente vacio
@@ -113,16 +111,16 @@ class PhoneWidget(forms.MultiWidget):
     """!
     Clase que agrupa los widgets de los campos de un número telefónico
 
-    @author William Páez (wpaez at cenditel.gob.ve)
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     def __init__(self, *args, **kwargs):
         """!
         Método que permite inicializar la clase
 
-        @author William Páez <wpaez@cenditel.gob.ve>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @param *args <b>{tupla}</b> Tupla de valores, inicialmente vacia
         @param *kwargs <b>{dict}</b> Diccionario de datos, inicialmente vacio

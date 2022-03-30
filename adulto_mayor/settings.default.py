@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ['*']
 
 # Identifica a los administradores del sistema
 ADMINS = [
-    ('William Páez', 'wpaez@cenditel.gob.ve'),
+    ('William Páez', 'paez.william8@gmail.com'),
 ]
 
 # Application definition

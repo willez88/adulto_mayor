@@ -9,10 +9,9 @@ class RifField(forms.MultiValueField):
     Clase que agrupa los campos del tipo de rif, número de rif y dígito
     validador del rif en un solo campo del formulario
 
-    @author Ing. Roldan Vargas <rvargas@cenditel.gob.ve>
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     widget = RifWidget
@@ -24,8 +23,7 @@ class RifField(forms.MultiValueField):
         """!
         Método que permite inicializar la clase
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @param *args <b>{tupla}</b> Tupla de valores, inicialmente vacia
         @param *kwargs <b>{dict}</b> Diccionario de datos, inicialmente vacio
@@ -63,10 +61,9 @@ class IdentityCardField(forms.MultiValueField):
     Clase que agrupa los campos de la nacionalidad y número de cédula de
     identidad en un solo campo del formulario
 
-    @author Ing. Roldan Vargas <rvargas@cenditel.gob.ve>
-    @author William Páez <wpaez@cenditel.gob.ve>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     widget = IdentityCardWidget
@@ -78,8 +75,7 @@ class IdentityCardField(forms.MultiValueField):
         """!
         Método que permite inicializar la clase
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @param *args <b>{tupla}</b> Tupla de valores, inicialmente vacia
         @param *kwargs <b>{dict}</b> Diccionario de datos, inicialmente vacio
@@ -115,9 +111,9 @@ class PhoneField(forms.MultiValueField):
     """!
     Clase que agrupa los campos de un número teléfónico
 
-    @author William Páez <wpaez@cenditel.gob.ve>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     widget = PhoneWidget
@@ -130,8 +126,7 @@ class PhoneField(forms.MultiValueField):
         """!
         Método que permite inicializar la clase
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         @param self <b>{object}</b> Objeto que instancia la clase
         @param *args <b>{tupla}</b> Tupla de valores, inicialmente vacia
         @param *kwargs <b>{dict}</b> Diccionario de datos, inicialmente vacio

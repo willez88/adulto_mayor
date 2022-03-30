@@ -13,9 +13,9 @@ class ProfileForm(forms.ModelForm):
     """!
     Clase que contiene los campos del formulario de perfil del usuario
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Username para identificar al usuario, en este caso se usa la cédula
@@ -117,17 +117,16 @@ class NationalLevelUpdateForm(ProfileForm):
     Clase que contiene el formulario para actualizar los datos de un
     usuario que tiene nivel Nacional
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     def __init__(self, *args, **kwargs):
         """!
         Función que inicializa el formulario
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         super().__init__(*args, **kwargs)
@@ -161,8 +160,7 @@ class NationalLevelUpdateForm(ProfileForm):
         """!
         Meta clase del formulario que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         model = Profile
@@ -177,9 +175,9 @@ class StateLevelForm(ProfileForm):
     Clase que contiene el formulario para registrar los datos de un
     usuario que tiene nivel Estadal
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     def __init__(self, *args, **kwargs):
@@ -211,8 +209,7 @@ class StateLevelForm(ProfileForm):
         """!
         Meta clase del formulario que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         model = User
@@ -227,17 +224,16 @@ class StateLevelUpdateForm(ProfileForm):
     Clase que contiene el formulario para actualizar los datos de un
     usuario que tiene nivel estadal
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     def __init__(self, *args, **kwargs):
         """!
         Función que inicializa el formulario
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         super().__init__(*args, **kwargs)
@@ -271,8 +267,7 @@ class StateLevelUpdateForm(ProfileForm):
         """!
         Meta clase del formulario que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         model = Profile
@@ -287,9 +282,9 @@ class MunicipalLevelForm(ProfileForm):
     Clase que contiene el formulario para registrar los datos de un
     usuario que tiene nivel municipal
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     def __init__(self, *args, **kwargs):
@@ -321,8 +316,7 @@ class MunicipalLevelForm(ProfileForm):
         """!
         Meta clase del formulario que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         model = User
@@ -337,9 +331,9 @@ class MunicipalLevelUpdateForm(ProfileForm):
     Clase que contiene el formulario para actualizar los datos de un
     usuario que tiene nivel municipal
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     def __init__(self, *args, **kwargs):
@@ -374,8 +368,7 @@ class MunicipalLevelUpdateForm(ProfileForm):
         """!
         Meta clase del formulario que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         model = Profile
@@ -390,9 +383,9 @@ class ParishLevelForm(ProfileForm):
     Clase que contiene el formulario para registrar los datos de un
     usuario que tiene nivel parroquial
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     def __init__(self, *args, **kwargs):
@@ -427,8 +420,7 @@ class ParishLevelForm(ProfileForm):
         """!
         Meta clase del formulario que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         model = User
@@ -443,9 +435,9 @@ class ParishLevelUpdateForm(ProfileForm):
     Clase que contiene el formulario para actualizar los datos de un
     usuario que tiene nivel parroquial
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     def __init__(self, *args, **kwargs):
@@ -480,8 +472,9 @@ class ParishLevelUpdateForm(ProfileForm):
         """!
         Meta clase del formulario que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
+        @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+            GNU Public License versión 2 (GPLv2)</a>
         """
 
         model = Profile
@@ -496,9 +489,9 @@ class CommunalCouncilLevelAdminForm(forms.ModelForm):
     Clase que contiene el formulario para registrar los datos de un
     consejo comunal en el panel administrativo
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     # Estado donde se ecnuetra ubicado el municipio
@@ -540,8 +533,7 @@ class CommunalCouncilLevelAdminForm(forms.ModelForm):
         """!
         Meta clase del formulario que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         model = User
@@ -553,9 +545,9 @@ class CommunalCouncilLevelForm(ProfileForm):
     Clase que contiene el formulario para registrar los datos de un
     usuario que tiene nivel consejo comunal
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     def __init__(self, *args, **kwargs):
@@ -579,8 +571,7 @@ class CommunalCouncilLevelForm(ProfileForm):
         """!
         Meta clase del formulario que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         model = User
@@ -595,9 +586,9 @@ class CommunalCouncilLevelUpdateForm(ProfileForm):
     Clase que contiene el formulario para actualizar los datos de un
     usuario que tiene nivel consejo comunal
 
-    @author William Páez <wpaez@cenditel.gob.ve> | <paez.william8@gmail.com>
-    @copyright <a href='https://tinyurl.com/y3tfnema'>
-        Licencia de Software CENDITEL versión 1.2</a>
+    @author William Páez <paez.william8@gmail.com>
+    @copyright <a href='​http://www.gnu.org/licenses/gpl-2.0.html'>
+        GNU Public License versión 2 (GPLv2)</a>
     """
 
     def __init__(self, *args, **kwargs):
@@ -632,8 +623,7 @@ class CommunalCouncilLevelUpdateForm(ProfileForm):
         """!
         Meta clase del formulario que establece algunas propiedades
 
-        @author William Páez <wpaez@cenditel.gob.ve> |
-            <paez.william8@gmail.com>
+        @author William Páez <paez.william8@gmail.com>
         """
 
         model = Profile
