@@ -2,7 +2,7 @@
 
 Este sistema recopila los datos de los adultos mayores.
 
-# Pasos para crear el entorno de desarrollo
+## Pasos para crear el entorno de desarrollo
 
 Cuando somos un usuario normal del sistema, en el terminal se mostrará el siguiente símbolo: ~$
 
@@ -157,3 +157,43 @@ Poner en el navegador la url que sale en el terminal para entrar el sistema
 Llegado hasta aquí el sistema ya debe estar funcionando
 
 Para salir del entorno virtual se puede ejecutar desde cualquier lugar del terminal: deactivate
+
+## Estilo de codificación PEP 8 en Visual Studio Code
+
+    // Abre el proyecto con vscode
+    (census) ~$ code .
+
+    Ir a extensiones del vscode e instalar
+        isort
+        pylint
+        Python Environment Manager
+
+    Python Environment Manager detectará todos los entornos virtuales creados
+    en la sección Venv, click en "Set as active workspace interpreter" para activarlo
+
+    Desde vscode abrir el archivo adulto_mayor/settings.py
+
+    En el menú de vscode ir a la opción View -> Command Palette
+
+    // Seleccionar
+    Python: Select Linter
+
+    // Seleccionar
+    pycodestyle
+
+    La instrucción anterior crea .vscode/settings.json
+
+    // El settings.json debe estar de la siguiente manera
+    {
+        "python.linting.enabled": true,
+        "python.linting.pycodestyleEnabled": true,
+        "python.linting.pylintArgs": [
+            "--django-settings-module=adulto_mayor.settings"
+        ],
+        "python.formatting.provider": "black",
+        "isort.args": ["--profile", "black"]
+    }
+
+    Para que los cambios hagan efecto cerrar el vscode y abrirlo de nuevo
+
+    Ahora vscode usando pylint cuenta con todas las reglas establecidas en PEP 8

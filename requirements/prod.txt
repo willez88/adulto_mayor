@@ -1,13 +1,11 @@
 # Para Despliegues en https://www.pythonanywhere.com/
 django==4.0.*
 django-extensions==3.1.5
-npm==0.1.1
 pymysql==1.0.2
 mysqlclient==2.1.0
 
 # Actualizaciones
-#django
-#django-extensions
-#npm
-#pymysql
-#mysqlclient
+# django
+# django-extensions
+# pymysql
+# mysqlclient

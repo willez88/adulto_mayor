@@ -6,3 +6,4 @@ migrations
 static/node_modules/*
 logs/*
 media/*
+.vscode
